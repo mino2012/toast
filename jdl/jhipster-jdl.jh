@@ -1,0 +1,94 @@
+// a compléter avec infos ENT
+entity ConventionStage {
+	sujet String,
+    fonctions String,
+    competences String,
+	dateDebut ZonedDateTime,
+    dateFin ZonedDateTime
+}
+
+entity Etudiant {
+	nom String,
+    prenom String,
+    numEtudiant String required
+    
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Entreprise {
+	nom String,
+	pays String,
+    numSiret String required,
+    numSiren String required,
+    version Long,
+    debutVersion ZonedDateTime,
+    finVersion ZonedDateTime,
+    versionActuelle Boolean
+}
+entity Groupe{
+	nom String,
+    version Long,
+    debutVersion ZonedDateTime,
+    finVersion ZonedDateTime,
+    versionActuelle Boolean
+}
+entity Site{
+	adresse String,
+    codePostal String,
+	ville String,
+    version Long,
+    debutVersion ZonedDateTime,
+    finVersion ZonedDateTime,
+    versionActuelle Boolean
+}
+
+entity EntreprisePartenaire {
+	dateDebut ZonedDateTime,
+    dateFin ZonedDateTime
+}
+
+entity Diplome {
+	nom String required,
+    version Long,
+    debutVersion ZonedDateTime,
+    finVersion ZonedDateTime,
+    versionActuelle Boolean
+}
+
+entity Filiere {
+	niveau String required
+}
+
+entity Promotion {
+	annee ZonedDateTime required
+}
+
+relationship ManyToMany {
+	EntreprisePartenaire{diplome(nom)} to Diplome{entreprisePartenaire},
+    Etudiant{diplome(nom)} to Diplome{etudiant}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Diplome{filiere} to Filiere,
+	Filiere{promotion} to Promotion,
+    Etudiant{conventionStage} to ConventionStage,
+    Entreprise{conventionStage} to ConventionStage,
+    Entreprise{entreprisePartenaire} to EntreprisePartenaire,
+    Entreprise{site} to Site,
+    Groupe{entreprise} to Entreprise
+}
+
+// we have to manage the versioning of the promotion
+
+// Set pagination options
+paginate ConventionStage, Etudiant with infinite-scroll
+paginate Entreprise with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+//angularSuffix * with mySuffix
