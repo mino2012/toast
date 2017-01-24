@@ -3,10 +3,10 @@ entity ConventionStage {
 	sujet String,
     fonctions String,
     competences String,
-	dateDebut Long,
-    dateFin Long
+	dateDebut ZonedDateTime,
+    dateFin ZonedDateTime
 }
-entity Tuteur{
+entity Tuteur {
 	nom String,
     prenom String,
     telephone String,
@@ -23,7 +23,7 @@ entity Etudiant {
     mail String,
     sexe String,
     numEtudiant String required
-    
+
 }
 
 // an ignored comment
@@ -37,12 +37,12 @@ entity Entreprise {
     debutVersion Long,
     finVersion Long
 }
-entity Groupe{
+entity Groupe {
 	nom String,
     debutVersion Long,
     finVersion Long
 }
-entity Site{
+entity Site {
 	adresse String,
     codePostal String,
 	ville String,
@@ -69,7 +69,7 @@ entity Filiere {
 }
 
 entity Promotion {
-	annee Long required
+	annee ZonedDateTime required
 }
 
 relationship ManyToMany {
