@@ -1,0 +1,90 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myProfessionnelLabel" data-translate="crmisticApp.professionnel.home.createOrEditLabel">Create or edit a Professionnel</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.professionnel.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.professionnel.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                    ng-model="vm.professionnel.nom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.prenom" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                    ng-model="vm.professionnel.prenom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.telephone" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                    ng-model="vm.professionnel.telephone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.mail" for="field_mail">Mail</label>
+            <input type="text" class="form-control" name="mail" id="field_mail"
+                    ng-model="vm.professionnel.mail"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.fonction" for="field_fonction">Fonction</label>
+            <input type="text" class="form-control" name="fonction" id="field_fonction"
+                    ng-model="vm.professionnel.fonction"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.ancienEtudiant" for="field_ancienEtudiant">Ancien Etudiant</label>
+            <input type="checkbox" class="form-control" name="ancienEtudiant" id="field_ancienEtudiant"
+                    ng-model="vm.professionnel.ancienEtudiant"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.debutVersion" for="field_debutVersion">Debut Version</label>
+            <input type="number" class="form-control" name="debutVersion" id="field_debutVersion"
+                    ng-model="vm.professionnel.debutVersion"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.professionnel.finVersion" for="field_finVersion">Fin Version</label>
+            <input type="number" class="form-control" name="finVersion" id="field_finVersion"
+                    ng-model="vm.professionnel.finVersion"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="crmisticApp.professionnel.entrepriseContact" for="field_entrepriseContact">Entreprise Contact</label>
+            <select class="form-control" id="field_entrepriseContact" name="entrepriseContact" ng-model="vm.professionnel.entrepriseContactId" ng-options="entreprise.id as entreprise.id for entreprise in vm.entreprisecontacts | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="crmisticApp.professionnel.diplome" for="field_diplome">Diplome</label>
+            <select class="form-control" id="field_diplome" multiple name="diplome" ng-model="vm.professionnel.diplomes" ng-options="diplome as diplome.nom for diplome in vm.diplomes track by diplome.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="crmisticApp.professionnel.entreprisePersonnel" for="field_entreprisePersonnel">Entreprise Personnel</label>
+            <select class="form-control" id="field_entreprisePersonnel" name="entreprisePersonnel" ng-model="vm.professionnel.entreprisePersonnelId" ng-options="entreprise.id as entreprise.nom for entreprise in vm.entreprises"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

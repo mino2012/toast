@@ -1,0 +1,28 @@
+{
+    "crmisticApp": {
+        "etudiant" : {
+            "home": {
+                "title": "Etudiants",
+                "createLabel": "Create a new Etudiant",
+                "createOrEditLabel": "Create or edit a Etudiant",
+                "search": "Search for Etudiant"
+            },
+            "created": "A new Etudiant is created with identifier {{ param }}",
+            "updated": "A Etudiant is updated with identifier {{ param }}",
+            "deleted": "A Etudiant is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Etudiant {{ id }}?"
+            },
+            "detail": {
+                "title": "Etudiant"
+            },
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "mail": "Mail",
+            "sexe": "Sexe",
+            "numEtudiant": "Num Etudiant",
+            "conventionStage": "Convention Stage",
+            "diplome": "Diplome"
+        }
+    }
+}

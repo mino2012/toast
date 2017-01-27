@@ -1,0 +1,72 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "entrepriseContact",
+            "otherEntityName": "entreprise",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "contact(nom)"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "conventionStage",
+            "otherEntityName": "conventionStage",
+            "otherEntityRelationshipName": "maitreStage"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "intervenant",
+            "relationshipName": "diplome",
+            "otherEntityName": "diplome",
+            "otherEntityField": "nom",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "entreprisePersonnel",
+            "otherEntityName": "entreprise",
+            "otherEntityField": "nom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prenom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fonction",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ancienEtudiant",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "debutVersion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "finVersion",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20170127154848",
+    "entityTableName": "professionnel",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

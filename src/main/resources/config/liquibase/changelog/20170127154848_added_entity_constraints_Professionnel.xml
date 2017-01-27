@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Professionnel.
+    -->
+    <changeSet id="20170127154848-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="entreprise_contact_id"
+                                 baseTableName="professionnel"
+                                 constraintName="fk_professionnel_entreprise_contact_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entreprise"/>
+
+        <addForeignKeyConstraint baseColumnNames="professionnels_id"
+                                 baseTableName="professionnel_diplome"
+                                 constraintName="fk_professionnel_diplome_professionnels_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professionnel"/>
+        <addForeignKeyConstraint baseColumnNames="diplomes_id"
+                                 baseTableName="professionnel_diplome"
+                                 constraintName="fk_professionnel_diplome_diplomes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="diplome"/>
+        
+        <addForeignKeyConstraint baseColumnNames="entreprise_personnel_id"
+                                 baseTableName="professionnel"
+                                 constraintName="fk_professionnel_entreprise_personnel_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entreprise"/>
+
+    </changeSet>
+</databaseChangeLog>

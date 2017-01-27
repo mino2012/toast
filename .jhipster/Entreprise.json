@@ -1,0 +1,90 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "partenariat",
+            "otherEntityName": "partenariat",
+            "otherEntityRelationshipName": "entreprise"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "site",
+            "otherEntityName": "site",
+            "otherEntityRelationshipName": "entrepriseSite"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "personnel",
+            "otherEntityName": "professionnel",
+            "otherEntityRelationshipName": "entreprisePersonnel"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "taxe",
+            "otherEntityName": "taxe",
+            "otherEntityRelationshipName": "entreprise"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "siege",
+            "otherEntityName": "site",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "entrepriseSiege"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "contact",
+            "otherEntityName": "professionnel",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "entrepriseContact"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "groupe",
+            "otherEntityName": "groupe",
+            "otherEntityField": "nom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pays",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numSiret",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numSiren",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "debutVersion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "finVersion",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20170127154850",
+    "entityTableName": "entreprise",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

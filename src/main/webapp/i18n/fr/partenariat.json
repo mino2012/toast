@@ -1,0 +1,25 @@
+{
+    "crmisticApp": {
+        "partenariat" : {
+            "home": {
+                "title": "Partenariats",
+                "createLabel": "Créer un nouveau Partenariat",
+                "createOrEditLabel": "Créer ou éditer un Partenariat",
+                "search": "Recherche pour Partenariat"
+            },
+            "created": "Un nouveau Partenariat a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Partenariat avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Partenariat avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Partenariat {{ id }} ?"
+            },
+            "detail": {
+                "title": "Partenariat"
+            },
+            "dateDebut": "Date Debut",
+            "dateFin": "Date Fin",
+            "diplome": "Diplome",
+            "entreprise": "Entreprise"
+        }
+    }
+}

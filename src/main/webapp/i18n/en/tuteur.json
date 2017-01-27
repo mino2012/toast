@@ -1,0 +1,26 @@
+{
+    "crmisticApp": {
+        "tuteur" : {
+            "home": {
+                "title": "Tuteurs",
+                "createLabel": "Create a new Tuteur",
+                "createOrEditLabel": "Create or edit a Tuteur",
+                "search": "Search for Tuteur"
+            },
+            "created": "A new Tuteur is created with identifier {{ param }}",
+            "updated": "A Tuteur is updated with identifier {{ param }}",
+            "deleted": "A Tuteur is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tuteur {{ id }}?"
+            },
+            "detail": {
+                "title": "Tuteur"
+            },
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "telephone": "Telephone",
+            "mail": "Mail",
+            "conventionStage": "Convention Stage"
+        }
+    }
+}

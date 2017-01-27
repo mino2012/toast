@@ -1,0 +1,65 @@
+
+<div>
+    <h2><span data-translate="crmisticApp.professionnel.detail.title">Professionnel</span> {{vm.professionnel.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="crmisticApp.professionnel.nom">Nom</span></dt>
+        <dd>
+            <span>{{vm.professionnel.nom}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.prenom">Prenom</span></dt>
+        <dd>
+            <span>{{vm.professionnel.prenom}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{vm.professionnel.telephone}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.mail">Mail</span></dt>
+        <dd>
+            <span>{{vm.professionnel.mail}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.fonction">Fonction</span></dt>
+        <dd>
+            <span>{{vm.professionnel.fonction}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.ancienEtudiant">Ancien Etudiant</span></dt>
+        <dd>
+            <span>{{vm.professionnel.ancienEtudiant}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.debutVersion">Debut Version</span></dt>
+        <dd>
+            <span>{{vm.professionnel.debutVersion}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.finVersion">Fin Version</span></dt>
+        <dd>
+            <span>{{vm.professionnel.finVersion}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.entrepriseContact">Entreprise Contact</span></dt>
+        <dd>
+            <a ui-sref="entreprise-detail({id:vm.professionnel.entrepriseContactId})">{{vm.professionnel.entrepriseContactId}}</a>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.diplome">Diplome</span></dt>
+        <dd>
+            <span ng-repeat="diplome in vm.professionnel.diplomes">
+                <a ui-sref="diplome-detail({id: diplome.id})">{{diplome.nom}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="crmisticApp.professionnel.entreprisePersonnel">Entreprise Personnel</span></dt>
+        <dd>
+            <a ui-sref="entreprise-detail({id:vm.professionnel.entreprisePersonnelId})">{{vm.professionnel.entreprisePersonnelNom}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="professionnel-detail.edit({id:vm.professionnel.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

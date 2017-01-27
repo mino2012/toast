@@ -1,0 +1,26 @@
+{
+    "crmisticApp": {
+        "tuteur" : {
+            "home": {
+                "title": "Tuteurs",
+                "createLabel": "Créer un nouveau Tuteur",
+                "createOrEditLabel": "Créer ou éditer un Tuteur",
+                "search": "Recherche pour Tuteur"
+            },
+            "created": "Un nouveau Tuteur a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Tuteur avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Tuteur avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Tuteur {{ id }} ?"
+            },
+            "detail": {
+                "title": "Tuteur"
+            },
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "telephone": "Telephone",
+            "mail": "Mail",
+            "conventionStage": "Convention Stage"
+        }
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "conventionStage",
+            "otherEntityName": "conventionStage",
+            "otherEntityRelationshipName": "etudiant"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "etudiant",
+            "relationshipName": "diplome",
+            "otherEntityName": "diplome",
+            "otherEntityField": "nom",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prenom",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sexe",
+            "fieldType": "Sexe",
+            "fieldValues": "HOMME,FEMME"
+        },
+        {
+            "fieldName": "numEtudiant",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170127154849",
+    "entityTableName": "etudiant",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

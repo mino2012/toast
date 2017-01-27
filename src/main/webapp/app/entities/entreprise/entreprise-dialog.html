@@ -1,0 +1,86 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEntrepriseLabel" data-translate="crmisticApp.entreprise.home.createOrEditLabel">Create or edit a Entreprise</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.entreprise.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.entreprise.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                    ng-model="vm.entreprise.nom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.pays" for="field_pays">Pays</label>
+            <input type="text" class="form-control" name="pays" id="field_pays"
+                    ng-model="vm.entreprise.pays"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.numSiret" for="field_numSiret">Num Siret</label>
+            <input type="text" class="form-control" name="numSiret" id="field_numSiret"
+                    ng-model="vm.entreprise.numSiret"
+                    required />
+            <div ng-show="editForm.numSiret.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.numSiret.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.numSiren" for="field_numSiren">Num Siren</label>
+            <input type="text" class="form-control" name="numSiren" id="field_numSiren"
+                    ng-model="vm.entreprise.numSiren"
+                    required />
+            <div ng-show="editForm.numSiren.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.numSiren.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.telephone" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                    ng-model="vm.entreprise.telephone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.debutVersion" for="field_debutVersion">Debut Version</label>
+            <input type="number" class="form-control" name="debutVersion" id="field_debutVersion"
+                    ng-model="vm.entreprise.debutVersion"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.entreprise.finVersion" for="field_finVersion">Fin Version</label>
+            <input type="number" class="form-control" name="finVersion" id="field_finVersion"
+                    ng-model="vm.entreprise.finVersion"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="crmisticApp.entreprise.groupe" for="field_groupe">Groupe</label>
+            <select class="form-control" id="field_groupe" name="groupe" ng-model="vm.entreprise.groupeId" ng-options="groupe.id as groupe.nom for groupe in vm.groupes"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

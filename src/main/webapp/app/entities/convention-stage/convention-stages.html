@@ -1,0 +1,101 @@
+<div>
+    <h2 data-translate="crmisticApp.conventionStage.home.title">Convention Stages</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="convention-stage.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="crmisticApp.conventionStage.home.createLabel">
+                        Create new Convention Stage
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'crmisticApp.conventionStage.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sujet"><span data-translate="crmisticApp.conventionStage.sujet">Sujet</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fonctions"><span data-translate="crmisticApp.conventionStage.fonctions">Fonctions</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="competences"><span data-translate="crmisticApp.conventionStage.competences">Competences</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateDebut"><span data-translate="crmisticApp.conventionStage.dateDebut">Date Debut</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateFin"><span data-translate="crmisticApp.conventionStage.dateFin">Date Fin</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="etudiantNom"><span data-translate="crmisticApp.conventionStage.etudiant">Etudiant</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lieuStageAdresse"><span data-translate="crmisticApp.conventionStage.lieuStage">Lieu Stage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tuteurNom"><span data-translate="crmisticApp.conventionStage.tuteur">Tuteur</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="maitreStageNom"><span data-translate="crmisticApp.conventionStage.maitreStage">Maitre Stage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="conventionStage in vm.conventionStages track by conventionStage.id">
+                    <td><a ui-sref="convention-stage-detail({id:conventionStage.id})">{{conventionStage.id}}</a></td>
+                    <td>{{conventionStage.sujet}}</td>
+                    <td>{{conventionStage.fonctions}}</td>
+                    <td>{{conventionStage.competences}}</td>
+                    <td>{{conventionStage.dateDebut | date:'medium'}}</td>
+                    <td>{{conventionStage.dateFin | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="etudiant-detail({id:conventionStage.etudiantId})">{{conventionStage.etudiantNom}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="site-detail({id:conventionStage.lieuStageId})">{{conventionStage.lieuStageAdresse}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="tuteur-detail({id:conventionStage.tuteurId})">{{conventionStage.tuteurNom}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="professionnel-detail({id:conventionStage.maitreStageId})">{{conventionStage.maitreStageNom}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="convention-stage-detail({id:conventionStage.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="convention-stage.edit({id:conventionStage.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="convention-stage.delete({id:conventionStage.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

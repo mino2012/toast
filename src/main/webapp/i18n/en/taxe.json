@@ -1,0 +1,24 @@
+{
+    "crmisticApp": {
+        "taxe" : {
+            "home": {
+                "title": "Taxes",
+                "createLabel": "Create a new Taxe",
+                "createOrEditLabel": "Create or edit a Taxe",
+                "search": "Search for Taxe"
+            },
+            "created": "A new Taxe is created with identifier {{ param }}",
+            "updated": "A Taxe is updated with identifier {{ param }}",
+            "deleted": "A Taxe is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Taxe {{ id }}?"
+            },
+            "detail": {
+                "title": "Taxe"
+            },
+            "montant": "Montant",
+            "annee": "Annee",
+            "entreprise": "Entreprise"
+        }
+    }
+}

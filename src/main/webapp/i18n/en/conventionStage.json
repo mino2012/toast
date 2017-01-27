@@ -1,0 +1,30 @@
+{
+    "crmisticApp": {
+        "conventionStage" : {
+            "home": {
+                "title": "Convention Stages",
+                "createLabel": "Create a new Convention Stage",
+                "createOrEditLabel": "Create or edit a Convention Stage",
+                "search": "Search for Convention Stage"
+            },
+            "created": "A new Convention Stage is created with identifier {{ param }}",
+            "updated": "A Convention Stage is updated with identifier {{ param }}",
+            "deleted": "A Convention Stage is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Convention Stage {{ id }}?"
+            },
+            "detail": {
+                "title": "Convention Stage"
+            },
+            "sujet": "Sujet",
+            "fonctions": "Fonctions",
+            "competences": "Competences",
+            "dateDebut": "Date Debut",
+            "dateFin": "Date Fin",
+            "etudiant": "Etudiant",
+            "lieuStage": "Lieu Stage",
+            "tuteur": "Tuteur",
+            "maitreStage": "Maitre Stage"
+        }
+    }
+}
