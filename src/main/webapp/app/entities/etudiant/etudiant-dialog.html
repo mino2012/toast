@@ -1,0 +1,67 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEtudiantLabel" data-translate="crmisticApp.etudiant.home.createOrEditLabel">Create or edit a Etudiant</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.etudiant.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.etudiant.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.etudiant.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                    ng-model="vm.etudiant.nom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.etudiant.prenom" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                    ng-model="vm.etudiant.prenom"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.etudiant.mail" for="field_mail">Mail</label>
+            <input type="text" class="form-control" name="mail" id="field_mail"
+                    ng-model="vm.etudiant.mail"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.etudiant.sexe" for="field_sexe">Sexe</label>
+            <select class="form-control" name="sexe" ng-model="vm.etudiant.sexe" id="field_sexe">
+                <option value="HOMME" data-translate="crmisticApp.Sexe.HOMME">HOMME</option>
+                <option value="FEMME" data-translate="crmisticApp.Sexe.FEMME">FEMME</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.etudiant.numEtudiant" for="field_numEtudiant">Num Etudiant</label>
+            <input type="text" class="form-control" name="numEtudiant" id="field_numEtudiant"
+                    ng-model="vm.etudiant.numEtudiant"
+                    required />
+            <div ng-show="editForm.numEtudiant.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.numEtudiant.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="crmisticApp.etudiant.diplome" for="field_diplome">Diplome</label>
+            <select class="form-control" id="field_diplome" multiple name="diplome" ng-model="vm.etudiant.diplomes" ng-options="diplome as diplome.nom for diplome in vm.diplomes track by diplome.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

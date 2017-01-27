@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity Partenariat.
+    -->
+    <changeSet id="20170127154854-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="partenariats_id"
+                                 baseTableName="partenariat_diplome"
+                                 constraintName="fk_partenariat_diplome_partenariats_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="partenariat"/>
+        <addForeignKeyConstraint baseColumnNames="diplomes_id"
+                                 baseTableName="partenariat_diplome"
+                                 constraintName="fk_partenariat_diplome_diplomes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="diplome"/>
+        
+        <addForeignKeyConstraint baseColumnNames="entreprise_id"
+                                 baseTableName="partenariat"
+                                 constraintName="fk_partenariat_entreprise_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entreprise"/>
+
+    </changeSet>
+</databaseChangeLog>

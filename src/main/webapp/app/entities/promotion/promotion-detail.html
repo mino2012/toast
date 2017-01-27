@@ -1,0 +1,27 @@
+
+<div>
+    <h2><span data-translate="crmisticApp.promotion.detail.title">Promotion</span> {{vm.promotion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="crmisticApp.promotion.annee">Annee</span></dt>
+        <dd>
+            <span>{{vm.promotion.annee | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.promotion.filiere">Filiere</span></dt>
+        <dd>
+            <a ui-sref="filiere-detail({id:vm.promotion.filiereId})">{{vm.promotion.filiereNiveau}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="promotion-detail.edit({id:vm.promotion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

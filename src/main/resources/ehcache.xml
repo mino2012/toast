@@ -20,5 +20,63 @@
 
     <cache alias="fr.istic.crm.domain.User.persistentTokens" uses-template="simple"/>
 
+    <cache alias="fr.istic.crm.domain.ConventionStage" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Tuteur" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Tuteur.conventionStages" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Professionnel" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Professionnel.conventionStages" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Professionnel.diplomes" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Etudiant" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Etudiant.conventionStages" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Etudiant.diplomes" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Entreprise" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Entreprise.partenariats" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Entreprise.sites" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Entreprise.personnels" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Entreprise.taxes" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Groupe" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Groupe.entreprises" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Site" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Site.conventionStages" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Diplome" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Diplome.filieres" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Diplome.partenariats" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Diplome.etudiants" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Diplome.intervenants" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Partenariat" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Partenariat.diplomes" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Filiere" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Filiere.promotions" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Promotion" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Taxe" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

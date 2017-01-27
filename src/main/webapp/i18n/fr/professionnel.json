@@ -1,0 +1,33 @@
+{
+    "crmisticApp": {
+        "professionnel" : {
+            "home": {
+                "title": "Professionnels",
+                "createLabel": "Créer un nouveau Professionnel",
+                "createOrEditLabel": "Créer ou éditer un Professionnel",
+                "search": "Recherche pour Professionnel"
+            },
+            "created": "Un nouveau Professionnel a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Professionnel avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Professionnel avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Professionnel {{ id }} ?"
+            },
+            "detail": {
+                "title": "Professionnel"
+            },
+            "nom": "Nom",
+            "prenom": "Prenom",
+            "telephone": "Telephone",
+            "mail": "Mail",
+            "fonction": "Fonction",
+            "ancienEtudiant": "Ancien Etudiant",
+            "debutVersion": "Debut Version",
+            "finVersion": "Fin Version",
+            "entrepriseContact": "Entreprise Contact",
+            "conventionStage": "Convention Stage",
+            "diplome": "Diplome",
+            "entreprisePersonnel": "Entreprise Personnel"
+        }
+    }
+}

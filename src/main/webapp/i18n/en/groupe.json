@@ -1,0 +1,25 @@
+{
+    "crmisticApp": {
+        "groupe" : {
+            "home": {
+                "title": "Groupes",
+                "createLabel": "Create a new Groupe",
+                "createOrEditLabel": "Create or edit a Groupe",
+                "search": "Search for Groupe"
+            },
+            "created": "A new Groupe is created with identifier {{ param }}",
+            "updated": "A Groupe is updated with identifier {{ param }}",
+            "deleted": "A Groupe is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Groupe {{ id }}?"
+            },
+            "detail": {
+                "title": "Groupe"
+            },
+            "nom": "Nom",
+            "debutVersion": "Debut Version",
+            "finVersion": "Fin Version",
+            "entreprise": "Entreprise"
+        }
+    }
+}

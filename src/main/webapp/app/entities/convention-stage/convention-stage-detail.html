@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="crmisticApp.conventionStage.detail.title">Convention Stage</span> {{vm.conventionStage.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="crmisticApp.conventionStage.sujet">Sujet</span></dt>
+        <dd>
+            <span>{{vm.conventionStage.sujet}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.fonctions">Fonctions</span></dt>
+        <dd>
+            <span>{{vm.conventionStage.fonctions}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.competences">Competences</span></dt>
+        <dd>
+            <span>{{vm.conventionStage.competences}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.dateDebut">Date Debut</span></dt>
+        <dd>
+            <span>{{vm.conventionStage.dateDebut | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.dateFin">Date Fin</span></dt>
+        <dd>
+            <span>{{vm.conventionStage.dateFin | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.etudiant">Etudiant</span></dt>
+        <dd>
+            <a ui-sref="etudiant-detail({id:vm.conventionStage.etudiantId})">{{vm.conventionStage.etudiantNom}}</a>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.lieuStage">Lieu Stage</span></dt>
+        <dd>
+            <a ui-sref="site-detail({id:vm.conventionStage.lieuStageId})">{{vm.conventionStage.lieuStageAdresse}}</a>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.tuteur">Tuteur</span></dt>
+        <dd>
+            <a ui-sref="tuteur-detail({id:vm.conventionStage.tuteurId})">{{vm.conventionStage.tuteurNom}}</a>
+        </dd>
+        <dt><span data-translate="crmisticApp.conventionStage.maitreStage">Maitre Stage</span></dt>
+        <dd>
+            <a ui-sref="professionnel-detail({id:vm.conventionStage.maitreStageId})">{{vm.conventionStage.maitreStageNom}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="convention-stage-detail.edit({id:vm.conventionStage.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

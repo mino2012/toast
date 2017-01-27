@@ -6,8 +6,16 @@ entity ConventionStage {
 	dateDebut ZonedDateTime,
     dateFin ZonedDateTime
 }
+
 entity Tuteur {
 	nom String,
+    prenom String,
+    telephone String,
+    mail String
+}
+
+entity Professionnel {
+    nom String,
     prenom String,
     telephone String,
     mail String,
@@ -21,13 +29,14 @@ entity Etudiant {
 	nom String,
     prenom String,
     mail String,
-    sexe String,
+    sexe Sexe,
     numEtudiant String required
-
 }
 
-// an ignored comment
-/** not an ignored comment */
+enum Sexe {
+	HOMME, FEMME
+}
+
 entity Entreprise {
 	nom String,
 	pays String,
@@ -37,31 +46,32 @@ entity Entreprise {
     debutVersion Long,
     finVersion Long
 }
+
 entity Groupe {
 	nom String,
     debutVersion Long,
     finVersion Long
 }
+
 entity Site {
 	adresse String,
     codePostal String,
 	ville String,
     pays String,
-    siege Boolean,
     telephone String,
     debutVersion Long,
     finVersion Long
-}
-
-entity EntreprisePartenaire {
-	dateDebut ZonedDateTime,
-    dateFin ZonedDateTime
 }
 
 entity Diplome {
 	nom String required,
     debutVersion Long,
     finVersion Long
+}
+
+entity Partenariat {
+	dateDebut ZonedDateTime,
+    dateFin ZonedDateTime
 }
 
 entity Filiere {
@@ -72,29 +82,38 @@ entity Promotion {
 	annee ZonedDateTime required
 }
 
+entity Taxe {
+	montant Double,
+    annee ZonedDateTime
+}
+
+relationship OneToOne {
+	Site{entrepriseSiege} to Entreprise{siege(adresse)},
+    Professionnel{entrepriseContact} to Entreprise{contact(nom)}
+}
+
 relationship ManyToMany {
-	EntreprisePartenaire{diplome(nom)} to Diplome{entreprisePartenaire},
-    Etudiant{diplome(nom)} to Diplome{etudiant}
+	Partenariat{diplome(nom)} to Diplome{partenariat},
+    Etudiant{diplome(nom)} to Diplome{etudiant(nom)},
+    Professionnel{diplome(nom)} to Diplome{intervenant(nom)}
 }
 
-// defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Diplome{filiere} to Filiere,
-	Filiere{promotion} to Promotion,
-    Etudiant{conventionStage} to ConventionStage,
-    Site{siege} to ConventionStage,
-    Site{lieuStage} to ConventionStage,
-    Entreprise{entreprisePartenaire} to EntreprisePartenaire,
-    Entreprise{site} to Site,
-    Groupe{entreprise} to Entreprise,
-    Tuteur{conventionStage} to ConventionStage
+	Diplome{filiere} to Filiere{diplome(nom)},
+	Filiere{promotion} to Promotion{Filiere(niveau)},
+    Etudiant{conventionStage} to ConventionStage{Etudiant(nom)},
+    Site{conventionStage} to ConventionStage{lieuStage(adresse)},
+    Entreprise{partenariat} to Partenariat{entreprise(nom)},
+    Entreprise{site} to Site{entrepriseSite(nom)},
+    Entreprise{personnel} to Professionnel{entreprisePersonnel(nom)},
+    Entreprise{taxe} to Taxe{entreprise(nom)},
+    Groupe{entreprise} to Entreprise{groupe(nom)},
+    Tuteur{conventionStage} to ConventionStage{tuteur(nom)},
+    Professionnel{conventionStage} to ConventionStage{maitreStage(nom)}
 }
-
-// we have to manage the versioning of the promotion
 
 // Set pagination options
-paginate ConventionStage, Etudiant with infinite-scroll
-paginate Entreprise with pagination
+paginate ConventionStage, Etudiant, Entreprise, Diplome, Professionnel, Tuteur, Site, Partenariat, Filiere, Promotion, Groupe, Taxe with pagination
 
 dto * with mapstruct
 

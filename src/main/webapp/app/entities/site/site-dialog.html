@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySiteLabel" data-translate="crmisticApp.site.home.createOrEditLabel">Create or edit a Site</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.site.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.site.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.adresse" for="field_adresse">Adresse</label>
+            <input type="text" class="form-control" name="adresse" id="field_adresse"
+                    ng-model="vm.site.adresse"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.codePostal" for="field_codePostal">Code Postal</label>
+            <input type="text" class="form-control" name="codePostal" id="field_codePostal"
+                    ng-model="vm.site.codePostal"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.ville" for="field_ville">Ville</label>
+            <input type="text" class="form-control" name="ville" id="field_ville"
+                    ng-model="vm.site.ville"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.pays" for="field_pays">Pays</label>
+            <input type="text" class="form-control" name="pays" id="field_pays"
+                    ng-model="vm.site.pays"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.telephone" for="field_telephone">Telephone</label>
+            <input type="text" class="form-control" name="telephone" id="field_telephone"
+                    ng-model="vm.site.telephone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.debutVersion" for="field_debutVersion">Debut Version</label>
+            <input type="number" class="form-control" name="debutVersion" id="field_debutVersion"
+                    ng-model="vm.site.debutVersion"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="crmisticApp.site.finVersion" for="field_finVersion">Fin Version</label>
+            <input type="number" class="form-control" name="finVersion" id="field_finVersion"
+                    ng-model="vm.site.finVersion"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="crmisticApp.site.entrepriseSiege" for="field_entrepriseSiege">Entreprise Siege</label>
+            <select class="form-control" id="field_entrepriseSiege" name="entrepriseSiege" ng-model="vm.site.entrepriseSiegeId" ng-options="entreprise.id as entreprise.id for entreprise in vm.entreprisesieges | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="crmisticApp.site.entrepriseSite" for="field_entrepriseSite">Entreprise Site</label>
+            <select class="form-control" id="field_entrepriseSite" name="entrepriseSite" ng-model="vm.site.entrepriseSiteId" ng-options="entreprise.id as entreprise.nom for entreprise in vm.entreprises"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,93 @@
+<div>
+    <h2 data-translate="crmisticApp.entreprise.home.title">Entreprises</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="entreprise.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs"  data-translate="crmisticApp.entreprise.home.createLabel">
+                        Create new Entreprise
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'crmisticApp.entreprise.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nom"><span data-translate="crmisticApp.entreprise.nom">Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pays"><span data-translate="crmisticApp.entreprise.pays">Pays</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numSiret"><span data-translate="crmisticApp.entreprise.numSiret">Num Siret</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numSiren"><span data-translate="crmisticApp.entreprise.numSiren">Num Siren</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="telephone"><span data-translate="crmisticApp.entreprise.telephone">Telephone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="debutVersion"><span data-translate="crmisticApp.entreprise.debutVersion">Debut Version</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="finVersion"><span data-translate="crmisticApp.entreprise.finVersion">Fin Version</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="groupeNom"><span data-translate="crmisticApp.entreprise.groupe">Groupe</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entreprise in vm.entreprises track by entreprise.id">
+                    <td><a ui-sref="entreprise-detail({id:entreprise.id})">{{entreprise.id}}</a></td>
+                    <td>{{entreprise.nom}}</td>
+                    <td>{{entreprise.pays}}</td>
+                    <td>{{entreprise.numSiret}}</td>
+                    <td>{{entreprise.numSiren}}</td>
+                    <td>{{entreprise.telephone}}</td>
+                    <td>{{entreprise.debutVersion}}</td>
+                    <td>{{entreprise.finVersion}}</td>
+                    <td>
+                        <a ui-sref="groupe-detail({id:entreprise.groupeId})">{{entreprise.groupeNom}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="entreprise-detail({id:entreprise.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="entreprise.edit({id:entreprise.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="entreprise.delete({id:entreprise.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

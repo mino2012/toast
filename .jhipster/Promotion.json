@@ -1,0 +1,25 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "filiere",
+            "otherEntityName": "filiere",
+            "otherEntityField": "niveau"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "annee",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170127154856",
+    "entityTableName": "promotion",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

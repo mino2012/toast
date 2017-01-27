@@ -1,0 +1,54 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "filiere",
+            "otherEntityName": "filiere",
+            "otherEntityRelationshipName": "diplome"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "partenariat",
+            "otherEntityName": "partenariat",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "diplome"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "etudiant",
+            "otherEntityName": "etudiant",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "diplome"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "intervenant",
+            "otherEntityName": "professionnel",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "diplome"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "debutVersion",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "finVersion",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20170127154853",
+    "entityTableName": "diplome",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

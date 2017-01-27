@@ -1,0 +1,51 @@
+
+<div>
+    <h2><span data-translate="crmisticApp.entreprise.detail.title">Entreprise</span> {{vm.entreprise.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="crmisticApp.entreprise.nom">Nom</span></dt>
+        <dd>
+            <span>{{vm.entreprise.nom}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.pays">Pays</span></dt>
+        <dd>
+            <span>{{vm.entreprise.pays}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.numSiret">Num Siret</span></dt>
+        <dd>
+            <span>{{vm.entreprise.numSiret}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.numSiren">Num Siren</span></dt>
+        <dd>
+            <span>{{vm.entreprise.numSiren}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{vm.entreprise.telephone}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.debutVersion">Debut Version</span></dt>
+        <dd>
+            <span>{{vm.entreprise.debutVersion}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.finVersion">Fin Version</span></dt>
+        <dd>
+            <span>{{vm.entreprise.finVersion}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.entreprise.groupe">Groupe</span></dt>
+        <dd>
+            <a ui-sref="groupe-detail({id:vm.entreprise.groupeId})">{{vm.entreprise.groupeNom}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="entreprise-detail.edit({id:vm.entreprise.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

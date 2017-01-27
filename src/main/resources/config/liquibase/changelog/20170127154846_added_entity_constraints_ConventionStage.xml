@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity ConventionStage.
+    -->
+    <changeSet id="20170127154846-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="etudiant_id"
+                                 baseTableName="convention_stage"
+                                 constraintName="fk_convention_stage_etudiant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="etudiant"/>
+
+        <addForeignKeyConstraint baseColumnNames="lieu_stage_id"
+                                 baseTableName="convention_stage"
+                                 constraintName="fk_convention_stage_lieu_stage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="site"/>
+
+        <addForeignKeyConstraint baseColumnNames="tuteur_id"
+                                 baseTableName="convention_stage"
+                                 constraintName="fk_convention_stage_tuteur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tuteur"/>
+
+        <addForeignKeyConstraint baseColumnNames="maitre_stage_id"
+                                 baseTableName="convention_stage"
+                                 constraintName="fk_convention_stage_maitre_stage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professionnel"/>
+
+    </changeSet>
+</databaseChangeLog>

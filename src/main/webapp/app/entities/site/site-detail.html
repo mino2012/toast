@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="crmisticApp.site.detail.title">Site</span> {{vm.site.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="crmisticApp.site.adresse">Adresse</span></dt>
+        <dd>
+            <span>{{vm.site.adresse}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.codePostal">Code Postal</span></dt>
+        <dd>
+            <span>{{vm.site.codePostal}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.ville">Ville</span></dt>
+        <dd>
+            <span>{{vm.site.ville}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.pays">Pays</span></dt>
+        <dd>
+            <span>{{vm.site.pays}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{vm.site.telephone}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.debutVersion">Debut Version</span></dt>
+        <dd>
+            <span>{{vm.site.debutVersion}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.finVersion">Fin Version</span></dt>
+        <dd>
+            <span>{{vm.site.finVersion}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.entrepriseSiege">Entreprise Siege</span></dt>
+        <dd>
+            <a ui-sref="entreprise-detail({id:vm.site.entrepriseSiegeId})">{{vm.site.entrepriseSiegeId}}</a>
+        </dd>
+        <dt><span data-translate="crmisticApp.site.entrepriseSite">Entreprise Site</span></dt>
+        <dd>
+            <a ui-sref="entreprise-detail({id:vm.site.entrepriseSiteId})">{{vm.site.entrepriseSiteNom}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="site-detail.edit({id:vm.site.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

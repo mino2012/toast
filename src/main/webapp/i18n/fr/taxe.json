@@ -1,0 +1,24 @@
+{
+    "crmisticApp": {
+        "taxe" : {
+            "home": {
+                "title": "Taxes",
+                "createLabel": "Créer un nouveau Taxe",
+                "createOrEditLabel": "Créer ou éditer un Taxe",
+                "search": "Recherche pour Taxe"
+            },
+            "created": "Un nouveau Taxe a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Taxe avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Taxe avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Taxe {{ id }} ?"
+            },
+            "detail": {
+                "title": "Taxe"
+            },
+            "montant": "Montant",
+            "annee": "Annee",
+            "entreprise": "Entreprise"
+        }
+    }
+}

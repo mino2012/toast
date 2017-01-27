@@ -1,0 +1,27 @@
+
+<div>
+    <h2><span data-translate="crmisticApp.filiere.detail.title">Filiere</span> {{vm.filiere.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="crmisticApp.filiere.niveau">Niveau</span></dt>
+        <dd>
+            <span>{{vm.filiere.niveau}}</span>
+        </dd>
+        <dt><span data-translate="crmisticApp.filiere.diplome">Diplome</span></dt>
+        <dd>
+            <a ui-sref="diplome-detail({id:vm.filiere.diplomeId})">{{vm.filiere.diplomeNom}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="filiere-detail.edit({id:vm.filiere.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
