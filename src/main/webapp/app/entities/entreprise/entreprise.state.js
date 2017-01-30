@@ -129,8 +129,8 @@
                                 numSiret: null,
                                 numSiren: null,
                                 telephone: null,
-                                debutVersion: null,
-                                finVersion: null,
+                                dateCreation: null,
+                                dateModification: null,
                                 id: null
                             };
                         }

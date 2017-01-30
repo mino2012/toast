@@ -41,8 +41,8 @@
                     <th jh-sort-by="numSiret"><span data-translate="crmisticApp.entreprise.numSiret">Num Siret</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="numSiren"><span data-translate="crmisticApp.entreprise.numSiren">Num Siren</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="telephone"><span data-translate="crmisticApp.entreprise.telephone">Telephone</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="debutVersion"><span data-translate="crmisticApp.entreprise.debutVersion">Debut Version</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="finVersion"><span data-translate="crmisticApp.entreprise.finVersion">Fin Version</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateCreation"><span data-translate="crmisticApp.entreprise.dateCreation">Date Creation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateModification"><span data-translate="crmisticApp.entreprise.dateModification">Date Modification</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="groupeNom"><span data-translate="crmisticApp.entreprise.groupe">Groupe</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -55,8 +55,8 @@
                     <td>{{entreprise.numSiret}}</td>
                     <td>{{entreprise.numSiren}}</td>
                     <td>{{entreprise.telephone}}</td>
-                    <td>{{entreprise.debutVersion}}</td>
-                    <td>{{entreprise.finVersion}}</td>
+                    <td>{{entreprise.dateCreation}}</td>
+                    <td>{{entreprise.dateModification}}</td>
                     <td>
                         <a ui-sref="groupe-detail({id:entreprise.groupeId})">{{entreprise.groupeNom}}</a>
                     </td>

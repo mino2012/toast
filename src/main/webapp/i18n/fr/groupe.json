@@ -17,8 +17,8 @@
                 "title": "Groupe"
             },
             "nom": "Nom",
-            "debutVersion": "Debut Version",
-            "finVersion": "Fin Version",
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
             "entreprise": "Entreprise"
         }
     }

@@ -40,13 +40,13 @@ public class Diplome implements Serializable {
     @Column(name = "nom", nullable = false)
     private String nom;
 
-    @Column(name = "debut_version", nullable = false, updatable = false)
+    @Column(name = "date_creation", nullable = false, updatable = false)
     @CreatedDate
-    private Long debutVersion;
+    private Long dateCreation;
 
-    @Column(name = "fin_version")
+    @Column(name = "date_modification")
     @LastModifiedDate
-    private Long finVersion;
+    private Long dateModification;
 
     @OneToMany(mappedBy = "diplome")
     @JsonIgnore
@@ -90,30 +90,30 @@ public class Diplome implements Serializable {
         this.nom = nom;
     }
 
-    public Long getDebutVersion() {
-        return debutVersion;
+    public Long getDateCreation() {
+        return dateCreation;
     }
 
-    public Diplome debutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public Diplome dateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
         return this;
     }
 
-    public void setDebutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public void setDateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public Long getFinVersion() {
-        return finVersion;
+    public Long getDateModification() {
+        return dateModification;
     }
 
-    public Diplome finVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public Diplome dateModification(Long dateModification) {
+        this.dateModification = dateModification;
         return this;
     }
 
-    public void setFinVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public void setDateModification(Long dateModification) {
+        this.dateModification = dateModification;
     }
 
     public Set<Filiere> getFilieres() {
@@ -241,8 +241,8 @@ public class Diplome implements Serializable {
         return "Diplome{" +
             "id=" + id +
             ", nom='" + nom + "'" +
-            ", debutVersion='" + debutVersion + "'" +
-            ", finVersion='" + finVersion + "'" +
+            ", dateCreation='" + dateCreation + "'" +
+            ", dateModification='" + dateModification + "'" +
             '}';
     }
 }

@@ -51,13 +51,13 @@ public class Professionnel implements Serializable {
     @Column(name = "ancien_etudiant")
     private Boolean ancienEtudiant;
 
-    @Column(name = "debut_version", nullable = false, updatable = false)
+    @Column(name = "date_creation", nullable = false, updatable = false)
     @CreatedDate
-    private Long debutVersion;
+    private Long dateCreation;
 
-    @Column(name = "fin_version")
+    @Column(name = "date_modification")
     @LastModifiedDate
-    private Long finVersion;
+    private Long dateModification;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -165,30 +165,30 @@ public class Professionnel implements Serializable {
         this.ancienEtudiant = ancienEtudiant;
     }
 
-    public Long getDebutVersion() {
-        return debutVersion;
+    public Long getDateCreation() {
+        return dateCreation;
     }
 
-    public Professionnel debutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public Professionnel dateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
         return this;
     }
 
-    public void setDebutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public void setDateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public Long getFinVersion() {
-        return finVersion;
+    public Long getDateModification() {
+        return dateModification;
     }
 
-    public Professionnel finVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public Professionnel dateModification(Long dateModification) {
+        this.dateModification = dateModification;
         return this;
     }
 
-    public void setFinVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public void setDateModification(Long dateModification) {
+        this.dateModification = dateModification;
     }
 
     public Entreprise getEntrepriseContact() {
@@ -297,8 +297,8 @@ public class Professionnel implements Serializable {
             ", mail='" + mail + "'" +
             ", fonction='" + fonction + "'" +
             ", ancienEtudiant='" + ancienEtudiant + "'" +
-            ", debutVersion='" + debutVersion + "'" +
-            ", finVersion='" + finVersion + "'" +
+            ", dateCreation='" + dateCreation + "'" +
+            ", dateModification='" + dateModification + "'" +
             '}';
     }
 }

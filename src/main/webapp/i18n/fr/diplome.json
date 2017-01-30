@@ -17,8 +17,8 @@
                 "title": "Diplome"
             },
             "nom": "Nom",
-            "debutVersion": "Debut Version",
-            "finVersion": "Fin Version",
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
             "filiere": "Filiere",
             "partenariat": "Partenariat",
             "etudiant": "Etudiant",

@@ -44,11 +44,11 @@ public class DiplomeResourceIntTest {
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DEBUT_VERSION = 1L;
-    private static final Long UPDATED_DEBUT_VERSION = 2L;
+    private static final Long DEFAULT_DATE_CREATION = 1L;
+    private static final Long UPDATED_DATE_CREATION = 2L;
 
-    private static final Long DEFAULT_FIN_VERSION = 1L;
-    private static final Long UPDATED_FIN_VERSION = 2L;
+    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
+    private static final Long UPDATED_DATE_MODIFICATION = 2L;
 
     @Inject
     private DiplomeRepository diplomeRepository;
@@ -94,8 +94,8 @@ public class DiplomeResourceIntTest {
     public static Diplome createEntity(EntityManager em) {
         Diplome diplome = new Diplome()
                 .nom(DEFAULT_NOM)
-                .debutVersion(DEFAULT_DEBUT_VERSION)
-                .finVersion(DEFAULT_FIN_VERSION);
+                .dateCreation(DEFAULT_DATE_CREATION)
+                .dateModification(DEFAULT_DATE_MODIFICATION);
         return diplome;
     }
 
@@ -123,8 +123,8 @@ public class DiplomeResourceIntTest {
         assertThat(diplomeList).hasSize(databaseSizeBeforeCreate + 1);
         Diplome testDiplome = diplomeList.get(diplomeList.size() - 1);
         assertThat(testDiplome.getNom()).isEqualTo(DEFAULT_NOM);
-        assertThat(testDiplome.getDebutVersion()).isEqualTo(DEFAULT_DEBUT_VERSION);
-        assertThat(testDiplome.getFinVersion()).isEqualTo(DEFAULT_FIN_VERSION);
+        assertThat(testDiplome.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testDiplome.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
 
         // Validate the Diplome in ElasticSearch
         Diplome diplomeEs = diplomeSearchRepository.findOne(testDiplome.getId());
@@ -183,8 +183,8 @@ public class DiplomeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(diplome.getId().intValue())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 
     @Test
@@ -199,8 +199,8 @@ public class DiplomeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(diplome.getId().intValue()))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
-            .andExpect(jsonPath("$.debutVersion").value(DEFAULT_DEBUT_VERSION.intValue()))
-            .andExpect(jsonPath("$.finVersion").value(DEFAULT_FIN_VERSION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
     }
 
     @Test
@@ -223,8 +223,8 @@ public class DiplomeResourceIntTest {
         Diplome updatedDiplome = diplomeRepository.findOne(diplome.getId());
         updatedDiplome
                 .nom(UPDATED_NOM)
-                .debutVersion(UPDATED_DEBUT_VERSION)
-                .finVersion(UPDATED_FIN_VERSION);
+                .dateCreation(UPDATED_DATE_CREATION)
+                .dateModification(UPDATED_DATE_MODIFICATION);
         DiplomeDTO diplomeDTO = diplomeMapper.diplomeToDiplomeDTO(updatedDiplome);
 
         restDiplomeMockMvc.perform(put("/api/diplomes")
@@ -237,8 +237,8 @@ public class DiplomeResourceIntTest {
         assertThat(diplomeList).hasSize(databaseSizeBeforeUpdate);
         Diplome testDiplome = diplomeList.get(diplomeList.size() - 1);
         assertThat(testDiplome.getNom()).isEqualTo(UPDATED_NOM);
-        assertThat(testDiplome.getDebutVersion()).isEqualTo(UPDATED_DEBUT_VERSION);
-        assertThat(testDiplome.getFinVersion()).isEqualTo(UPDATED_FIN_VERSION);
+        assertThat(testDiplome.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testDiplome.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
 
         // Validate the Diplome in ElasticSearch
         Diplome diplomeEs = diplomeSearchRepository.findOne(testDiplome.getId());
@@ -299,7 +299,7 @@ public class DiplomeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(diplome.getId().intValue())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 }

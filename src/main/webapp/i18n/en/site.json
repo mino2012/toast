@@ -21,8 +21,8 @@
             "ville": "Ville",
             "pays": "Pays",
             "telephone": "Telephone",
-            "debutVersion": "Debut Version",
-            "finVersion": "Fin Version",
+            "dateCreation": "Date Creation",
+            "dateModification": "Date Modification",
             "entrepriseSiege": "Entreprise Siege",
             "conventionStage": "Convention Stage",
             "entrepriseSite": "Entreprise Site"

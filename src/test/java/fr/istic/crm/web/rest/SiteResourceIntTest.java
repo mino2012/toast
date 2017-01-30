@@ -56,11 +56,11 @@ public class SiteResourceIntTest {
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DEBUT_VERSION = 1L;
-    private static final Long UPDATED_DEBUT_VERSION = 2L;
+    private static final Long DEFAULT_DATE_CREATION = 1L;
+    private static final Long UPDATED_DATE_CREATION = 2L;
 
-    private static final Long DEFAULT_FIN_VERSION = 1L;
-    private static final Long UPDATED_FIN_VERSION = 2L;
+    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
+    private static final Long UPDATED_DATE_MODIFICATION = 2L;
 
     @Inject
     private SiteRepository siteRepository;
@@ -110,8 +110,8 @@ public class SiteResourceIntTest {
                 .ville(DEFAULT_VILLE)
                 .pays(DEFAULT_PAYS)
                 .telephone(DEFAULT_TELEPHONE)
-                .debutVersion(DEFAULT_DEBUT_VERSION)
-                .finVersion(DEFAULT_FIN_VERSION);
+                .dateCreation(DEFAULT_DATE_CREATION)
+                .dateModification(DEFAULT_DATE_MODIFICATION);
         return site;
     }
 
@@ -143,8 +143,8 @@ public class SiteResourceIntTest {
         assertThat(testSite.getVille()).isEqualTo(DEFAULT_VILLE);
         assertThat(testSite.getPays()).isEqualTo(DEFAULT_PAYS);
         assertThat(testSite.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
-        assertThat(testSite.getDebutVersion()).isEqualTo(DEFAULT_DEBUT_VERSION);
-        assertThat(testSite.getFinVersion()).isEqualTo(DEFAULT_FIN_VERSION);
+        assertThat(testSite.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testSite.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
 
         // Validate the Site in ElasticSearch
         Site siteEs = siteSearchRepository.findOne(testSite.getId());
@@ -188,8 +188,8 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.[*].ville").value(hasItem(DEFAULT_VILLE.toString())))
             .andExpect(jsonPath("$.[*].pays").value(hasItem(DEFAULT_PAYS.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 
     @Test
@@ -208,8 +208,8 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.ville").value(DEFAULT_VILLE.toString()))
             .andExpect(jsonPath("$.pays").value(DEFAULT_PAYS.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
-            .andExpect(jsonPath("$.debutVersion").value(DEFAULT_DEBUT_VERSION.intValue()))
-            .andExpect(jsonPath("$.finVersion").value(DEFAULT_FIN_VERSION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
     }
 
     @Test
@@ -236,8 +236,8 @@ public class SiteResourceIntTest {
                 .ville(UPDATED_VILLE)
                 .pays(UPDATED_PAYS)
                 .telephone(UPDATED_TELEPHONE)
-                .debutVersion(UPDATED_DEBUT_VERSION)
-                .finVersion(UPDATED_FIN_VERSION);
+                .dateCreation(UPDATED_DATE_CREATION)
+                .dateModification(UPDATED_DATE_MODIFICATION);
         SiteDTO siteDTO = siteMapper.siteToSiteDTO(updatedSite);
 
         restSiteMockMvc.perform(put("/api/sites")
@@ -254,8 +254,8 @@ public class SiteResourceIntTest {
         assertThat(testSite.getVille()).isEqualTo(UPDATED_VILLE);
         assertThat(testSite.getPays()).isEqualTo(UPDATED_PAYS);
         assertThat(testSite.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
-        assertThat(testSite.getDebutVersion()).isEqualTo(UPDATED_DEBUT_VERSION);
-        assertThat(testSite.getFinVersion()).isEqualTo(UPDATED_FIN_VERSION);
+        assertThat(testSite.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testSite.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
 
         // Validate the Site in ElasticSearch
         Site siteEs = siteSearchRepository.findOne(testSite.getId());
@@ -320,7 +320,7 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.[*].ville").value(hasItem(DEFAULT_VILLE.toString())))
             .andExpect(jsonPath("$.[*].pays").value(hasItem(DEFAULT_PAYS.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 }

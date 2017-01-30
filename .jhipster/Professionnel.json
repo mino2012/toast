@@ -56,17 +56,17 @@
             "fieldType": "Boolean"
         },
         {
-            "fieldName": "debutVersion",
+            "fieldName": "dateCreation",
             "fieldType": "Long"
         },
         {
-            "fieldName": "finVersion",
+            "fieldName": "dateModification",
             "fieldType": "Long"
         }
     ],
     "changelogDate": "20170127154848",
-    "entityTableName": "professionnel",
     "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "professionnel",
+    "pagination": "pagination"
 }

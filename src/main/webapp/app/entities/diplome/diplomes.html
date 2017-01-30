@@ -37,8 +37,8 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="nom"><span data-translate="crmisticApp.diplome.nom">Nom</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="debutVersion"><span data-translate="crmisticApp.diplome.debutVersion">Debut Version</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="finVersion"><span data-translate="crmisticApp.diplome.finVersion">Fin Version</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateCreation"><span data-translate="crmisticApp.diplome.dateCreation">Date Creation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateModification"><span data-translate="crmisticApp.diplome.dateModification">Date Modification</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -46,8 +46,8 @@
                 <tr ng-repeat="diplome in vm.diplomes track by diplome.id">
                     <td><a ui-sref="diplome-detail({id:diplome.id})">{{diplome.id}}</a></td>
                     <td>{{diplome.nom}}</td>
-                    <td>{{diplome.debutVersion}}</td>
-                    <td>{{diplome.finVersion}}</td>
+                    <td>{{diplome.dateCreation}}</td>
+                    <td>{{diplome.dateModification}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

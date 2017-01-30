@@ -56,11 +56,11 @@ public class EntrepriseResourceIntTest {
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DEBUT_VERSION = 1L;
-    private static final Long UPDATED_DEBUT_VERSION = 2L;
+    private static final Long DEFAULT_DATE_CREATION = 1L;
+    private static final Long UPDATED_DATE_CREATION = 2L;
 
-    private static final Long DEFAULT_FIN_VERSION = 1L;
-    private static final Long UPDATED_FIN_VERSION = 2L;
+    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
+    private static final Long UPDATED_DATE_MODIFICATION = 2L;
 
     @Inject
     private EntrepriseRepository entrepriseRepository;
@@ -110,8 +110,8 @@ public class EntrepriseResourceIntTest {
                 .numSiret(DEFAULT_NUM_SIRET)
                 .numSiren(DEFAULT_NUM_SIREN)
                 .telephone(DEFAULT_TELEPHONE)
-                .debutVersion(DEFAULT_DEBUT_VERSION)
-                .finVersion(DEFAULT_FIN_VERSION);
+                .dateCreation(DEFAULT_DATE_CREATION)
+                .dateModification(DEFAULT_DATE_MODIFICATION);
         return entreprise;
     }
 
@@ -143,8 +143,8 @@ public class EntrepriseResourceIntTest {
         assertThat(testEntreprise.getNumSiret()).isEqualTo(DEFAULT_NUM_SIRET);
         assertThat(testEntreprise.getNumSiren()).isEqualTo(DEFAULT_NUM_SIREN);
         assertThat(testEntreprise.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
-        assertThat(testEntreprise.getDebutVersion()).isEqualTo(DEFAULT_DEBUT_VERSION);
-        assertThat(testEntreprise.getFinVersion()).isEqualTo(DEFAULT_FIN_VERSION);
+        assertThat(testEntreprise.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testEntreprise.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
 
         // Validate the Entreprise in ElasticSearch
         Entreprise entrepriseEs = entrepriseSearchRepository.findOne(testEntreprise.getId());
@@ -226,8 +226,8 @@ public class EntrepriseResourceIntTest {
             .andExpect(jsonPath("$.[*].numSiret").value(hasItem(DEFAULT_NUM_SIRET.toString())))
             .andExpect(jsonPath("$.[*].numSiren").value(hasItem(DEFAULT_NUM_SIREN.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 
     @Test
@@ -246,8 +246,8 @@ public class EntrepriseResourceIntTest {
             .andExpect(jsonPath("$.numSiret").value(DEFAULT_NUM_SIRET.toString()))
             .andExpect(jsonPath("$.numSiren").value(DEFAULT_NUM_SIREN.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
-            .andExpect(jsonPath("$.debutVersion").value(DEFAULT_DEBUT_VERSION.intValue()))
-            .andExpect(jsonPath("$.finVersion").value(DEFAULT_FIN_VERSION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
     }
 
     @Test
@@ -274,8 +274,8 @@ public class EntrepriseResourceIntTest {
                 .numSiret(UPDATED_NUM_SIRET)
                 .numSiren(UPDATED_NUM_SIREN)
                 .telephone(UPDATED_TELEPHONE)
-                .debutVersion(UPDATED_DEBUT_VERSION)
-                .finVersion(UPDATED_FIN_VERSION);
+                .dateCreation(UPDATED_DATE_CREATION)
+                .dateModification(UPDATED_DATE_MODIFICATION);
         EntrepriseDTO entrepriseDTO = entrepriseMapper.entrepriseToEntrepriseDTO(updatedEntreprise);
 
         restEntrepriseMockMvc.perform(put("/api/entreprises")
@@ -292,8 +292,8 @@ public class EntrepriseResourceIntTest {
         assertThat(testEntreprise.getNumSiret()).isEqualTo(UPDATED_NUM_SIRET);
         assertThat(testEntreprise.getNumSiren()).isEqualTo(UPDATED_NUM_SIREN);
         assertThat(testEntreprise.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
-        assertThat(testEntreprise.getDebutVersion()).isEqualTo(UPDATED_DEBUT_VERSION);
-        assertThat(testEntreprise.getFinVersion()).isEqualTo(UPDATED_FIN_VERSION);
+        assertThat(testEntreprise.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testEntreprise.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
 
         // Validate the Entreprise in ElasticSearch
         Entreprise entrepriseEs = entrepriseSearchRepository.findOne(testEntreprise.getId());
@@ -358,7 +358,7 @@ public class EntrepriseResourceIntTest {
             .andExpect(jsonPath("$.[*].numSiret").value(hasItem(DEFAULT_NUM_SIRET.toString())))
             .andExpect(jsonPath("$.[*].numSiren").value(hasItem(DEFAULT_NUM_SIREN.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 }
