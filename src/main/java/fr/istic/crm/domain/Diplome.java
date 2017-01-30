@@ -3,6 +3,8 @@ package fr.istic.crm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
+
 /**
  * A Diplome.
  */
@@ -19,6 +23,7 @@ import java.util.Objects;
 @Table(name = "diplome")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "diplome")
+@Audited(targetAuditMode = NOT_AUDITED)
 public class Diplome implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +45,7 @@ public class Diplome implements Serializable {
     @OneToMany(mappedBy = "diplome")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NotAudited
     private Set<Filiere> filieres = new HashSet<>();
 
     @ManyToMany(mappedBy = "diplomes")

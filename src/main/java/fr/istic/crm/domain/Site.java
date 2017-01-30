@@ -3,13 +3,17 @@ package fr.istic.crm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 /**
  * A Site.
@@ -18,6 +22,7 @@ import java.util.Objects;
 @Table(name = "site")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "site")
+@Audited(targetAuditMode = NOT_AUDITED)
 public class Site implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +59,7 @@ public class Site implements Serializable {
     @OneToMany(mappedBy = "lieuStage")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NotAudited
     private Set<ConventionStage> conventionStages = new HashSet<>();
 
     @ManyToOne

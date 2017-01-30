@@ -3,6 +3,8 @@ package fr.istic.crm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -18,6 +20,7 @@ import java.util.Objects;
 @Table(name = "professionnel")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "professionnel")
+@Audited
 public class Professionnel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +60,7 @@ public class Professionnel implements Serializable {
     @OneToMany(mappedBy = "maitreStage")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NotAudited
     private Set<ConventionStage> conventionStages = new HashSet<>();
 
     @ManyToMany
