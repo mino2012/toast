@@ -5,7 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -24,6 +27,7 @@ import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "diplome")
 @Audited(targetAuditMode = NOT_AUDITED)
+@EntityListeners(AuditingEntityListener.class)
 public class Diplome implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,10 +40,12 @@ public class Diplome implements Serializable {
     @Column(name = "nom", nullable = false)
     private String nom;
 
-    @Column(name = "debut_version")
+    @Column(name = "debut_version", nullable = false, updatable = false)
+    @CreatedDate
     private Long debutVersion;
 
     @Column(name = "fin_version")
+    @LastModifiedDate
     private Long finVersion;
 
     @OneToMany(mappedBy = "diplome")

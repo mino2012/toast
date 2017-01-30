@@ -5,7 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +26,7 @@ import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "site")
 @Audited(targetAuditMode = NOT_AUDITED)
+@EntityListeners(AuditingEntityListener.class)
 public class Site implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,10 +50,12 @@ public class Site implements Serializable {
     @Column(name = "telephone")
     private String telephone;
 
-    @Column(name = "debut_version")
+    @Column(name = "debut_version", nullable = false, updatable = false)
+    @CreatedDate
     private Long debutVersion;
 
     @Column(name = "fin_version")
+    @LastModifiedDate
     private Long finVersion;
 
     @OneToOne

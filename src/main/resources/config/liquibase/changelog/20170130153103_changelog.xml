@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="florent (generated)" id="1485790277013-1">
+        <addNotNullConstraint columnDataType="bigint" columnName="debut_version" tableName="diplome"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485790277013-2">
+        <addNotNullConstraint columnDataType="bigint" columnName="debut_version" tableName="entreprise"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485790277013-3">
+        <addNotNullConstraint columnDataType="bigint" columnName="debut_version" tableName="groupe"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485790277013-4">
+        <addNotNullConstraint columnDataType="bigint" columnName="debut_version" tableName="professionnel"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485790277013-5">
+        <addNotNullConstraint columnDataType="bigint" columnName="debut_version" tableName="site"/>
+    </changeSet>
+</databaseChangeLog>
