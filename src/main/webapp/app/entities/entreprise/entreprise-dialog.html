@@ -56,19 +56,6 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="crmisticApp.entreprise.debutVersion" for="field_debutVersion">Debut Version</label>
-            <input type="number" class="form-control" name="debutVersion" id="field_debutVersion"
-                    ng-model="vm.entreprise.debutVersion"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="crmisticApp.entreprise.finVersion" for="field_finVersion">Fin Version</label>
-            <input type="number" class="form-control" name="finVersion" id="field_finVersion"
-                    ng-model="vm.entreprise.finVersion"
-                     />
-        </div>
-
-        <div class="form-group">
             <label data-translate="crmisticApp.entreprise.groupe" for="field_groupe">Groupe</label>
             <select class="form-control" id="field_groupe" name="groupe" ng-model="vm.entreprise.groupeId" ng-options="groupe.id as groupe.nom for groupe in vm.groupes"            >
                 <option value=""></option>
