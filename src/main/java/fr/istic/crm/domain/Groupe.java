@@ -3,13 +3,16 @@ package fr.istic.crm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 
 /**
  * A Groupe.
@@ -18,6 +21,7 @@ import java.util.Objects;
 @Table(name = "groupe")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "groupe")
+@Audited(targetAuditMode = NOT_AUDITED)
 public class Groupe implements Serializable {
 
     private static final long serialVersionUID = 1L;

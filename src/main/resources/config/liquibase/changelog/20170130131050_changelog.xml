@@ -1,0 +1,149 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="florent (generated)" id="1485781863879-1">
+        <createTable tableName="diplome_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="TINYINT"/>
+            <column name="debut_version" type="BIGINT"/>
+            <column name="fin_version" type="BIGINT"/>
+            <column name="nom" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-2">
+        <createTable tableName="entreprise_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="TINYINT"/>
+            <column name="debut_version" type="BIGINT"/>
+            <column name="fin_version" type="BIGINT"/>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="num_siren" type="VARCHAR(255)"/>
+            <column name="num_siret" type="VARCHAR(255)"/>
+            <column name="pays" type="VARCHAR(255)"/>
+            <column name="telephone" type="VARCHAR(255)"/>
+            <column name="groupe_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-3">
+        <createTable tableName="groupe_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="TINYINT"/>
+            <column name="debut_version" type="BIGINT"/>
+            <column name="fin_version" type="BIGINT"/>
+            <column name="nom" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-4">
+        <createTable tableName="professionnel_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="TINYINT"/>
+            <column name="ancien_etudiant" type="BIT"/>
+            <column name="debut_version" type="BIGINT"/>
+            <column name="fin_version" type="BIGINT"/>
+            <column name="fonction" type="VARCHAR(255)"/>
+            <column name="mail" type="VARCHAR(255)"/>
+            <column name="nom" type="VARCHAR(255)"/>
+            <column name="prenom" type="VARCHAR(255)"/>
+            <column name="telephone" type="VARCHAR(255)"/>
+            <column name="entreprise_contact_id" type="BIGINT"/>
+            <column name="entreprise_personnel_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-5">
+        <createTable tableName="professionnel_diplome_aud">
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="professionnels_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="diplomes_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="TINYINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-6">
+        <createTable tableName="revinfo">
+            <column autoIncrement="true" name="rev" type="INT">
+                <constraints primaryKey="true" primaryKeyName="revinfoPK"/>
+            </column>
+            <column name="revtstmp" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-7">
+        <createTable tableName="site_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="TINYINT"/>
+            <column name="adresse" type="VARCHAR(255)"/>
+            <column name="code_postal" type="VARCHAR(255)"/>
+            <column name="debut_version" type="BIGINT"/>
+            <column name="fin_version" type="BIGINT"/>
+            <column name="pays" type="VARCHAR(255)"/>
+            <column name="telephone" type="VARCHAR(255)"/>
+            <column name="ville" type="VARCHAR(255)"/>
+            <column name="entreprise_siege_id" type="BIGINT"/>
+            <column name="entreprise_site_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-8">
+        <addPrimaryKey columnNames="id, rev" constraintName="diplome_audPK" tableName="diplome_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-9">
+        <addPrimaryKey columnNames="id, rev" constraintName="entreprise_audPK" tableName="entreprise_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-10">
+        <addPrimaryKey columnNames="id, rev" constraintName="groupe_audPK" tableName="groupe_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-11">
+        <addPrimaryKey columnNames="id, rev" constraintName="professionnel_audPK" tableName="professionnel_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-12">
+        <addPrimaryKey columnNames="rev, professionnels_id, diplomes_id" constraintName="professionnel_diplome_audPK" tableName="professionnel_diplome_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-13">
+        <addPrimaryKey columnNames="id, rev" constraintName="site_audPK" tableName="site_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-14">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="groupe_aud" constraintName="FKanwtka1yia2472til4bw9057x" deferrable="false" initiallyDeferred="false" referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-15">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="diplome_aud" constraintName="FKd041hhpda5kr4xn6vjt2qnvbh" deferrable="false" initiallyDeferred="false" referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-16">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="entreprise_aud" constraintName="FKerm2kd0m3hf1jvdn3e55m3s5j" deferrable="false" initiallyDeferred="false" referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-17">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="professionnel_aud" constraintName="FKkqdsj1hd4ujukoc0e2hv9n1r9" deferrable="false" initiallyDeferred="false" referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-18">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="professionnel_diplome_aud" constraintName="FKnmn1jlbaerkmtutoe40tc70cq" deferrable="false" initiallyDeferred="false" referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485781863879-19">
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="site_aud" constraintName="FKqrh2qcnmq36tb9xx8owoabtnu" deferrable="false" initiallyDeferred="false" referencedColumnNames="rev" referencedTableName="revinfo"/>
+    </changeSet>
+</databaseChangeLog>

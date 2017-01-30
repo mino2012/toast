@@ -3,6 +3,8 @@ package fr.istic.crm.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -19,6 +21,7 @@ import java.util.Objects;
 @Table(name = "entreprise")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "entreprise")
+@Audited
 public class Entreprise implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +56,7 @@ public class Entreprise implements Serializable {
     @OneToMany(mappedBy = "entreprise")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NotAudited
     private Set<Partenariat> partenariats = new HashSet<>();
 
     @OneToMany(mappedBy = "entrepriseSite")
@@ -68,6 +72,7 @@ public class Entreprise implements Serializable {
     @OneToMany(mappedBy = "entreprise")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NotAudited
     private Set<Taxe> taxes = new HashSet<>();
 
     @OneToOne(mappedBy = "entrepriseSiege")
