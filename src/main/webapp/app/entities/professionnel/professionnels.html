@@ -45,6 +45,7 @@
                     <th jh-sort-by="dateCreation"><span data-translate="crmisticApp.professionnel.dateCreation">Date Creation</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="dateModification"><span data-translate="crmisticApp.professionnel.dateModification">Date Modification</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="entrepriseContactId"><span data-translate="crmisticApp.professionnel.entrepriseContact">Entreprise Contact</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="diplome"><span data-translate="crmisticApp.professionnel.diplome">Diplome</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="entreprisePersonnelNom"><span data-translate="crmisticApp.professionnel.entreprisePersonnel">Entreprise Personnel</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
@@ -64,8 +65,14 @@
                         <a ui-sref="entreprise-detail({id:professionnel.entrepriseContactId})">{{professionnel.entrepriseContactId}}</a>
                     </td>
                     <td>
+                        <span ng-repeat="diplome in professionnel.diplomes track by diplome.id">
+                            <a ui-sref="diplome-detail({id: diplome.id})">{{diplome.nom}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td>
                         <a ui-sref="entreprise-detail({id:professionnel.entreprisePersonnelId})">{{professionnel.entreprisePersonnelNom}}</a>
                     </td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
