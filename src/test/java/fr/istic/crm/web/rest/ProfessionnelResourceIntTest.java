@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,12 +60,6 @@ public class ProfessionnelResourceIntTest {
     private static final Boolean DEFAULT_ANCIEN_ETUDIANT = false;
     private static final Boolean UPDATED_ANCIEN_ETUDIANT = true;
 
-    private static final Long DEFAULT_DATE_CREATION = 1L;
-    private static final Long UPDATED_DATE_CREATION = 2L;
-
-    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
-    private static final Long UPDATED_DATE_MODIFICATION = 2L;
-
     @Inject
     private ProfessionnelRepository professionnelRepository;
 
@@ -90,6 +85,26 @@ public class ProfessionnelResourceIntTest {
 
     private Professionnel professionnel;
 
+    private Long timestampCreation;
+
+    private Long timestampModification;
+
+    public Long getTimestampCreation() {
+        return timestampCreation;
+    }
+
+    public void setTimestampCreation(Long timestampCreation) {
+        this.timestampCreation = timestampCreation;
+    }
+
+    public Long getTimestampModification() {
+        return timestampModification;
+    }
+
+    public void setTimestampModification(Long timestampModification) {
+        this.timestampModification = timestampModification;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -105,6 +120,8 @@ public class ProfessionnelResourceIntTest {
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
+     *
+     * dateCreation and dateModification are automatically set using envers
      */
     public static Professionnel createEntity(EntityManager em) {
         Professionnel professionnel = new Professionnel()
@@ -113,15 +130,14 @@ public class ProfessionnelResourceIntTest {
                 .telephone(DEFAULT_TELEPHONE)
                 .mail(DEFAULT_MAIL)
                 .fonction(DEFAULT_FONCTION)
-                .ancienEtudiant(DEFAULT_ANCIEN_ETUDIANT)
-                .dateCreation(DEFAULT_DATE_CREATION)
-                .dateModification(DEFAULT_DATE_MODIFICATION);
+                .ancienEtudiant(DEFAULT_ANCIEN_ETUDIANT);
         return professionnel;
     }
 
     @Before
     public void initTest() {
         professionnelSearchRepository.deleteAll();
+        setTimestampCreation(new Long(new Date().getTime()));
         professionnel = createEntity(em);
     }
 
@@ -148,8 +164,8 @@ public class ProfessionnelResourceIntTest {
         assertThat(testProfessionnel.getMail()).isEqualTo(DEFAULT_MAIL);
         assertThat(testProfessionnel.getFonction()).isEqualTo(DEFAULT_FONCTION);
         assertThat(testProfessionnel.isAncienEtudiant()).isEqualTo(DEFAULT_ANCIEN_ETUDIANT);
-        assertThat(testProfessionnel.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testProfessionnel.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
+        assertThat(testProfessionnel.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testProfessionnel.getDateModification().longValue() == getTimestampCreation().longValue());
 
         // Validate the Professionnel in ElasticSearch
         Professionnel professionnelEs = professionnelSearchRepository.findOne(testProfessionnel.getId());
@@ -194,8 +210,8 @@ public class ProfessionnelResourceIntTest {
             .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL.toString())))
             .andExpect(jsonPath("$.[*].fonction").value(hasItem(DEFAULT_FONCTION.toString())))
             .andExpect(jsonPath("$.[*].ancienEtudiant").value(hasItem(DEFAULT_ANCIEN_ETUDIANT.booleanValue())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(professionnel.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(professionnel.getDateModification().longValue())));
     }
 
     @Test
@@ -215,8 +231,8 @@ public class ProfessionnelResourceIntTest {
             .andExpect(jsonPath("$.mail").value(DEFAULT_MAIL.toString()))
             .andExpect(jsonPath("$.fonction").value(DEFAULT_FONCTION.toString()))
             .andExpect(jsonPath("$.ancienEtudiant").value(DEFAULT_ANCIEN_ETUDIANT.booleanValue()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(professionnel.getDateCreation().longValue()))
+            .andExpect(jsonPath("$.dateModification").value(professionnel.getDateModification().longValue()));
     }
 
     @Test
@@ -237,15 +253,17 @@ public class ProfessionnelResourceIntTest {
 
         // Update the professionnel
         Professionnel updatedProfessionnel = professionnelRepository.findOne(professionnel.getId());
+
+        setTimestampModification(new Date().getTime());
+
+        // dateCreation and dateModification are updated automatically using envers
         updatedProfessionnel
                 .nom(UPDATED_NOM)
                 .prenom(UPDATED_PRENOM)
                 .telephone(UPDATED_TELEPHONE)
                 .mail(UPDATED_MAIL)
                 .fonction(UPDATED_FONCTION)
-                .ancienEtudiant(UPDATED_ANCIEN_ETUDIANT)
-                .dateCreation(UPDATED_DATE_CREATION)
-                .dateModification(UPDATED_DATE_MODIFICATION);
+                .ancienEtudiant(UPDATED_ANCIEN_ETUDIANT);
         ProfessionnelDTO professionnelDTO = professionnelMapper.professionnelToProfessionnelDTO(updatedProfessionnel);
 
         restProfessionnelMockMvc.perform(put("/api/professionnels")
@@ -263,12 +281,13 @@ public class ProfessionnelResourceIntTest {
         assertThat(testProfessionnel.getMail()).isEqualTo(UPDATED_MAIL);
         assertThat(testProfessionnel.getFonction()).isEqualTo(UPDATED_FONCTION);
         assertThat(testProfessionnel.isAncienEtudiant()).isEqualTo(UPDATED_ANCIEN_ETUDIANT);
-        assertThat(testProfessionnel.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testProfessionnel.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
+        assertThat(testProfessionnel.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testProfessionnel.getDateModification().longValue() ==  getTimestampModification().longValue());
+        assertThat(testProfessionnel.getDateCreation().longValue()).isLessThan(testProfessionnel.getDateModification().longValue());
 
         // Validate the Professionnel in ElasticSearch
         Professionnel professionnelEs = professionnelSearchRepository.findOne(testProfessionnel.getId());
-        assertThat(professionnelEs).isEqualToComparingFieldByField(testProfessionnel);
+        assertThat(professionnelEs).isEqualToIgnoringGivenFields(testProfessionnel, "dateModification");
     }
 
     @Test
@@ -330,7 +349,7 @@ public class ProfessionnelResourceIntTest {
             .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL.toString())))
             .andExpect(jsonPath("$.[*].fonction").value(hasItem(DEFAULT_FONCTION.toString())))
             .andExpect(jsonPath("$.[*].ancienEtudiant").value(hasItem(DEFAULT_ANCIEN_ETUDIANT.booleanValue())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(professionnel.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(professionnel.getDateModification().longValue())));
     }
 }
