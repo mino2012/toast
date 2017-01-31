@@ -130,8 +130,8 @@
                                 mail: null,
                                 fonction: null,
                                 ancienEtudiant: null,
-                                debutVersion: null,
-                                finVersion: null,
+                                dateCreation: null,
+                                dateModification: null,
                                 id: null
                             };
                         }

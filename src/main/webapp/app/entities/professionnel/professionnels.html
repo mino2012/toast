@@ -42,8 +42,8 @@
                     <th jh-sort-by="mail"><span data-translate="crmisticApp.professionnel.mail">Mail</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fonction"><span data-translate="crmisticApp.professionnel.fonction">Fonction</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="ancienEtudiant"><span data-translate="crmisticApp.professionnel.ancienEtudiant">Ancien Etudiant</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="debutVersion"><span data-translate="crmisticApp.professionnel.debutVersion">Debut Version</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="finVersion"><span data-translate="crmisticApp.professionnel.finVersion">Fin Version</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateCreation"><span data-translate="crmisticApp.professionnel.dateCreation">Date Creation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateModification"><span data-translate="crmisticApp.professionnel.dateModification">Date Modification</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="entrepriseContactId"><span data-translate="crmisticApp.professionnel.entrepriseContact">Entreprise Contact</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="entreprisePersonnelNom"><span data-translate="crmisticApp.professionnel.entreprisePersonnel">Entreprise Personnel</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -58,8 +58,8 @@
                     <td>{{professionnel.mail}}</td>
                     <td>{{professionnel.fonction}}</td>
                     <td>{{professionnel.ancienEtudiant}}</td>
-                    <td>{{professionnel.debutVersion}}</td>
-                    <td>{{professionnel.finVersion}}</td>
+                    <td>{{professionnel.dateCreation}}</td>
+                    <td>{{professionnel.dateModification}}</td>
                     <td>
                         <a ui-sref="entreprise-detail({id:professionnel.entrepriseContactId})">{{professionnel.entrepriseContactId}}</a>
                     </td>

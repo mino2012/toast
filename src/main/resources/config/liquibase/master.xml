@@ -18,6 +18,8 @@
     <include file="classpath:config/liquibase/changelog/20170127154856_added_entity_Promotion.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170127154857_added_entity_Taxe.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170130131050_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170130153103_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170130170819_changelog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170127154846_added_entity_constraints_ConventionStage.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170127154848_added_entity_constraints_Professionnel.xml" relativeToChangelogFile="false"/>

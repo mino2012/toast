@@ -59,11 +59,11 @@ public class ProfessionnelResourceIntTest {
     private static final Boolean DEFAULT_ANCIEN_ETUDIANT = false;
     private static final Boolean UPDATED_ANCIEN_ETUDIANT = true;
 
-    private static final Long DEFAULT_DEBUT_VERSION = 1L;
-    private static final Long UPDATED_DEBUT_VERSION = 2L;
+    private static final Long DEFAULT_DATE_CREATION = 1L;
+    private static final Long UPDATED_DATE_CREATION = 2L;
 
-    private static final Long DEFAULT_FIN_VERSION = 1L;
-    private static final Long UPDATED_FIN_VERSION = 2L;
+    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
+    private static final Long UPDATED_DATE_MODIFICATION = 2L;
 
     @Inject
     private ProfessionnelRepository professionnelRepository;
@@ -114,8 +114,8 @@ public class ProfessionnelResourceIntTest {
                 .mail(DEFAULT_MAIL)
                 .fonction(DEFAULT_FONCTION)
                 .ancienEtudiant(DEFAULT_ANCIEN_ETUDIANT)
-                .debutVersion(DEFAULT_DEBUT_VERSION)
-                .finVersion(DEFAULT_FIN_VERSION);
+                .dateCreation(DEFAULT_DATE_CREATION)
+                .dateModification(DEFAULT_DATE_MODIFICATION);
         return professionnel;
     }
 
@@ -148,8 +148,8 @@ public class ProfessionnelResourceIntTest {
         assertThat(testProfessionnel.getMail()).isEqualTo(DEFAULT_MAIL);
         assertThat(testProfessionnel.getFonction()).isEqualTo(DEFAULT_FONCTION);
         assertThat(testProfessionnel.isAncienEtudiant()).isEqualTo(DEFAULT_ANCIEN_ETUDIANT);
-        assertThat(testProfessionnel.getDebutVersion()).isEqualTo(DEFAULT_DEBUT_VERSION);
-        assertThat(testProfessionnel.getFinVersion()).isEqualTo(DEFAULT_FIN_VERSION);
+        assertThat(testProfessionnel.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testProfessionnel.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
 
         // Validate the Professionnel in ElasticSearch
         Professionnel professionnelEs = professionnelSearchRepository.findOne(testProfessionnel.getId());
@@ -194,8 +194,8 @@ public class ProfessionnelResourceIntTest {
             .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL.toString())))
             .andExpect(jsonPath("$.[*].fonction").value(hasItem(DEFAULT_FONCTION.toString())))
             .andExpect(jsonPath("$.[*].ancienEtudiant").value(hasItem(DEFAULT_ANCIEN_ETUDIANT.booleanValue())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 
     @Test
@@ -215,8 +215,8 @@ public class ProfessionnelResourceIntTest {
             .andExpect(jsonPath("$.mail").value(DEFAULT_MAIL.toString()))
             .andExpect(jsonPath("$.fonction").value(DEFAULT_FONCTION.toString()))
             .andExpect(jsonPath("$.ancienEtudiant").value(DEFAULT_ANCIEN_ETUDIANT.booleanValue()))
-            .andExpect(jsonPath("$.debutVersion").value(DEFAULT_DEBUT_VERSION.intValue()))
-            .andExpect(jsonPath("$.finVersion").value(DEFAULT_FIN_VERSION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
+            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
     }
 
     @Test
@@ -244,8 +244,8 @@ public class ProfessionnelResourceIntTest {
                 .mail(UPDATED_MAIL)
                 .fonction(UPDATED_FONCTION)
                 .ancienEtudiant(UPDATED_ANCIEN_ETUDIANT)
-                .debutVersion(UPDATED_DEBUT_VERSION)
-                .finVersion(UPDATED_FIN_VERSION);
+                .dateCreation(UPDATED_DATE_CREATION)
+                .dateModification(UPDATED_DATE_MODIFICATION);
         ProfessionnelDTO professionnelDTO = professionnelMapper.professionnelToProfessionnelDTO(updatedProfessionnel);
 
         restProfessionnelMockMvc.perform(put("/api/professionnels")
@@ -263,8 +263,8 @@ public class ProfessionnelResourceIntTest {
         assertThat(testProfessionnel.getMail()).isEqualTo(UPDATED_MAIL);
         assertThat(testProfessionnel.getFonction()).isEqualTo(UPDATED_FONCTION);
         assertThat(testProfessionnel.isAncienEtudiant()).isEqualTo(UPDATED_ANCIEN_ETUDIANT);
-        assertThat(testProfessionnel.getDebutVersion()).isEqualTo(UPDATED_DEBUT_VERSION);
-        assertThat(testProfessionnel.getFinVersion()).isEqualTo(UPDATED_FIN_VERSION);
+        assertThat(testProfessionnel.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testProfessionnel.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
 
         // Validate the Professionnel in ElasticSearch
         Professionnel professionnelEs = professionnelSearchRepository.findOne(testProfessionnel.getId());
@@ -330,7 +330,7 @@ public class ProfessionnelResourceIntTest {
             .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL.toString())))
             .andExpect(jsonPath("$.[*].fonction").value(hasItem(DEFAULT_FONCTION.toString())))
             .andExpect(jsonPath("$.[*].ancienEtudiant").value(hasItem(DEFAULT_ANCIEN_ETUDIANT.booleanValue())))
-            .andExpect(jsonPath("$.[*].debutVersion").value(hasItem(DEFAULT_DEBUT_VERSION.intValue())))
-            .andExpect(jsonPath("$.[*].finVersion").value(hasItem(DEFAULT_FIN_VERSION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
     }
 }

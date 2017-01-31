@@ -21,8 +21,8 @@ entity Professionnel {
     mail String,
     fonction String,
     ancienEtudiant Boolean,
-    debutVersion Long,
-    finVersion Long
+    dateCreation Long,
+    dateModification Long
 }
 
 entity Etudiant {
@@ -43,14 +43,14 @@ entity Entreprise {
     numSiret String required,
     numSiren String required,
     telephone String,
-    debutVersion Long,
-    finVersion Long
+    dateCreation Long,
+    dateModification Long
 }
 
 entity Groupe {
 	nom String,
-    debutVersion Long,
-    finVersion Long
+    dateCreation Long,
+    dateModification Long
 }
 
 entity Site {
@@ -59,14 +59,14 @@ entity Site {
 	ville String,
     pays String,
     telephone String,
-    debutVersion Long,
-    finVersion Long
+    dateCreation Long,
+    dateModification Long
 }
 
 entity Diplome {
 	nom String required,
-    debutVersion Long,
-    finVersion Long
+    dateCreation Long,
+    dateModification Long
 }
 
 entity Partenariat {

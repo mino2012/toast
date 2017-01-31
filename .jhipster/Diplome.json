@@ -38,17 +38,17 @@
             ]
         },
         {
-            "fieldName": "debutVersion",
+            "fieldName": "dateCreation",
             "fieldType": "Long"
         },
         {
-            "fieldName": "finVersion",
+            "fieldName": "dateModification",
             "fieldType": "Long"
         }
     ],
     "changelogDate": "20170127154853",
-    "entityTableName": "diplome",
     "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "diplome",
+    "pagination": "pagination"
 }

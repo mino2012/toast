@@ -17,9 +17,9 @@ public class DiplomeDTO implements Serializable {
     @NotNull
     private String nom;
 
-    private Long debutVersion;
+    private Long dateCreation;
 
-    private Long finVersion;
+    private Long dateModification;
 
 
     public Long getId() {
@@ -36,19 +36,19 @@ public class DiplomeDTO implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    public Long getDebutVersion() {
-        return debutVersion;
+    public Long getDateCreation() {
+        return dateCreation;
     }
 
-    public void setDebutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public void setDateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
     }
-    public Long getFinVersion() {
-        return finVersion;
+    public Long getDateModification() {
+        return dateModification;
     }
 
-    public void setFinVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public void setDateModification(Long dateModification) {
+        this.dateModification = dateModification;
     }
 
     @Override
@@ -77,8 +77,8 @@ public class DiplomeDTO implements Serializable {
         return "DiplomeDTO{" +
             "id=" + id +
             ", nom='" + nom + "'" +
-            ", debutVersion='" + debutVersion + "'" +
-            ", finVersion='" + finVersion + "'" +
+            ", dateCreation='" + dateCreation + "'" +
+            ", dateModification='" + dateModification + "'" +
             '}';
     }
 }

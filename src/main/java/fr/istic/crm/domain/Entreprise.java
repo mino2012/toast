@@ -5,7 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -22,6 +25,7 @@ import java.util.Objects;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "entreprise")
 @Audited
+@EntityListeners(AuditingEntityListener.class)
 public class Entreprise implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,11 +51,13 @@ public class Entreprise implements Serializable {
     @Column(name = "telephone")
     private String telephone;
 
-    @Column(name = "debut_version")
-    private Long debutVersion;
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    @CreatedDate
+    private Long dateCreation;
 
-    @Column(name = "fin_version")
-    private Long finVersion;
+    @Column(name = "date_modification")
+    @LastModifiedDate
+    private Long dateModification;
 
     @OneToMany(mappedBy = "entreprise")
     @JsonIgnore
@@ -159,30 +165,30 @@ public class Entreprise implements Serializable {
         this.telephone = telephone;
     }
 
-    public Long getDebutVersion() {
-        return debutVersion;
+    public Long getDateCreation() {
+        return dateCreation;
     }
 
-    public Entreprise debutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public Entreprise dateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
         return this;
     }
 
-    public void setDebutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public void setDateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public Long getFinVersion() {
-        return finVersion;
+    public Long getDateModification() {
+        return dateModification;
     }
 
-    public Entreprise finVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public Entreprise dateModification(Long dateModification) {
+        this.dateModification = dateModification;
         return this;
     }
 
-    public void setFinVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public void setDateModification(Long dateModification) {
+        this.dateModification = dateModification;
     }
 
     public Set<Partenariat> getPartenariats() {
@@ -353,8 +359,8 @@ public class Entreprise implements Serializable {
             ", numSiret='" + numSiret + "'" +
             ", numSiren='" + numSiren + "'" +
             ", telephone='" + telephone + "'" +
-            ", debutVersion='" + debutVersion + "'" +
-            ", finVersion='" + finVersion + "'" +
+            ", dateCreation='" + dateCreation + "'" +
+            ", dateModification='" + dateModification + "'" +
             '}';
     }
 }

@@ -1,0 +1,173 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="florent (generated)" id="1485796121195-1">
+        <addColumn tableName="diplome">
+            <column name="date_creation" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-2">
+        <addColumn tableName="diplome_aud">
+            <column name="date_creation" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-3">
+        <addColumn tableName="entreprise">
+            <column name="date_creation" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-4">
+        <addColumn tableName="entreprise_aud">
+            <column name="date_creation" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-5">
+        <addColumn tableName="groupe">
+            <column name="date_creation" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-6">
+        <addColumn tableName="groupe_aud">
+            <column name="date_creation" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-7">
+        <addColumn tableName="professionnel">
+            <column name="date_creation" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-8">
+        <addColumn tableName="professionnel_aud">
+            <column name="date_creation" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-9">
+        <addColumn tableName="site">
+            <column name="date_creation" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-10">
+        <addColumn tableName="site_aud">
+            <column name="date_creation" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-11">
+        <addColumn tableName="diplome">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-12">
+        <addColumn tableName="diplome_aud">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-13">
+        <addColumn tableName="entreprise">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-14">
+        <addColumn tableName="entreprise_aud">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-15">
+        <addColumn tableName="groupe">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-16">
+        <addColumn tableName="groupe_aud">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-17">
+        <addColumn tableName="professionnel">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-18">
+        <addColumn tableName="professionnel_aud">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-19">
+        <addColumn tableName="site">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-20">
+        <addColumn tableName="site_aud">
+            <column name="date_modification" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-21">
+        <dropColumn columnName="debut_version" tableName="diplome"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-22">
+        <dropColumn columnName="debut_version" tableName="diplome_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-23">
+        <dropColumn columnName="debut_version" tableName="entreprise"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-24">
+        <dropColumn columnName="debut_version" tableName="entreprise_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-25">
+        <dropColumn columnName="debut_version" tableName="groupe"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-26">
+        <dropColumn columnName="debut_version" tableName="groupe_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-27">
+        <dropColumn columnName="debut_version" tableName="professionnel"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-28">
+        <dropColumn columnName="debut_version" tableName="professionnel_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-29">
+        <dropColumn columnName="debut_version" tableName="site"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-30">
+        <dropColumn columnName="debut_version" tableName="site_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-31">
+        <dropColumn columnName="fin_version" tableName="diplome"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-32">
+        <dropColumn columnName="fin_version" tableName="diplome_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-33">
+        <dropColumn columnName="fin_version" tableName="entreprise"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-34">
+        <dropColumn columnName="fin_version" tableName="entreprise_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-35">
+        <dropColumn columnName="fin_version" tableName="groupe"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-36">
+        <dropColumn columnName="fin_version" tableName="groupe_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-37">
+        <dropColumn columnName="fin_version" tableName="professionnel"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-38">
+        <dropColumn columnName="fin_version" tableName="professionnel_aud"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-39">
+        <dropColumn columnName="fin_version" tableName="site"/>
+    </changeSet>
+    <changeSet author="florent (generated)" id="1485796121195-40">
+        <dropColumn columnName="fin_version" tableName="site_aud"/>
+    </changeSet>
+</databaseChangeLog>

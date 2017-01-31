@@ -5,7 +5,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,6 +24,7 @@ import java.util.Objects;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "professionnel")
 @Audited
+@EntityListeners(AuditingEntityListener.class)
 public class Professionnel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,11 +51,13 @@ public class Professionnel implements Serializable {
     @Column(name = "ancien_etudiant")
     private Boolean ancienEtudiant;
 
-    @Column(name = "debut_version")
-    private Long debutVersion;
+    @Column(name = "date_creation", nullable = false, updatable = false)
+    @CreatedDate
+    private Long dateCreation;
 
-    @Column(name = "fin_version")
-    private Long finVersion;
+    @Column(name = "date_modification")
+    @LastModifiedDate
+    private Long dateModification;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -159,30 +165,30 @@ public class Professionnel implements Serializable {
         this.ancienEtudiant = ancienEtudiant;
     }
 
-    public Long getDebutVersion() {
-        return debutVersion;
+    public Long getDateCreation() {
+        return dateCreation;
     }
 
-    public Professionnel debutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public Professionnel dateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
         return this;
     }
 
-    public void setDebutVersion(Long debutVersion) {
-        this.debutVersion = debutVersion;
+    public void setDateCreation(Long dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public Long getFinVersion() {
-        return finVersion;
+    public Long getDateModification() {
+        return dateModification;
     }
 
-    public Professionnel finVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public Professionnel dateModification(Long dateModification) {
+        this.dateModification = dateModification;
         return this;
     }
 
-    public void setFinVersion(Long finVersion) {
-        this.finVersion = finVersion;
+    public void setDateModification(Long dateModification) {
+        this.dateModification = dateModification;
     }
 
     public Entreprise getEntrepriseContact() {
@@ -291,8 +297,8 @@ public class Professionnel implements Serializable {
             ", mail='" + mail + "'" +
             ", fonction='" + fonction + "'" +
             ", ancienEtudiant='" + ancienEtudiant + "'" +
-            ", debutVersion='" + debutVersion + "'" +
-            ", finVersion='" + finVersion + "'" +
+            ", dateCreation='" + dateCreation + "'" +
+            ", dateModification='" + dateModification + "'" +
             '}';
     }
 }

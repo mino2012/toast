@@ -14,17 +14,17 @@
             "fieldType": "String"
         },
         {
-            "fieldName": "debutVersion",
+            "fieldName": "dateCreation",
             "fieldType": "Long"
         },
         {
-            "fieldName": "finVersion",
+            "fieldName": "dateModification",
             "fieldType": "Long"
         }
     ],
     "changelogDate": "20170127154851",
-    "entityTableName": "groupe",
     "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "groupe",
+    "pagination": "pagination"
 }
