@@ -24,10 +24,10 @@
         <dd>
             <span>{{vm.etudiant.numEtudiant}}</span>
         </dd>
-        <dt><span data-translate="crmisticApp.etudiant.diplome">Diplome</span></dt>
+        <dt><span data-translate="crmisticApp.etudiant.promotion">Promotion</span></dt>
         <dd>
-            <span ng-repeat="diplome in vm.etudiant.diplomes">
-                <a ui-sref="diplome-detail({id: diplome.id})">{{diplome.nom}}</a>{{$last ? '' : ', '}}
+            <span ng-repeat="promotion in vm.etudiant.promotions">
+                <a ui-sref="promotion-detail({id: promotion.id})">{{promotion.annee}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
     </dl>

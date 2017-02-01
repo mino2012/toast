@@ -17,7 +17,8 @@
                 "title": "Promotion"
             },
             "annee": "Annee",
-            "filiere": "Filiere"
+            "filiere": "Filiere",
+            "etudiant": "Etudiant"
         }
     }
 }

@@ -50,10 +50,19 @@
                 </p>
             </div>
         </div>
-
         <div class="form-group">
             <label data-translate="crmisticApp.etudiant.diplome" for="field_diplome">Diplome</label>
-            <select class="form-control" id="field_diplome" multiple name="diplome" ng-model="vm.etudiant.diplomes" ng-options="diplome as diplome.nom for diplome in vm.diplomes track by diplome.id"></select>
+            <select class="form-control" id="field_diplome" multiple name="diplome" ng-model="vm.etudiant.diplome" ng-options="diplome as diplome.nom for diplome in vm.diplomes track by diplome.id"></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="crmisticApp.etudiant.filiere" for="field_filiere">Filiere</label>
+            <select class="form-control" id="field_filiere" multiple name="filiere"  data-ng-disabled="!vm.etudiant.diplome[0]"
+                    ng-model="vm.etudiant.filiere" ng-options="filiere as filiere.niveau for filiere in vm.filieres | filter : {diplomeId: vm.etudiant.diplome[0].id} "></select>
+        </div>
+        <div class="form-group">
+            <label data-translate="crmisticApp.etudiant.promotion" for="field_promotion">Promotion</label>
+            <select class="form-control" id="field_promotion" multiple name="promotion" data-ng-disabled="!vm.etudiant.filiere[0]"
+                    ng-model="vm.etudiant.promotions" ng-options="promotion as promotion.annee for promotion in vm.promotions | filter : {filiereId: vm.etudiant.filiere[0].id} "></select>
         </div>
     </div>
     <div class="modal-footer">

@@ -78,5 +78,9 @@
 
     <cache alias="fr.istic.crm.domain.Taxe" uses-template="simple"/>
 
+    <cache alias="fr.istic.crm.domain.Etudiant.promotions" uses-template="simple"/>
+
+    <cache alias="fr.istic.crm.domain.Promotion.etudiants" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

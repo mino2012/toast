@@ -44,7 +44,7 @@
             <tbody>
                 <tr ng-repeat="promotion in vm.promotions track by promotion.id">
                     <td><a ui-sref="promotion-detail({id:promotion.id})">{{promotion.id}}</a></td>
-                    <td>{{promotion.annee | date:'yyyy'}}</td>
+                    <td>{{promotion.annee | date:'medium'}}</td>
                     <td>
                         <a ui-sref="filiere-detail({id:promotion.filiereId})">{{promotion.filiereNiveau}}</a>
                     </td>

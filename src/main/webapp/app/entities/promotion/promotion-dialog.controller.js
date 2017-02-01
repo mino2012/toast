@@ -5,9 +5,9 @@
         .module('crmisticApp')
         .controller('PromotionDialogController', PromotionDialogController);
 
-    PromotionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Promotion', 'Filiere'];
+    PromotionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Promotion', 'Filiere', 'Etudiant', 'Diplome'];
 
-    function PromotionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Promotion, Filiere) {
+    function PromotionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Promotion, Filiere, Etudiant, Diplome) {
         var vm = this;
 
         vm.promotion = entity;
@@ -15,13 +15,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
+        vm.diplomes = Diplome.query();
         vm.filieres = Filiere.query();
-
-        vm.datepickerOptions = {
-                mode: 'year',
-                minMode: 'year',
-                maxMode: 'year'
-        };
+        vm.etudiants = Etudiant.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

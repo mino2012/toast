@@ -18,7 +18,6 @@ public interface DiplomeMapper {
 
     @Mapping(target = "filieres", ignore = true)
     @Mapping(target = "partenariats", ignore = true)
-    @Mapping(target = "etudiants", ignore = true)
     @Mapping(target = "intervenants", ignore = true)
     Diplome diplomeDTOToDiplome(DiplomeDTO diplomeDTO);
 
