@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="quentin (generated)" id="1485955259787-1">
+        <createTable tableName="etudiant_promotion">
+            <column name="etudiants_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="promotions_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="quentin (generated)" id="1485955259787-2">
+        <addPrimaryKey columnNames="etudiants_id, promotions_id" tableName="etudiant_promotion"/>
+    </changeSet>
+    <changeSet author="quentin (generated)" id="1485955259787-3">
+        <addForeignKeyConstraint baseColumnNames="etudiants_id" baseTableName="etudiant_promotion" constraintName="FKcio77m894ji1uh7doplrp5dwx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="etudiant"/>
+    </changeSet>
+    <changeSet author="quentin (generated)" id="1485955259787-4">
+        <addForeignKeyConstraint baseColumnNames="promotions_id" baseTableName="etudiant_promotion" constraintName="FKi7qy9cg8v1qkfk2rdqlee8w8e" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="promotion"/>
+    </changeSet>
+    <changeSet author="quentin (generated)" id="1485955259787-5">
+        <dropForeignKeyConstraint baseTableName="etudiant_diplome" constraintName="fk_etudiant_diplome_diplomes_id"/>
+    </changeSet>
+    <changeSet author="quentin (generated)" id="1485955259787-6">
+        <dropForeignKeyConstraint baseTableName="etudiant_diplome" constraintName="fk_etudiant_diplome_etudiants_id"/>
+    </changeSet>
+    <changeSet author="quentin (generated)" id="1485955259787-7">
+        <dropTable tableName="etudiant_diplome"/>
+    </changeSet>
+</databaseChangeLog>

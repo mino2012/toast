@@ -19,6 +19,7 @@ public interface PromotionMapper {
     List<PromotionDTO> promotionsToPromotionDTOs(List<Promotion> promotions);
 
     @Mapping(source = "filiereId", target = "filiere")
+    @Mapping(target = "etudiants", ignore = true)
     Promotion promotionDTOToPromotion(PromotionDTO promotionDTO);
 
     List<Promotion> promotionDTOsToPromotions(List<PromotionDTO> promotionDTOs);

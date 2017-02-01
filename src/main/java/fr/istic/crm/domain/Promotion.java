@@ -1,5 +1,6 @@
 package fr.istic.crm.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -31,6 +34,11 @@ public class Promotion implements Serializable {
 
     @ManyToOne
     private Filiere filiere;
+
+    @ManyToMany(mappedBy = "promotions")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Etudiant> etudiants = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -64,6 +72,31 @@ public class Promotion implements Serializable {
 
     public void setFiliere(Filiere filiere) {
         this.filiere = filiere;
+    }
+
+    public Set<Etudiant> getEtudiants() {
+        return etudiants;
+    }
+
+    public Promotion etudiants(Set<Etudiant> etudiants) {
+        this.etudiants = etudiants;
+        return this;
+    }
+
+    public Promotion addEtudiant(Etudiant etudiant) {
+        etudiants.add(etudiant);
+        etudiant.getPromotions().add(this);
+        return this;
+    }
+
+    public Promotion removeEtudiant(Etudiant etudiant) {
+        etudiants.remove(etudiant);
+        etudiant.getPromotions().remove(this);
+        return this;
+    }
+
+    public void setEtudiants(Set<Etudiant> etudiants) {
+        this.etudiants = etudiants;
     }
 
     @Override

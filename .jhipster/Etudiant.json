@@ -8,12 +8,12 @@
             "otherEntityRelationshipName": "etudiant"
         },
         {
+            "relationshipName": "promotion",
+            "otherEntityName": "promotion",
             "relationshipType": "many-to-many",
-            "otherEntityRelationshipName": "etudiant",
-            "relationshipName": "diplome",
-            "otherEntityName": "diplome",
             "otherEntityField": "nom",
-            "ownerSide": true
+            "ownerSide": true,
+            "otherEntityRelationshipName": "etudiant"
         }
     ],
     "fields": [
@@ -43,8 +43,8 @@
         }
     ],
     "changelogDate": "20170127154849",
-    "entityTableName": "etudiant",
     "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "etudiant",
+    "pagination": "pagination"
 }

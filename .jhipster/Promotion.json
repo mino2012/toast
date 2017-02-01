@@ -6,6 +6,13 @@
             "relationshipName": "filiere",
             "otherEntityName": "filiere",
             "otherEntityField": "niveau"
+        },
+        {
+            "relationshipName": "etudiant",
+            "otherEntityName": "etudiant",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "promotion"
         }
     ],
     "fields": [
@@ -18,8 +25,8 @@
         }
     ],
     "changelogDate": "20170127154856",
-    "entityTableName": "promotion",
     "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "promotion",
+    "pagination": "pagination"
 }

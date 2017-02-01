@@ -32,10 +32,13 @@
                 </p>
             </div>
         </div>
-
+        <div class="form-group">
+            <label data-translate="crmisticApp.etudiant.diplome" for="field_diplome">Diplome</label>
+            <select class="form-control" id="field_diplome" multiple name="diplome" ng-model="vm.etudiant.diplome" ng-options="diplome as diplome.nom for diplome in vm.diplomes track by diplome.id"></select>
+        </div>
         <div class="form-group">
             <label data-translate="crmisticApp.promotion.filiere" for="field_filiere">Filiere</label>
-            <select class="form-control" id="field_filiere" name="filiere" ng-model="vm.promotion.filiereId" ng-options="filiere.id as filiere.niveau for filiere in vm.filieres"            >
+            <select class="form-control" id="field_filiere" name="filiere"  data-ng-disabled="!vm.etudiant.diplome[0]" ng-model="vm.promotion.filiereId" ng-options="filiere.id as filiere.niveau for filiere in vm.filieres | filter : {diplomeId: vm.etudiant.diplome[0].id}"            >
                 <option value=""></option>
             </select>
         </div>

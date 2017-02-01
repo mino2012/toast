@@ -62,11 +62,6 @@ public class Diplome implements Serializable {
     @ManyToMany(mappedBy = "diplomes")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Etudiant> etudiants = new HashSet<>();
-
-    @ManyToMany(mappedBy = "diplomes")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Professionnel> intervenants = new HashSet<>();
 
     public Long getId() {
@@ -164,31 +159,6 @@ public class Diplome implements Serializable {
 
     public void setPartenariats(Set<Partenariat> partenariats) {
         this.partenariats = partenariats;
-    }
-
-    public Set<Etudiant> getEtudiants() {
-        return etudiants;
-    }
-
-    public Diplome etudiants(Set<Etudiant> etudiants) {
-        this.etudiants = etudiants;
-        return this;
-    }
-
-    public Diplome addEtudiant(Etudiant etudiant) {
-        etudiants.add(etudiant);
-        etudiant.getDiplomes().add(this);
-        return this;
-    }
-
-    public Diplome removeEtudiant(Etudiant etudiant) {
-        etudiants.remove(etudiant);
-        etudiant.getDiplomes().remove(this);
-        return this;
-    }
-
-    public void setEtudiants(Set<Etudiant> etudiants) {
-        this.etudiants = etudiants;
     }
 
     public Set<Professionnel> getIntervenants() {

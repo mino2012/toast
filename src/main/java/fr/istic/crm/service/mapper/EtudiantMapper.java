@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Mapper for the entity Etudiant and its DTO EtudiantDTO.
  */
-@Mapper(componentModel = "spring", uses = {DiplomeMapper.class, })
+@Mapper(componentModel = "spring", uses = {PromotionMapper.class, })
 public interface EtudiantMapper {
 
     EtudiantDTO etudiantToEtudiantDTO(Etudiant etudiant);
@@ -21,12 +21,12 @@ public interface EtudiantMapper {
 
     List<Etudiant> etudiantDTOsToEtudiants(List<EtudiantDTO> etudiantDTOs);
 
-    default Diplome diplomeFromId(Long id) {
+    default Promotion promotionFromId(Long id) {
         if (id == null) {
             return null;
         }
-        Diplome diplome = new Diplome();
-        diplome.setId(id);
-        return diplome;
+        Promotion promotion = new Promotion();
+        promotion.setId(id);
+        return promotion;
     }
 }

@@ -53,10 +53,10 @@ public class Etudiant implements Serializable {
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "etudiant_diplome",
+    @JoinTable(name = "etudiant_promotion",
                joinColumns = @JoinColumn(name="etudiants_id", referencedColumnName="ID"),
-               inverseJoinColumns = @JoinColumn(name="diplomes_id", referencedColumnName="ID"))
-    private Set<Diplome> diplomes = new HashSet<>();
+               inverseJoinColumns = @JoinColumn(name="promotions_id", referencedColumnName="ID"))
+    private Set<Promotion> promotions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -156,29 +156,29 @@ public class Etudiant implements Serializable {
         this.conventionStages = conventionStages;
     }
 
-    public Set<Diplome> getDiplomes() {
-        return diplomes;
+    public Set<Promotion> getPromotions() {
+        return promotions;
     }
 
-    public Etudiant diplomes(Set<Diplome> diplomes) {
-        this.diplomes = diplomes;
+    public Etudiant promotions(Set<Promotion> promotions) {
+        this.promotions = promotions;
         return this;
     }
 
-    public Etudiant addDiplome(Diplome diplome) {
-        diplomes.add(diplome);
-        diplome.getEtudiants().add(this);
+    public Etudiant addPromotion(Promotion promotion) {
+        promotions.add(promotion);
+        promotion.getEtudiants().add(this);
         return this;
     }
 
-    public Etudiant removeDiplome(Diplome diplome) {
-        diplomes.remove(diplome);
-        diplome.getEtudiants().remove(this);
+    public Etudiant removePromotion(Promotion promotion) {
+        promotions.remove(promotion);
+        promotion.getEtudiants().remove(this);
         return this;
     }
 
-    public void setDiplomes(Set<Diplome> diplomes) {
-        this.diplomes = diplomes;
+    public void setPromotions(Set<Promotion> promotions) {
+        this.promotions = promotions;
     }
 
     @Override

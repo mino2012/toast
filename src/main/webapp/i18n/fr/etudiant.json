@@ -22,7 +22,7 @@
             "sexe": "Sexe",
             "numEtudiant": "Num Etudiant",
             "conventionStage": "Convention Stage",
-            "diplome": "Diplome"
+            "promotion": "Promotion"
         }
     }
 }

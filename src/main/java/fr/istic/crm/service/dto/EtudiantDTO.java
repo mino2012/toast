@@ -27,7 +27,7 @@ public class EtudiantDTO implements Serializable {
     private String numEtudiant;
 
 
-    private Set<DiplomeDTO> diplomes = new HashSet<>();
+    private Set<PromotionDTO> promotions = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -72,12 +72,12 @@ public class EtudiantDTO implements Serializable {
         this.numEtudiant = numEtudiant;
     }
 
-    public Set<DiplomeDTO> getDiplomes() {
-        return diplomes;
+    public Set<PromotionDTO> getPromotions() {
+        return promotions;
     }
 
-    public void setDiplomes(Set<DiplomeDTO> diplomes) {
-        this.diplomes = diplomes;
+    public void setPromotions(Set<PromotionDTO> promotions) {
+        this.promotions = promotions;
     }
 
     @Override

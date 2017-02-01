@@ -16,13 +16,6 @@
         },
         {
             "relationshipType": "many-to-many",
-            "relationshipName": "etudiant",
-            "otherEntityName": "etudiant",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "diplome"
-        },
-        {
-            "relationshipType": "many-to-many",
             "relationshipName": "intervenant",
             "otherEntityName": "professionnel",
             "ownerSide": false,

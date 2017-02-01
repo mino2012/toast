@@ -1,5 +1,7 @@
 package fr.istic.crm.service.dto;
 
+import fr.istic.crm.domain.Filiere;
+
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -20,7 +22,7 @@ public class PromotionDTO implements Serializable {
 
 
     private Long filiereId;
-    
+
 
     private String filiereNiveau;
 

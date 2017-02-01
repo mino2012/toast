@@ -5,9 +5,9 @@
         .module('crmisticApp')
         .controller('EtudiantDetailController', EtudiantDetailController);
 
-    EtudiantDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Etudiant', 'ConventionStage', 'Diplome'];
+    EtudiantDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Etudiant', 'ConventionStage', 'Promotion'];
 
-    function EtudiantDetailController($scope, $rootScope, $stateParams, previousState, entity, Etudiant, ConventionStage, Diplome) {
+    function EtudiantDetailController($scope, $rootScope, $stateParams, previousState, entity, Etudiant, ConventionStage, Promotion) {
         var vm = this;
 
         vm.etudiant = entity;

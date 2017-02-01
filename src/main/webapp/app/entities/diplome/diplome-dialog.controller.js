@@ -5,9 +5,9 @@
         .module('crmisticApp')
         .controller('DiplomeDialogController', DiplomeDialogController);
 
-    DiplomeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Diplome', 'Filiere', 'Partenariat', 'Etudiant', 'Professionnel'];
+    DiplomeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Diplome', 'Filiere', 'Partenariat', 'Professionnel'];
 
-    function DiplomeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Diplome, Filiere, Partenariat, Etudiant, Professionnel) {
+    function DiplomeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Diplome, Filiere, Partenariat, Professionnel) {
         var vm = this;
 
         vm.diplome = entity;
@@ -15,7 +15,6 @@
         vm.save = save;
         vm.filieres = Filiere.query();
         vm.partenariats = Partenariat.query();
-        vm.etudiants = Etudiant.query();
         vm.professionnels = Professionnel.query();
 
         $timeout(function (){
