@@ -19,6 +19,12 @@
         vm.filieres = Filiere.query();
         vm.etudiants = Etudiant.query();
 
+        vm.datepickerOptions = {
+            mode: 'year',
+            minMode: 'year',
+            maxMode: 'year'
+        };
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

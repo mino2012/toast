@@ -6,11 +6,15 @@
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="crmisticApp.promotion.annee">Annee</span></dt>
         <dd>
-            <span>{{vm.promotion.annee | date:'medium'}}</span>
+            <span>{{vm.promotion.annee | date:'yyyy'}}</span>
         </dd>
         <dt><span data-translate="crmisticApp.promotion.filiere">Filiere</span></dt>
         <dd>
             <a ui-sref="filiere-detail({id:vm.promotion.filiereId})">{{vm.promotion.filiereNiveau}}</a>
+        </dd>
+        <dt><span data-translate="crmisticApp.diplome">Diplome</span></dt>
+        <dd>
+             <span>{{vm.promotion.filiereId.diplomeNom}}</span>
         </dd>
     </dl>
 
