@@ -31,7 +31,10 @@ script:
   - gulp test
   - ./mvnw package -Pprod -DskipTests
 notifications:
-  webhooks:
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: false     # default: false
+  slack:
+    secure: BJoHZhgEwRMnYa1Xn8veH4YZa2RoGIDNIc/Vo74aghL9ZCglejmU7YXZi52FXG8zyV+EiYAKTB65t0mlFeMTmAcm7cOTjiYwC23IhQSy8sWT7UwjYItO9yAuRZ+wnFEOAe1qlNjugdIDZWeKi/+xqrFl2a2EhrZQqKbhtyw/bkPUC6L4UmXqXLsTO96+rZxlzH9r/SPZWNOlfXCrHoKCxN+nEjxtbU+rPJtJx7IeV6k3PLv2tw6ibiGbOl/jhtutYf6kdYg62Oy5iwLcmlw3KF9l+nSBZzdcxYGWUDi+PwquPYPwQXfzmqoKcbPn+Vto1D27nK4UFgUc02tvAOTB1XPVH2xMqY98vKtiEyjZs/eL4NEPmKichT8dlxLvGpBqyMRGq7wq3TmROD4Dq2fP49FlsMhn46mHwAwHW28A2BcWrNvTtSCT+ATWSCP7XJVikaqKne/edi+GJtLeTKVWBNd3ImukQtqjh3jNs2Q31YkyY0yW5aMHCmdc9OXzIVtlWru5iXITqZfwLMnD1H7xZ0GaOgfHBCzOyxhrRCCPO3abhH3hPikQQysFa7HNH8PbqIw6xSBfL+2jIcCzGvQmvgHKPm6TtFvmKSMPODNr7RRu+NMN00R3a3IQsRVK14/c/V+b8UUMCvuNhgk7CN2gktvktIqahB6NdkM3VLn6vQ8=
+    email: false
+
+branches:
+  only:
+  - master
