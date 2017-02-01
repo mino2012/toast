@@ -11,7 +11,7 @@
             "relationshipName": "promotion",
             "otherEntityName": "promotion",
             "relationshipType": "many-to-many",
-            "otherEntityField": "annee",
+            "otherEntityField": "nom",
             "ownerSide": true,
             "otherEntityRelationshipName": "etudiant"
         }
