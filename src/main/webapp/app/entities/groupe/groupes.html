@@ -46,8 +46,8 @@
                 <tr ng-repeat="groupe in vm.groupes track by groupe.id">
                     <td><a ui-sref="groupe-detail({id:groupe.id})">{{groupe.id}}</a></td>
                     <td>{{groupe.nom}}</td>
-                    <td>{{groupe.dateCreation}}</td>
-                    <td>{{groupe.dateModification}}</td>
+                    <td>{{groupe.dateCreation | date:'dd/MM/yyyy'}}</td>
+                    <td>{{groupe.dateModification | date:'dd/MM/yyyy'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

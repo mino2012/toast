@@ -46,8 +46,8 @@
                 <tr ng-repeat="diplome in vm.diplomes track by diplome.id">
                     <td><a ui-sref="diplome-detail({id:diplome.id})">{{diplome.id}}</a></td>
                     <td>{{diplome.nom}}</td>
-                    <td>{{diplome.dateCreation}}</td>
-                    <td>{{diplome.dateModification}}</td>
+                    <td>{{diplome.dateCreation | date:'dd/MM/yyyy'}}</td>
+                    <td>{{diplome.dateModification | date:'dd/MM/yyyy'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

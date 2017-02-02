@@ -56,8 +56,8 @@
                     <td>{{site.ville}}</td>
                     <td>{{site.pays}}</td>
                     <td>{{site.telephone}}</td>
-                    <td>{{site.dateCreation}}</td>
-                    <td>{{site.dateModification}}</td>
+                    <td>{{site.dateCreation | date:'dd/MM/yyyy'}}</td>
+                    <td>{{site.dateModification | date:'dd/MM/yyyy'}}</td>
                     <td>
                         <a ui-sref="entreprise-detail({id:site.entrepriseSiegeId})">{{site.entrepriseSiegeId}}</a>
                     </td>

@@ -59,8 +59,8 @@
                     <td>{{professionnel.mail}}</td>
                     <td>{{professionnel.fonction}}</td>
                     <td>{{professionnel.ancienEtudiant}}</td>
-                    <td>{{professionnel.dateCreation}}</td>
-                    <td>{{professionnel.dateModification}}</td>
+                    <td>{{professionnel.dateCreation | date:'dd/MM/yyyy'}}</td>
+                    <td>{{professionnel.dateModification | date:'dd/MM/yyyy'}}</td>
                     <td>
                         <a ui-sref="entreprise-detail({id:professionnel.entrepriseContactId})">{{professionnel.entrepriseContactId}}</a>
                     </td>
