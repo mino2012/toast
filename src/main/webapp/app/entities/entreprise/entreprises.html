@@ -55,8 +55,8 @@
                     <td>{{entreprise.numSiret}}</td>
                     <td>{{entreprise.numSiren}}</td>
                     <td>{{entreprise.telephone}}</td>
-                    <td>{{entreprise.dateCreation}}</td>
-                    <td>{{entreprise.dateModification}}</td>
+                    <td>{{entreprise.dateCreation | date:'dd/MM/yyyy'}}</td>
+                    <td>{{entreprise.dateModification | date:'dd/MM/yyyy'}}</td>
                     <td>
                         <a ui-sref="groupe-detail({id:entreprise.groupeId})">{{entreprise.groupeNom}}</a>
                     </td>
