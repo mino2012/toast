@@ -18,7 +18,8 @@
             },
             "annee": "Annee",
             "filiere": "Filiere",
-            "etudiant": "Etudiant"
+            "etudiant": "Etudiant",
+            "diplome": "Degree"
         }
     }
 }

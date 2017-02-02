@@ -14,6 +14,7 @@ public interface PromotionMapper {
 
     @Mapping(source = "filiere.id", target = "filiereId")
     @Mapping(source = "filiere.niveau", target = "filiereNiveau")
+    @Mapping(source = "filiere.diplome", target = "diplome")
     PromotionDTO promotionToPromotionDTO(Promotion promotion);
 
     List<PromotionDTO> promotionsToPromotionDTOs(List<Promotion> promotions);
