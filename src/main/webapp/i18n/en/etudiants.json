@@ -1,0 +1,10 @@
+{
+    "crmisticApp": {
+        "etudiants" : {
+            "home": {
+                "title": "Students - Explorer"
+            },
+            "salut": "hello"
+        }
+    }
+}
