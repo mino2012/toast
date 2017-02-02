@@ -94,7 +94,7 @@ relationship OneToOne {
 
 relationship ManyToMany {
 	Partenariat{diplome(nom)} to Diplome{partenariat},
-    Etudiant{diplome(nom)} to Diplome{etudiant(nom)},
+    Etudiant{promotion(annee)} to Promotion{etudiant(nom)},
     Professionnel{diplome(nom)} to Diplome{intervenant(nom)}
 }
 
