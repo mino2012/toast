@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,12 +44,6 @@ public class GroupeResourceIntTest {
 
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_DATE_CREATION = 1L;
-    private static final Long UPDATED_DATE_CREATION = 2L;
-
-    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
-    private static final Long UPDATED_DATE_MODIFICATION = 2L;
 
     @Inject
     private GroupeRepository groupeRepository;
@@ -75,6 +70,26 @@ public class GroupeResourceIntTest {
 
     private Groupe groupe;
 
+    private Long timestampCreation;
+
+    private Long timestampModification;
+
+    public Long getTimestampCreation() {
+        return timestampCreation;
+    }
+
+    public void setTimestampCreation(Long timestampCreation) {
+        this.timestampCreation = timestampCreation;
+    }
+
+    public Long getTimestampModification() {
+        return timestampModification;
+    }
+
+    public void setTimestampModification(Long timestampModification) {
+        this.timestampModification = timestampModification;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -90,18 +105,19 @@ public class GroupeResourceIntTest {
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
+     *
+     * dateCreation and dateModification are automatically set using envers
      */
     public static Groupe createEntity(EntityManager em) {
         Groupe groupe = new Groupe()
-                .nom(DEFAULT_NOM)
-                .dateCreation(DEFAULT_DATE_CREATION)
-                .dateModification(DEFAULT_DATE_MODIFICATION);
+                .nom(DEFAULT_NOM);
         return groupe;
     }
 
     @Before
     public void initTest() {
         groupeSearchRepository.deleteAll();
+        setTimestampCreation(new Long(new Date().getTime()));
         groupe = createEntity(em);
     }
 
@@ -123,8 +139,8 @@ public class GroupeResourceIntTest {
         assertThat(groupeList).hasSize(databaseSizeBeforeCreate + 1);
         Groupe testGroupe = groupeList.get(groupeList.size() - 1);
         assertThat(testGroupe.getNom()).isEqualTo(DEFAULT_NOM);
-        assertThat(testGroupe.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testGroupe.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
+        assertThat(testGroupe.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testGroupe.getDateModification().longValue() == getTimestampCreation().longValue());
 
         // Validate the Groupe in ElasticSearch
         Groupe groupeEs = groupeSearchRepository.findOne(testGroupe.getId());
@@ -164,8 +180,8 @@ public class GroupeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupe.getId().intValue())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(groupe.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(groupe.getDateModification().longValue())));
     }
 
     @Test
@@ -180,8 +196,8 @@ public class GroupeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(groupe.getId().intValue()))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(groupe.getDateCreation().longValue()))
+            .andExpect(jsonPath("$.dateModification").value(groupe.getDateModification().longValue()));
     }
 
     @Test
@@ -202,10 +218,12 @@ public class GroupeResourceIntTest {
 
         // Update the groupe
         Groupe updatedGroupe = groupeRepository.findOne(groupe.getId());
+
+        setTimestampModification(new Date().getTime());
+
+        // dateCreation and dateModification are updated automatically using envers
         updatedGroupe
-                .nom(UPDATED_NOM)
-                .dateCreation(UPDATED_DATE_CREATION)
-                .dateModification(UPDATED_DATE_MODIFICATION);
+                .nom(UPDATED_NOM);
         GroupeDTO groupeDTO = groupeMapper.groupeToGroupeDTO(updatedGroupe);
 
         restGroupeMockMvc.perform(put("/api/groupes")
@@ -218,12 +236,14 @@ public class GroupeResourceIntTest {
         assertThat(groupeList).hasSize(databaseSizeBeforeUpdate);
         Groupe testGroupe = groupeList.get(groupeList.size() - 1);
         assertThat(testGroupe.getNom()).isEqualTo(UPDATED_NOM);
-        assertThat(testGroupe.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testGroupe.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
+        assertThat(testGroupe.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testGroupe.getDateModification().longValue() == getTimestampModification().longValue());
+
+        assertThat(testGroupe.getDateCreation().longValue()).isLessThan(testGroupe.getDateModification().longValue());
 
         // Validate the Groupe in ElasticSearch
         Groupe groupeEs = groupeSearchRepository.findOne(testGroupe.getId());
-        assertThat(groupeEs).isEqualToComparingFieldByField(testGroupe);
+        assertThat(groupeEs).isEqualToIgnoringGivenFields(testGroupe, "dateModification");
     }
 
     @Test
@@ -280,7 +300,7 @@ public class GroupeResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(groupe.getId().intValue())))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(groupe.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(groupe.getDateModification().longValue())));
     }
 }

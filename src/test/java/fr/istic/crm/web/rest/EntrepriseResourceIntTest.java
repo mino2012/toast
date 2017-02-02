@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,12 +57,6 @@ public class EntrepriseResourceIntTest {
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DATE_CREATION = 1L;
-    private static final Long UPDATED_DATE_CREATION = 2L;
-
-    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
-    private static final Long UPDATED_DATE_MODIFICATION = 2L;
-
     @Inject
     private EntrepriseRepository entrepriseRepository;
 
@@ -87,6 +82,26 @@ public class EntrepriseResourceIntTest {
 
     private Entreprise entreprise;
 
+    private Long timestampCreation;
+
+    private Long timestampModification;
+
+    public Long getTimestampCreation() {
+        return timestampCreation;
+    }
+
+    public void setTimestampCreation(Long timestampCreation) {
+        this.timestampCreation = timestampCreation;
+    }
+
+    public Long getTimestampModification() {
+        return timestampModification;
+    }
+
+    public void setTimestampModification(Long timestampModification) {
+        this.timestampModification = timestampModification;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -102,6 +117,8 @@ public class EntrepriseResourceIntTest {
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
+     *
+     * dateCreation and dateModification are automatically set using envers
      */
     public static Entreprise createEntity(EntityManager em) {
         Entreprise entreprise = new Entreprise()
@@ -109,15 +126,14 @@ public class EntrepriseResourceIntTest {
                 .pays(DEFAULT_PAYS)
                 .numSiret(DEFAULT_NUM_SIRET)
                 .numSiren(DEFAULT_NUM_SIREN)
-                .telephone(DEFAULT_TELEPHONE)
-                .dateCreation(DEFAULT_DATE_CREATION)
-                .dateModification(DEFAULT_DATE_MODIFICATION);
+                .telephone(DEFAULT_TELEPHONE);
         return entreprise;
     }
 
     @Before
     public void initTest() {
         entrepriseSearchRepository.deleteAll();
+        setTimestampCreation(new Long(new Date().getTime()));
         entreprise = createEntity(em);
     }
 
@@ -143,8 +159,8 @@ public class EntrepriseResourceIntTest {
         assertThat(testEntreprise.getNumSiret()).isEqualTo(DEFAULT_NUM_SIRET);
         assertThat(testEntreprise.getNumSiren()).isEqualTo(DEFAULT_NUM_SIREN);
         assertThat(testEntreprise.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
-        assertThat(testEntreprise.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testEntreprise.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
+        assertThat(testEntreprise.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testEntreprise.getDateModification().longValue() == getTimestampCreation().longValue());
 
         // Validate the Entreprise in ElasticSearch
         Entreprise entrepriseEs = entrepriseSearchRepository.findOne(testEntreprise.getId());
@@ -226,8 +242,8 @@ public class EntrepriseResourceIntTest {
             .andExpect(jsonPath("$.[*].numSiret").value(hasItem(DEFAULT_NUM_SIRET.toString())))
             .andExpect(jsonPath("$.[*].numSiren").value(hasItem(DEFAULT_NUM_SIREN.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(entreprise.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(entreprise.getDateModification().longValue())));
     }
 
     @Test
@@ -246,8 +262,8 @@ public class EntrepriseResourceIntTest {
             .andExpect(jsonPath("$.numSiret").value(DEFAULT_NUM_SIRET.toString()))
             .andExpect(jsonPath("$.numSiren").value(DEFAULT_NUM_SIREN.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(entreprise.getDateCreation().longValue()))
+            .andExpect(jsonPath("$.dateModification").value(entreprise.getDateModification().longValue()));
     }
 
     @Test
@@ -268,14 +284,16 @@ public class EntrepriseResourceIntTest {
 
         // Update the entreprise
         Entreprise updatedEntreprise = entrepriseRepository.findOne(entreprise.getId());
+
+        setTimestampModification(new Date().getTime());
+
+        // dateCreation and dateModification are updated automatically using envers
         updatedEntreprise
                 .nom(UPDATED_NOM)
                 .pays(UPDATED_PAYS)
                 .numSiret(UPDATED_NUM_SIRET)
                 .numSiren(UPDATED_NUM_SIREN)
-                .telephone(UPDATED_TELEPHONE)
-                .dateCreation(UPDATED_DATE_CREATION)
-                .dateModification(UPDATED_DATE_MODIFICATION);
+                .telephone(UPDATED_TELEPHONE);
         EntrepriseDTO entrepriseDTO = entrepriseMapper.entrepriseToEntrepriseDTO(updatedEntreprise);
 
         restEntrepriseMockMvc.perform(put("/api/entreprises")
@@ -292,12 +310,14 @@ public class EntrepriseResourceIntTest {
         assertThat(testEntreprise.getNumSiret()).isEqualTo(UPDATED_NUM_SIRET);
         assertThat(testEntreprise.getNumSiren()).isEqualTo(UPDATED_NUM_SIREN);
         assertThat(testEntreprise.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
-        assertThat(testEntreprise.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testEntreprise.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
+        assertThat(testEntreprise.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testEntreprise.getDateModification().longValue() == getTimestampModification().longValue());
+
+        assertThat(testEntreprise.getDateCreation().longValue()).isLessThan(testEntreprise.getDateModification().longValue());
 
         // Validate the Entreprise in ElasticSearch
         Entreprise entrepriseEs = entrepriseSearchRepository.findOne(testEntreprise.getId());
-        assertThat(entrepriseEs).isEqualToComparingFieldByField(testEntreprise);
+        assertThat(entrepriseEs).isEqualToIgnoringGivenFields(testEntreprise, "dateModification");
     }
 
     @Test
@@ -358,7 +378,7 @@ public class EntrepriseResourceIntTest {
             .andExpect(jsonPath("$.[*].numSiret").value(hasItem(DEFAULT_NUM_SIRET.toString())))
             .andExpect(jsonPath("$.[*].numSiren").value(hasItem(DEFAULT_NUM_SIREN.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(entreprise.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(entreprise.getDateModification().longValue())));
     }
 }

@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,12 +57,6 @@ public class SiteResourceIntTest {
     private static final String DEFAULT_TELEPHONE = "AAAAAAAAAA";
     private static final String UPDATED_TELEPHONE = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DATE_CREATION = 1L;
-    private static final Long UPDATED_DATE_CREATION = 2L;
-
-    private static final Long DEFAULT_DATE_MODIFICATION = 1L;
-    private static final Long UPDATED_DATE_MODIFICATION = 2L;
-
     @Inject
     private SiteRepository siteRepository;
 
@@ -87,6 +82,26 @@ public class SiteResourceIntTest {
 
     private Site site;
 
+    private Long timestampCreation;
+
+    private Long timestampModification;
+
+    public Long getTimestampCreation() {
+        return timestampCreation;
+    }
+
+    public void setTimestampCreation(Long timestampCreation) {
+        this.timestampCreation = timestampCreation;
+    }
+
+    public Long getTimestampModification() {
+        return timestampModification;
+    }
+
+    public void setTimestampModification(Long timestampModification) {
+        this.timestampModification = timestampModification;
+    }
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -102,6 +117,8 @@ public class SiteResourceIntTest {
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
+     *
+     * dateCreation and dateModification are automatically set using envers
      */
     public static Site createEntity(EntityManager em) {
         Site site = new Site()
@@ -109,15 +126,14 @@ public class SiteResourceIntTest {
                 .codePostal(DEFAULT_CODE_POSTAL)
                 .ville(DEFAULT_VILLE)
                 .pays(DEFAULT_PAYS)
-                .telephone(DEFAULT_TELEPHONE)
-                .dateCreation(DEFAULT_DATE_CREATION)
-                .dateModification(DEFAULT_DATE_MODIFICATION);
+                .telephone(DEFAULT_TELEPHONE);
         return site;
     }
 
     @Before
     public void initTest() {
         siteSearchRepository.deleteAll();
+        setTimestampCreation(new Long(new Date().getTime()));
         site = createEntity(em);
     }
 
@@ -143,8 +159,8 @@ public class SiteResourceIntTest {
         assertThat(testSite.getVille()).isEqualTo(DEFAULT_VILLE);
         assertThat(testSite.getPays()).isEqualTo(DEFAULT_PAYS);
         assertThat(testSite.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
-        assertThat(testSite.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
-        assertThat(testSite.getDateModification()).isEqualTo(DEFAULT_DATE_MODIFICATION);
+        assertThat(testSite.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testSite.getDateModification().longValue() == getTimestampCreation().longValue());
 
         // Validate the Site in ElasticSearch
         Site siteEs = siteSearchRepository.findOne(testSite.getId());
@@ -188,8 +204,8 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.[*].ville").value(hasItem(DEFAULT_VILLE.toString())))
             .andExpect(jsonPath("$.[*].pays").value(hasItem(DEFAULT_PAYS.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(site.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(site.getDateModification().longValue())));
     }
 
     @Test
@@ -208,8 +224,8 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.ville").value(DEFAULT_VILLE.toString()))
             .andExpect(jsonPath("$.pays").value(DEFAULT_PAYS.toString()))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
-            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.intValue()))
-            .andExpect(jsonPath("$.dateModification").value(DEFAULT_DATE_MODIFICATION.intValue()));
+            .andExpect(jsonPath("$.dateCreation").value(site.getDateCreation().longValue()))
+            .andExpect(jsonPath("$.dateModification").value(site.getDateModification().longValue()));
     }
 
     @Test
@@ -230,14 +246,16 @@ public class SiteResourceIntTest {
 
         // Update the site
         Site updatedSite = siteRepository.findOne(site.getId());
+
+        setTimestampModification(new Date().getTime());
+
+        // dateCreation and dateModification are updated automatically using envers
         updatedSite
                 .adresse(UPDATED_ADRESSE)
                 .codePostal(UPDATED_CODE_POSTAL)
                 .ville(UPDATED_VILLE)
                 .pays(UPDATED_PAYS)
-                .telephone(UPDATED_TELEPHONE)
-                .dateCreation(UPDATED_DATE_CREATION)
-                .dateModification(UPDATED_DATE_MODIFICATION);
+                .telephone(UPDATED_TELEPHONE);
         SiteDTO siteDTO = siteMapper.siteToSiteDTO(updatedSite);
 
         restSiteMockMvc.perform(put("/api/sites")
@@ -254,12 +272,14 @@ public class SiteResourceIntTest {
         assertThat(testSite.getVille()).isEqualTo(UPDATED_VILLE);
         assertThat(testSite.getPays()).isEqualTo(UPDATED_PAYS);
         assertThat(testSite.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
-        assertThat(testSite.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
-        assertThat(testSite.getDateModification()).isEqualTo(UPDATED_DATE_MODIFICATION);
+        assertThat(testSite.getDateCreation().longValue() == getTimestampCreation().longValue());
+        assertThat(testSite.getDateModification().longValue() == getTimestampModification().longValue());
+
+        assertThat(testSite.getDateCreation().longValue()).isLessThan(testSite.getDateModification().longValue());
 
         // Validate the Site in ElasticSearch
         Site siteEs = siteSearchRepository.findOne(testSite.getId());
-        assertThat(siteEs).isEqualToComparingFieldByField(testSite);
+        assertThat(siteEs).isEqualToIgnoringGivenFields(testSite, "dateModification");
     }
 
     @Test
@@ -320,7 +340,7 @@ public class SiteResourceIntTest {
             .andExpect(jsonPath("$.[*].ville").value(hasItem(DEFAULT_VILLE.toString())))
             .andExpect(jsonPath("$.[*].pays").value(hasItem(DEFAULT_PAYS.toString())))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
-            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.intValue())))
-            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(DEFAULT_DATE_MODIFICATION.intValue())));
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(site.getDateCreation().longValue())))
+            .andExpect(jsonPath("$.[*].dateModification").value(hasItem(site.getDateModification().longValue())));
     }
 }
