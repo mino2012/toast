@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="control-label" data-translate="crmisticApp.taxe.annee" for="field_annee">Annee</label>
                 <div class="input-group">
-                    <input id="field_annee" type="text" class="form-control" name="annee" datetime-picker="{{dateformat}}" ng-model="vm.taxe.annee" is-open="vm.datePickerOpenStatus.annee"
+                    <input id="field_annee" type="text" class="form-control" name="annee" datetime-picker="yyyy" ng-model="vm.taxe.annee" is-open="vm.datePickerOpenStatus.annee" enable-time="false" datepicker-options="vm.datepickerOptions"
                       />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('annee')"><i class="glyphicon glyphicon-calendar"></i></button>
