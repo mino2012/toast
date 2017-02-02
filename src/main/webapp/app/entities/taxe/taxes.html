@@ -46,7 +46,7 @@
                 <tr ng-repeat="taxe in vm.taxes track by taxe.id">
                     <td><a ui-sref="taxe-detail({id:taxe.id})">{{taxe.id}}</a></td>
                     <td>{{taxe.montant}}</td>
-                    <td>{{taxe.annee | date:'medium'}}</td>
+                    <td>{{taxe.annee | date:'yyyy'}}</td>
                     <td>
                         <a ui-sref="entreprise-detail({id:taxe.entrepriseId})">{{taxe.entrepriseNom}}</a>
                     </td>
