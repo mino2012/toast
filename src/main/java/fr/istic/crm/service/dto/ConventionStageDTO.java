@@ -1,9 +1,8 @@
 package fr.istic.crm.service.dto;
 
+import fr.istic.crm.domain.Entreprise;
 import java.time.ZonedDateTime;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 
@@ -24,26 +23,23 @@ public class ConventionStageDTO implements Serializable {
 
     private ZonedDateTime dateFin;
 
-
     private Long etudiantId;
-    
 
     private String etudiantNom;
 
     private Long lieuStageId;
-    
 
     private String lieuStageAdresse;
 
     private Long tuteurId;
-    
 
     private String tuteurNom;
 
     private Long maitreStageId;
-    
 
     private String maitreStageNom;
+
+    private Entreprise entreprise;
 
     public Long getId() {
         return id;
@@ -154,6 +150,13 @@ public class ConventionStageDTO implements Serializable {
 
     public void setMaitreStageNom(String professionnelNom) {
         this.maitreStageNom = professionnelNom;
+    }
+
+    public Entreprise getEntreprise() {
+        return entreprise;
+    }
+    public void setEntreprise(Entreprise entreprise){
+        this.entreprise = entreprise;
     }
 
     @Override

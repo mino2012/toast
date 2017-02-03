@@ -45,6 +45,7 @@
                     <th jh-sort-by="lieuStageAdresse"><span data-translate="crmisticApp.conventionStage.lieuStage">Lieu Stage</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="tuteurNom"><span data-translate="crmisticApp.conventionStage.tuteur">Tuteur</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="maitreStageNom"><span data-translate="crmisticApp.conventionStage.maitreStage">Maitre Stage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lieuStage.entrepriseSite.nom"><span data-translate="crmisticApp.conventionStage.entreprise">Entreprise </span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -68,6 +69,10 @@
                     <td>
                         <a ui-sref="professionnel-detail({id:conventionStage.maitreStageId})">{{conventionStage.maitreStageNom}}</a>
                     </td>
+                    <td>
+                        <a ui-sref="entreprise-detail({id:conventionStage.entreprise.id})">{{conventionStage.entreprise.nom}}</a>
+                    </td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -24,7 +24,8 @@
             "etudiant": "Etudiant",
             "lieuStage": "Lieu Stage",
             "tuteur": "Tuteur",
-            "maitreStage": "Maitre Stage"
+            "maitreStage": "Maitre Stage",
+            "entreprise": "Entreprise"
         }
     }
 }
