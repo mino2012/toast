@@ -39,6 +39,7 @@
                     <th jh-sort-by="dateDebut"><span data-translate="crmisticApp.partenariat.dateDebut">Date Debut</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="dateFin"><span data-translate="crmisticApp.partenariat.dateFin">Date Fin</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="entrepriseNom"><span data-translate="crmisticApp.partenariat.entreprise">Entreprise</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="diplomes.nom"><span data-translate="crmisticApp.partenariat.diplome">Diplome</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -49,6 +50,11 @@
                     <td>{{partenariat.dateFin | date:'medium'}}</td>
                     <td>
                         <a ui-sref="entreprise-detail({id:partenariat.entrepriseId})">{{partenariat.entrepriseNom}}</a>
+                    </td>
+                    <td>
+                        <span ng-repeat="diplome in partenariat.diplomes track by diplome.id">
+                            <a ui-sref="diplome-detail({id: diplome.id})">{{diplome.nom}}</a>{{$last ? '' : ', '}}
+                        </span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

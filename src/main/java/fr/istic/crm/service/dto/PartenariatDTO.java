@@ -18,11 +18,9 @@ public class PartenariatDTO implements Serializable {
 
     private ZonedDateTime dateFin;
 
-
     private Set<DiplomeDTO> diplomes = new HashSet<>();
 
     private Long entrepriseId;
-    
 
     private String entrepriseNom;
 
