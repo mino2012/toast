@@ -5,6 +5,11 @@
         "menu": {
             "home": "Accueil",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "exploration": {
+                "main": "Exploration",
+                "etudiants": "Etudiants",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional exploration element here (do not translate!)"
+            },
             "entities": {
                 "main": "Entités",
                 "conventionStage": "Convention Stage",
