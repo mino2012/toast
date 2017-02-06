@@ -8,6 +8,7 @@
             "exploration": {
                 "main": "Exploration",
                 "etudiants": "Etudiants",
+                "stages":"Stages",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional exploration element here (do not translate!)"
             },
             "entities": {
