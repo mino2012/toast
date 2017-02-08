@@ -20,6 +20,7 @@ public interface ConventionStageMapper {
     @Mapping(source = "tuteur.nom", target = "tuteurNom")
     @Mapping(source = "maitreStage.id", target = "maitreStageId")
     @Mapping(source = "maitreStage.nom", target = "maitreStageNom")
+    @Mapping(source = "lieuStage.entrepriseSite", target = "entreprise")
     ConventionStageDTO conventionStageToConventionStageDTO(ConventionStage conventionStage);
 
     List<ConventionStageDTO> conventionStagesToConventionStageDTOs(List<ConventionStage> conventionStages);

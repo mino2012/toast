@@ -1,0 +1,15 @@
+{
+    "crmisticApp": {
+        "stages" : {
+            "home": {
+                "title": "Stages",
+                "search": "Recherche pour Stage"
+            },
+
+            "sujet": "Sujet",
+            "dateDebut": "Date Debut",
+            "dateFin": "Date Fin",
+            "entreprise": "Entreprise"
+        }
+    }
+}
