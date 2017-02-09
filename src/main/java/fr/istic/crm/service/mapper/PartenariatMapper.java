@@ -14,6 +14,7 @@ public interface PartenariatMapper {
 
     @Mapping(source = "entreprise.id", target = "entrepriseId")
     @Mapping(source = "entreprise.nom", target = "entrepriseNom")
+    @Mapping(source = "diplomes", target = "diplomes")
     PartenariatDTO partenariatToPartenariatDTO(Partenariat partenariat);
 
     List<PartenariatDTO> partenariatsToPartenariatDTOs(List<Partenariat> partenariats);

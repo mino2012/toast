@@ -38,6 +38,7 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="annee"><span data-translate="crmisticApp.promotion.annee">Annee</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="filiereNiveau"><span data-translate="crmisticApp.promotion.filiere">Filiere</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="filiere.diplome.nom"><span data-translate="crmisticApp.promotion.diplome">Diplome</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -47,6 +48,9 @@
                     <td>{{promotion.annee | date:'yyyy'}}</td>
                     <td>
                         <a ui-sref="filiere-detail({id:promotion.filiereId})">{{promotion.filiereNiveau}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="diplome-detail({id:promotion.diplome.id})">{{promotion.diplome.nom}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

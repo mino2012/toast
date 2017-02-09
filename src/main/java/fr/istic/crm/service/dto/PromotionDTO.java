@@ -1,7 +1,6 @@
 package fr.istic.crm.service.dto;
 
-import fr.istic.crm.domain.Filiere;
-
+import fr.istic.crm.domain.Diplome;
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -20,11 +19,12 @@ public class PromotionDTO implements Serializable {
     @NotNull
     private ZonedDateTime annee;
 
-
     private Long filiereId;
 
 
     private String filiereNiveau;
+
+    private Diplome diplome;
 
     public Long getId() {
         return id;
@@ -56,6 +56,14 @@ public class PromotionDTO implements Serializable {
 
     public void setFiliereNiveau(String filiereNiveau) {
         this.filiereNiveau = filiereNiveau;
+    }
+
+    public Diplome getDiplome() {
+        return diplome;
+    }
+
+    public void setDiplome(Diplome diplome) {
+        this.diplome = diplome;
     }
 
     @Override
