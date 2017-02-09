@@ -37,6 +37,41 @@
             <a ui-sref="groupe-detail({id:vm.entreprise.groupeId})">{{vm.entreprise.groupeNom}}</a>
         </dd>
     </dl>
+    <br />
+    <h3 data-translate="crmisticApp.entreprise.anciennesVersions">Anciennes Versions</h3>
+    <br />
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th><span data-translate="global.field.id">ID</span></th>
+                <th><span>Action</span></th>
+                <th><span data-translate="crmisticApp.entreprise.nom">Nom</span></th>
+                <th><span data-translate="crmisticApp.entreprise.pays">Pays</span></th>
+                <th><span data-translate="crmisticApp.entreprise.numSiret">Num Siret</span></th>
+                <th><span data-translate="crmisticApp.entreprise.numSiren">Num Siren</span></th>
+                <th><span data-translate="crmisticApp.entreprise.telephone">Telephone</span></th>
+                <th><span data-translate="crmisticApp.entreprise.dateCreation">Date Creation</span></th>
+                <th><span data-translate="crmisticApp.entreprise.dateModification">Date Modification</span></th>
+                <th><span data-translate="crmisticApp.entreprise.groupe">Groupe</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ancienneEntreprise in vm.anciennesVersions">
+                <td>{{ancienneEntreprise[0].id}}</td>
+                <td>{{ancienneEntreprise[2]}}</td>
+                <td>{{ancienneEntreprise[0].nom}}</td>
+                <td>{{ancienneEntreprise[0].pays}}</td>
+                <td>{{ancienneEntreprise[0].numSiret}}</td>
+                <td>{{ancienneEntreprise[0].numSiren}}</td>
+                <td>{{ancienneEntreprise[0].telephone}}</td>
+                <td>{{ancienneEntreprise[0].dateCreation | date:'short'}}</td>
+                <td>{{ancienneEntreprise[0].dateModification | date:'short'}}</td>
+                <td>{{ancienneEntreprise[0].groupeNom}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <button type="submit"
             ui-sref="{{ vm.previousState }}"

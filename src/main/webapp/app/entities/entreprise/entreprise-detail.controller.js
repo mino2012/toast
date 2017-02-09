@@ -5,12 +5,15 @@
         .module('crmisticApp')
         .controller('EntrepriseDetailController', EntrepriseDetailController);
 
-    EntrepriseDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Entreprise', 'Partenariat', 'Site', 'Professionnel', 'Taxe', 'Groupe'];
+    EntrepriseDetailController.$inject = ['$resource', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Entreprise', 'Partenariat', 'Site', 'Professionnel', 'Taxe', 'Groupe', 'EntrepriseOld'];
 
-    function EntrepriseDetailController($scope, $rootScope, $stateParams, previousState, entity, Entreprise, Partenariat, Site, Professionnel, Taxe, Groupe) {
+    function EntrepriseDetailController($resource, $scope, $rootScope, $stateParams, previousState, entity, Entreprise, Partenariat, Site, Professionnel, Taxe, Groupe, EntrepriseOld) {
         var vm = this;
 
         vm.entreprise = entity;
+        vm.anciennesVersions = EntrepriseOld.query({
+            id: vm.entreprise.id
+        });
         vm.previousState = previousState.name;
 
         var unsubscribe = $rootScope.$on('crmisticApp:entrepriseUpdate', function(event, result) {

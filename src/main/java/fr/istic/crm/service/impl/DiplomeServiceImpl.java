@@ -29,7 +29,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DiplomeServiceImpl implements DiplomeService{
 
     private final Logger log = LoggerFactory.getLogger(DiplomeServiceImpl.class);
-    
+
     @Inject
     private DiplomeRepository diplomeRepository;
 
@@ -56,11 +56,11 @@ public class DiplomeServiceImpl implements DiplomeService{
 
     /**
      *  Get all the diplomes.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<DiplomeDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Diplomes");
         Page<Diplome> result = diplomeRepository.findAll(pageable);
@@ -73,7 +73,7 @@ public class DiplomeServiceImpl implements DiplomeService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public DiplomeDTO findOne(Long id) {
         log.debug("Request to get Diplome : {}", id);
         Diplome diplome = diplomeRepository.findOne(id);

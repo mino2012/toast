@@ -20,7 +20,7 @@ public interface EntrepriseService {
 
     /**
      *  Get all the entreprises.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -46,6 +46,16 @@ public interface EntrepriseService {
      */
     EntrepriseDTO findOne(Long id);
 
+
+    /**
+     *  Get old version of entreprise.
+     *
+     *  @param id the id of the entity
+     *  @return list of old version
+     */
+    List findAnciennesVersions(Long id);
+
+
     /**
      *  Delete the "id" entreprise.
      *
@@ -57,7 +67,7 @@ public interface EntrepriseService {
      * Search for the entreprise corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

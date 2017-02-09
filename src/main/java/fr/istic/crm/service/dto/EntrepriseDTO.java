@@ -2,8 +2,6 @@ package fr.istic.crm.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 
@@ -32,7 +30,7 @@ public class EntrepriseDTO implements Serializable {
 
 
     private Long groupeId;
-    
+
 
     private String groupeNom;
 
@@ -100,7 +98,6 @@ public class EntrepriseDTO implements Serializable {
     public void setGroupeId(Long groupeId) {
         this.groupeId = groupeId;
     }
-
 
     public String getGroupeNom() {
         return groupeNom;

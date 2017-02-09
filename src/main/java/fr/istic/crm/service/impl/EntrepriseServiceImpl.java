@@ -6,14 +6,20 @@ import fr.istic.crm.repository.EntrepriseRepository;
 import fr.istic.crm.repository.search.EntrepriseSearchRepository;
 import fr.istic.crm.service.dto.EntrepriseDTO;
 import fr.istic.crm.service.mapper.EntrepriseMapper;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,15 +35,25 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class EntrepriseServiceImpl implements EntrepriseService{
 
     private final Logger log = LoggerFactory.getLogger(EntrepriseServiceImpl.class);
-    
+
     @Inject
     private EntrepriseRepository entrepriseRepository;
+
+    @Inject
+    private EntityManager manager;
 
     @Inject
     private EntrepriseMapper entrepriseMapper;
 
     @Inject
     private EntrepriseSearchRepository entrepriseSearchRepository;
+
+    AuditReader reader;
+
+    void init(){
+            reader = AuditReaderFactory.get(manager);
+    }
+
 
     /**
      * Save a entreprise.
@@ -56,13 +72,13 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 
     /**
      *  Get all the entreprises.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<EntrepriseDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Entreprises");
+        log.debug("Request to get all Entreprises "  + (manager==null));
         Page<Entreprise> result = entrepriseRepository.findAll(pageable);
         return result.map(entreprise -> entrepriseMapper.entrepriseToEntrepriseDTO(entreprise));
     }
@@ -72,7 +88,7 @@ public class EntrepriseServiceImpl implements EntrepriseService{
      *  get all the entreprises where Siege is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<EntrepriseDTO> findAllWhereSiegeIsNull() {
         log.debug("Request to get all entreprises where Siege is null");
         return StreamSupport
@@ -87,7 +103,7 @@ public class EntrepriseServiceImpl implements EntrepriseService{
      *  get all the entreprises where Contact is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<EntrepriseDTO> findAllWhereContactIsNull() {
         log.debug("Request to get all entreprises where Contact is null");
         return StreamSupport
@@ -103,13 +119,35 @@ public class EntrepriseServiceImpl implements EntrepriseService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public EntrepriseDTO findOne(Long id) {
         log.debug("Request to get Entreprise : {}", id);
         Entreprise entreprise = entrepriseRepository.findOne(id);
         EntrepriseDTO entrepriseDTO = entrepriseMapper.entrepriseToEntrepriseDTO(entreprise);
         return entrepriseDTO;
     }
+
+    /**
+     *  Get old Entreprise versions by id.
+     *
+     *  @param id the id of the entity
+     *  @return the list of old version
+     */
+    @Transactional(readOnly = true)
+    public List findAnciennesVersions(Long id) {
+        init();
+        log.debug("Request to get Entreprise : {}", id);
+
+        List anciennesVersions = reader.createQuery()
+            .forRevisionsOfEntity(Entreprise.class, false, true)
+            .add(AuditEntity.id().eq(id))
+            .getResultList();
+
+        log.debug("OLD VERSION" + anciennesVersions);
+
+        return anciennesVersions;
+    }
+
 
     /**
      *  Delete the  entreprise by id.
