@@ -29,7 +29,8 @@
             "taxe": "Taxe",
             "siege": "Siege",
             "contact": "Contact",
-            "groupe": "Groupe"
+            "groupe": "Groupe",
+            "anciennesVersions": "Historique des modifications"
         }
     }
 }

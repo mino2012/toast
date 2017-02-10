@@ -36,7 +36,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class EntrepriseResource {
 
     private final Logger log = LoggerFactory.getLogger(EntrepriseResource.class);
-        
+
     @Inject
     private EntrepriseService entrepriseService;
 
@@ -129,6 +129,20 @@ public class EntrepriseResource {
     }
 
     /**
+     * GET  /entreprisesOld/:id : get all the entreprises.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of entreprises in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/entreprisesOld/{id}")
+    @Timed
+    public ResponseEntity<List> getOldEntreprise(@PathVariable Long id)
+        throws URISyntaxException {
+        return new ResponseEntity<>(entrepriseService.findAnciennesVersions(id), HttpStatus.OK);
+    }
+
+
+    /**
      * DELETE  /entreprises/:id : delete the "id" entreprise.
      *
      * @param id the id of the entrepriseDTO to delete
@@ -146,7 +160,7 @@ public class EntrepriseResource {
      * SEARCH  /_search/entreprises?query=:query : search for the entreprise corresponding
      * to the query.
      *
-     * @param query the query of the entreprise search 
+     * @param query the query of the entreprise search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
