@@ -22,7 +22,8 @@
             "filiere": "Filiere",
             "partenariat": "Partenariat",
             "intervenant": "Intervenant",
-            "anciennesVersions": "Historique des modifications"
+            "anciennesVersions": "Historique des modifications",
+            "action" : "Action"
         }
     }
 }
