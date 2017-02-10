@@ -41,6 +41,10 @@
                     <th jh-sort-by="mail"><span data-translate="crmisticApp.etudiant.mail">Mail</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="sexe"><span data-translate="crmisticApp.etudiant.sexe">Sexe</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="numEtudiant"><span data-translate="crmisticApp.etudiant.numEtudiant">Num Etudiant</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!-- on ne peut pas trier par ordre dans ces trois dernières colonnes car on récupère plusieurs valeurs dans chaque -->
+                    <th><span data-translate="crmisticApp.etudiant.promotion">Promotion</span></th>
+                    <th><span data-translate="crmisticApp.etudiant.filiere">Filiere</span></th>
+                    <th><span data-translate="crmisticApp.etudiant.diplome">Diplome</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -52,6 +56,21 @@
                     <td>{{etudiant.mail}}</td>
                     <td data-translate="{{'crmisticApp.Sexe.' + etudiant.sexe}}">{{etudiant.sexe}}</td>
                     <td>{{etudiant.numEtudiant}}</td>
+                    <td>
+                        <span ng-repeat="promotion in etudiant.promotions track by promotion.id">
+                            <a ui-sref="promotion-detail({id: promotion.id})">{{promotion.annee | date:'yyyy'}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td>
+                        <span ng-repeat="promotion in etudiant.promotions">
+                            <a ui-sref="filiere-detail({id: promotion.filiere.id})">{{promotion.annee | date:'yyyy'}} - {{promotion.filiere.niveau}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
+                    <td>
+                        <span ng-repeat="promotion in etudiant.promotions">
+                            <a ui-sref="diplome-detail({id: promotion.filiere.diplome.id})">{{promotion.annee | date:'yyyy'}} - {{promotion.filiere.niveau}} {{promotion.filiere.diplome.nom}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

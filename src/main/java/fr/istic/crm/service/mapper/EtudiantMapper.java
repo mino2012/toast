@@ -12,6 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {PromotionMapper.class, })
 public interface EtudiantMapper {
 
+    @Mapping(source = "promotions", target = "promotions")
     EtudiantDTO etudiantToEtudiantDTO(Etudiant etudiant);
 
     List<EtudiantDTO> etudiantsToEtudiantDTOs(List<Etudiant> etudiants);
