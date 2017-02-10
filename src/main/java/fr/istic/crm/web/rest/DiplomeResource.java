@@ -36,7 +36,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DiplomeResource {
 
     private final Logger log = LoggerFactory.getLogger(DiplomeResource.class);
-        
+
     @Inject
     private DiplomeService diplomeService;
 
@@ -100,6 +100,19 @@ public class DiplomeResource {
     }
 
     /**
+     * GET  /diplomeOld/:id : get all version of diplome.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of diplomes in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/diplomesOld/{id}")
+    @Timed
+    public ResponseEntity<List> getOldDiplome(@PathVariable Long id)
+        throws URISyntaxException {
+        return new ResponseEntity<>(diplomeService.findAnciennesVersions(id), HttpStatus.OK);
+    }
+
+    /**
      * GET  /diplomes/:id : get the "id" diplome.
      *
      * @param id the id of the diplomeDTO to retrieve
@@ -135,7 +148,7 @@ public class DiplomeResource {
      * SEARCH  /_search/diplomes?query=:query : search for the diplome corresponding
      * to the query.
      *
-     * @param query the query of the diplome search 
+     * @param query the query of the diplome search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

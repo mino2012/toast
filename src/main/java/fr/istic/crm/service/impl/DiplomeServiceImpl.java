@@ -1,11 +1,15 @@
 package fr.istic.crm.service.impl;
 
+import fr.istic.crm.domain.Entreprise;
 import fr.istic.crm.service.DiplomeService;
 import fr.istic.crm.domain.Diplome;
 import fr.istic.crm.repository.DiplomeRepository;
 import fr.istic.crm.repository.search.DiplomeSearchRepository;
 import fr.istic.crm.service.dto.DiplomeDTO;
 import fr.istic.crm.service.mapper.DiplomeMapper;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +43,16 @@ public class DiplomeServiceImpl implements DiplomeService{
 
     @Inject
     private DiplomeSearchRepository diplomeSearchRepository;
+
+    @Inject
+    private EntityManager manager;
+
+    AuditReader reader;
+
+    void init(){
+        reader = AuditReaderFactory.get(manager);
+    }
+
 
     /**
      * Save a diplome.
@@ -79,6 +94,27 @@ public class DiplomeServiceImpl implements DiplomeService{
         Diplome diplome = diplomeRepository.findOne(id);
         DiplomeDTO diplomeDTO = diplomeMapper.diplomeToDiplomeDTO(diplome);
         return diplomeDTO;
+    }
+
+    /**
+     *  Get old Diplome versions by id.
+     *
+     *  @param id the id of the entity
+     *  @return the list of old version
+     */
+    @Transactional(readOnly = true)
+    public List findAnciennesVersions(Long id) {
+        init();
+        log.debug("Request to get Diplome : {}", id);
+
+        List anciennesVersions = reader.createQuery()
+            .forRevisionsOfEntity(Diplome.class, false, true)
+            .add(AuditEntity.id().eq(id))
+            .getResultList();
+
+        log.debug("OLD VERSION" + anciennesVersions);
+
+        return anciennesVersions;
     }
 
     /**

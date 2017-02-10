@@ -17,7 +17,28 @@
             <span>{{vm.diplome.dateModification | date:'short'}}</span>
         </dd>
     </dl>
-
+    <h3 data-translate="crmisticApp.diplome.anciennesVersions">Anciennes Versions</h3>
+    <br />
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th><span data-translate="crmisticApp.diplome.action">Action</span></th>
+                <th><span data-translate="crmisticApp.diplome.nom">Nom</span></th>
+                <th><span data-translate="crmisticApp.diplome.dateCreation">Date Creation</span></th>
+                <th><span data-translate="crmisticApp.diplome.dateModification">Date Modification</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ancienDiplome in vm.anciennesVersions">
+                <td>{{ancienDiplome[2]}}</td>
+                <td>{{ancienDiplome[0].nom}}</td>
+                <td>{{ancienDiplome[0].dateCreation | date:'short'}}</td>
+                <td>{{ancienDiplome[0].dateModification | date:'short'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">

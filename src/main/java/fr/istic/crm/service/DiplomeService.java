@@ -20,7 +20,7 @@ public interface DiplomeService {
 
     /**
      *  Get all the diplomes.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -35,6 +35,14 @@ public interface DiplomeService {
     DiplomeDTO findOne(Long id);
 
     /**
+     *  Get old version of diplome.
+     *
+     *  @param id the id of the entity
+     *  @return list of old version
+     */
+    List findAnciennesVersions(Long id);
+
+    /**
      *  Delete the "id" diplome.
      *
      *  @param id the id of the entity
@@ -45,7 +53,7 @@ public interface DiplomeService {
      * Search for the diplome corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

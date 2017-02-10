@@ -21,7 +21,8 @@
             "dateModification": "Date Modification",
             "filiere": "Filiere",
             "partenariat": "Partenariat",
-            "intervenant": "Intervenant"
+            "intervenant": "Intervenant",
+            "anciennesVersions": "Historique des modifications"
         }
     }
 }
