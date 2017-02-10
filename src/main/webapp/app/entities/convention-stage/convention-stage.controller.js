@@ -5,9 +5,9 @@
         .module('crmisticApp')
         .controller('ConventionStageController', ConventionStageController);
 
-    ConventionStageController.$inject = ['$scope', '$state', 'ConventionStage', 'ConventionStageSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    ConventionStageController.$inject = ['$scope', '$state', 'ConventionStage', 'ConventionStageSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Principal', 'LoginService'];
 
-    function ConventionStageController ($scope, $state, ConventionStage, ConventionStageSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ConventionStageController ($scope, $state, ConventionStage, ConventionStageSearch, ParseLinks, AlertService, paginationConstants, pagingParams, Principal, LoginService) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -20,6 +20,23 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        vm.account = null;
+        vm.isAuthenticated = null;
+        vm.login = LoginService.open;
+        vm.register = register;
+
+        getAccount();
+
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+            });
+        }
+
+        function register () {
+            $state.go('register');
+        }
 
         loadAll();
 

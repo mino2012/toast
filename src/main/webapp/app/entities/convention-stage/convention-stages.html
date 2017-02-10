@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="convention-stage.new" >
+                <button has-authority="ROLE_ADMIN" class="btn btn-primary" ui-sref="convention-stage.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs"  data-translate="crmisticApp.conventionStage.home.createLabel">
                         Create new Convention Stage
@@ -58,19 +58,24 @@
                     <td>{{conventionStage.dateDebut | date:'medium'}}</td>
                     <td>{{conventionStage.dateFin | date:'medium'}}</td>
                     <td>
-                        <a ui-sref="etudiant-detail({id:conventionStage.etudiantId})">{{conventionStage.etudiantNom}}</a>
+                        <a has-authority="ROLE_ADMIN" ui-sref="etudiant-detail({id:conventionStage.etudiantId})">{{conventionStage.etudiantNom}}</a>
+                        <span ng-if="vm.account.authorities.indexOf('ROLE_ADMIN') === -1">{{conventionStage.etudiantNom}}</span>
                     </td>
                     <td>
-                        <a ui-sref="site-detail({id:conventionStage.lieuStageId})">{{conventionStage.lieuStageAdresse}}</a>
+                        <a has-authority="ROLE_ADMIN" ui-sref="site-detail({id:conventionStage.lieuStageId})">{{conventionStage.lieuStageAdresse}}</a>
+                        <span ng-if="vm.account.authorities.indexOf('ROLE_ADMIN') === -1">{{conventionStage.lieuStageAdresse}}</span>
                     </td>
                     <td>
-                        <a ui-sref="tuteur-detail({id:conventionStage.tuteurId})">{{conventionStage.tuteurNom}}</a>
+                        <a has-authority="ROLE_ADMIN" ui-sref="tuteur-detail({id:conventionStage.tuteurId})">{{conventionStage.tuteurNom}}</a>
+                        <span ng-if="vm.account.authorities.indexOf('ROLE_ADMIN') === -1">{{conventionStage.tuteurNom}}</span>
                     </td>
                     <td>
-                        <a ui-sref="professionnel-detail({id:conventionStage.maitreStageId})">{{conventionStage.maitreStageNom}}</a>
+                        <a has-authority="ROLE_ADMIN" ui-sref="professionnel-detail({id:conventionStage.maitreStageId})">{{conventionStage.maitreStageNom}}</a>
+                        <span ng-if="vm.account.authorities.indexOf('ROLE_ADMIN') === -1">{{conventionStage.maitreStageNom}}</span>
                     </td>
                     <td>
-                        <a ui-sref="entreprise-detail({id:conventionStage.entreprise.id})">{{conventionStage.entreprise.nom}}</a>
+                        <a has-authority="ROLE_ADMIN" ui-sref="entreprise-detail({id:conventionStage.entreprise.id})">{{conventionStage.entreprise.nom}}</a>
+                        <span ng-if="vm.account.authorities.indexOf('ROLE_ADMIN') === -1">{{conventionStage.entreprise.nom}}</span>
                     </td>
 
                     <td class="text-right">
@@ -81,13 +86,13 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
+                            <button has-authority="ROLE_ADMIN" type="submit"
                                     ui-sref="convention-stage.edit({id:conventionStage.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
-                            <button type="submit"
+                            <button has-authority="ROLE_ADMIN" type="submit"
                                     ui-sref="convention-stage.delete({id:conventionStage.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
