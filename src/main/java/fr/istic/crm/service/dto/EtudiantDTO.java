@@ -1,11 +1,14 @@
 package fr.istic.crm.service.dto;
 
+import fr.istic.crm.domain.Diplome;
+import fr.istic.crm.domain.Filiere;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import fr.istic.crm.domain.Promotion;
 import fr.istic.crm.domain.enumeration.Sexe;
 
 /**
@@ -22,6 +25,8 @@ public class EtudiantDTO implements Serializable {
     private String mail;
 
     private Sexe sexe;
+
+    private Filiere filiere;
 
     @NotNull
     private String numEtudiant;
@@ -78,6 +83,14 @@ public class EtudiantDTO implements Serializable {
 
     public void setPromotions(Set<PromotionDTO> promotions) {
         this.promotions = promotions;
+    }
+
+    public Filiere getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(Filiere filiere) {
+        this.filiere = filiere;
     }
 
     @Override

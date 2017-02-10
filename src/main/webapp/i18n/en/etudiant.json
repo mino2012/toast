@@ -22,7 +22,9 @@
             "sexe": "Sexe",
             "numEtudiant": "Num Etudiant",
             "conventionStage": "Convention Stage",
-            "promotion": "Promotion"
+            "promotion": "Promotion",
+            "filiere": "spinneret",
+            "diplome": "Degree"
         }
     }
 }
