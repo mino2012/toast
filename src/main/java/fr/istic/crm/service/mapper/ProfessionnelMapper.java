@@ -13,6 +13,7 @@ import java.util.List;
 public interface ProfessionnelMapper {
 
     @Mapping(source = "entrepriseContact.id", target = "entrepriseContactId")
+    @Mapping(source = "entrepriseContact.nom", target = "entrepriseContactNom")
     @Mapping(source = "entreprisePersonnel.id", target = "entreprisePersonnelId")
     @Mapping(source = "entreprisePersonnel.nom", target = "entreprisePersonnelNom")
     ProfessionnelDTO professionnelToProfessionnelDTO(Professionnel professionnel);

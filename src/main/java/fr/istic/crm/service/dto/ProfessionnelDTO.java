@@ -29,13 +29,13 @@ public class ProfessionnelDTO implements Serializable {
 
     private Long dateModification;
 
-
     private Long entrepriseContactId;
-    
+
+    private String entrepriseContactNom;
+
     private Set<DiplomeDTO> diplomes = new HashSet<>();
 
     private Long entreprisePersonnelId;
-    
 
     private String entreprisePersonnelNom;
 
@@ -127,13 +127,20 @@ public class ProfessionnelDTO implements Serializable {
         this.entreprisePersonnelId = entrepriseId;
     }
 
-
     public String getEntreprisePersonnelNom() {
         return entreprisePersonnelNom;
     }
 
     public void setEntreprisePersonnelNom(String entrepriseNom) {
         this.entreprisePersonnelNom = entrepriseNom;
+    }
+
+    public String getEntrepriseContactNom() {
+        return entrepriseContactNom;
+    }
+
+    public void setEntrepriseContactNom(String entrepriseContactNom) {
+        this.entrepriseContactNom = entrepriseContactNom;
     }
 
     @Override
