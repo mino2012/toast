@@ -62,7 +62,7 @@
                     <td>{{professionnel.dateCreation | date:'short'}}</td>
                     <td>{{professionnel.dateModification | date:'short'}}</td>
                     <td>
-                        <a ui-sref="entreprise-detail({id:professionnel.entrepriseContactId})">{{professionnel.entrepriseContactId}}</a>
+                        <a ui-sref="entreprise-detail({id:professionnel.entrepriseContactId})">{{professionnel.entrepriseContactNom}}</a>
                     </td>
                     <td>
                         <span ng-repeat="diplome in professionnel.diplomes track by diplome.id">

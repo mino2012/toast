@@ -29,9 +29,10 @@ public class SiteDTO implements Serializable {
 
 
     private Long entrepriseSiegeId;
-    
+
+    private String entrepriseSiegeNom;
+
     private Long entrepriseSiteId;
-    
 
     private String entrepriseSiteNom;
 
@@ -108,13 +109,20 @@ public class SiteDTO implements Serializable {
         this.entrepriseSiteId = entrepriseId;
     }
 
-
     public String getEntrepriseSiteNom() {
         return entrepriseSiteNom;
     }
 
     public void setEntrepriseSiteNom(String entrepriseNom) {
         this.entrepriseSiteNom = entrepriseNom;
+    }
+
+    public String getEntrepriseSiegeNom() {
+        return entrepriseSiegeNom;
+    }
+
+    public void setEntrepriseSiegeNom(String entrepriseSiegeNom) {
+        this.entrepriseSiegeNom = entrepriseSiegeNom;
     }
 
     @Override
