@@ -24,7 +24,9 @@ before_install:
   - bower -v
   - gulp -v
   - java -version
-install: npm install
+install:
+  - npm install
+  - bower install
 script:
   - ./mvnw clean
   - ./mvnw test

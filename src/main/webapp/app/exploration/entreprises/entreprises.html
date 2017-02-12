@@ -39,6 +39,26 @@
         </div>
     </div>
 </div>
+
+<section id="map">
+    <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]"
+         ui-event="{'map-click': 'openMarkerInfo(marker)'}">
+    </div>
+
+    <div ui-map-info-window="myInfoWindow">
+        <span><strong>{{ currentEntreprise.nom }}</strong></span>
+        <br />
+        <span>{{ currentEntreprise.adresse }}</span>
+        <br />
+        <span>{{ currentEntreprise.codePostal }} {{ currentEntreprise.ville }}</span>
+        <br /><br />
+        <!-- TODO : add translation -->
+        <span data-translate="crmisticApp.entreprises.map.infoWindow.description" translate-values="{nbEtudiants: '{{currentLabel}}'}">a reçu {{ currentLabel }} stagiaire(s)</span>
+    </div>
+
+    <div ui-map="myMap" ui-options="mapOptions" class="map-canvas"></div>
+</section>
+
 <div class="table-responsive">
     <table class="jh-table table table-striped">
         <thead>
