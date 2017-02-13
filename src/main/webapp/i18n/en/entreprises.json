@@ -1,0 +1,13 @@
+{
+    "crmisticApp": {
+        "entreprises" : {
+            "home": {
+                "title": "Exploration - Entreprises"
+            },
+            "entreprise": "Entreprise",
+            "nbEtudiants": "Nb. Etudiants",
+            "dateDebut" : "Date début",
+            "dateFin" : "Date fin"
+        }
+    }
+}
