@@ -120,6 +120,10 @@
                             $translate.refresh();
                         });
                     }
+                    // if ROLE_USER (not admin) redirect to Convention stage
+                    if(account.authorities.indexOf('ROLE_ADMIN') === -1){
+                        $state.go('convention-stage');
+                    }
                     deferred.resolve(data);
                 });
                 return cb();
@@ -132,6 +136,7 @@
         function logout () {
             AuthServerProvider.logout();
             Principal.authenticate(null);
+            LoginService.open();
         }
 
         function resetPasswordFinish (keyAndPassword, callback) {
