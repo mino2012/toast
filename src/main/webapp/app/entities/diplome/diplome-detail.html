@@ -17,7 +17,7 @@
             <span>{{vm.diplome.dateModification | date:'short'}}</span>
         </dd>
     </dl>
-    <h3 data-translate="crmisticApp.diplome.anciennesVersions">Anciennes Versions</h3>
+    <h3 data-translate="crmisticApp.diplome.anciennesVersions">Historique des modifications</h3>
     <br />
     <div class="table-responsive">
         <table class="jh-table table table-striped">
@@ -40,7 +40,7 @@
         </table>
     </div>
     <button type="submit"
-            ui-sref="{{ vm.previousState }}"
+            ui-sref="diplome"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
