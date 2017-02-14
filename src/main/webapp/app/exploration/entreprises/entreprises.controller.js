@@ -1,5 +1,5 @@
 function initMap () {
-    angular.bootstrap(document.getElementById("map"), ['crmisticApp']);
+    angular.bootstrap(document.getElementById("map"), ['crmisticApp.ui-map']);
 }
 
 (function() {
