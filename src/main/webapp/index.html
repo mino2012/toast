@@ -16,6 +16,7 @@
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
+    <link rel="stylesheet" href="content/css/map.css">
     <!-- endbuild -->
 </head>
 <body ng-app="crmisticApp" ng-strict-di>
@@ -67,6 +68,9 @@
     <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script src="bower_components/angular-ui-event/dist/event.js"></script>
+    <script src="bower_components/angular-ui-map/ui-map.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -267,6 +271,9 @@
     <script src="app/account/account.state.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0n7RCzePME5TvKDULWkXdx-CGsOYmPhs&callback=initMap" async defer></script>
+
 
 </body>
 </html>

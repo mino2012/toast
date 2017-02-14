@@ -7,7 +7,12 @@
             "entreprise": "Entreprise",
             "nbEtudiants": "Nb. Etudiants",
             "dateDebut" : "Date début",
-            "dateFin" : "Date fin"
+            "dateFin" : "Date fin",
+            "map": {
+                "infoWindow": {
+                    "description": "received {{ nbEtudiants }} intern(s)"
+                }
+            }
         }
     }
 }

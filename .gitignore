@@ -2,6 +2,7 @@
 # Project Specific
 ######################
 /src/main/webapp/content/css/main.css
+/src/main/webapp/content/css/map.css
 /target/www/**
 
 ######################
@@ -10,6 +11,11 @@
 node/
 node_tmp/
 node_modules/
+
+######################
+# Bower
+######################
+src/main/webapp/bower_components/
 
 ######################
 # SASS
