@@ -46,8 +46,8 @@
             <tbody>
                 <tr ng-repeat="partenariat in vm.partenariats track by partenariat.id">
                     <td><a ui-sref="partenariat-detail({id:partenariat.id})">{{partenariat.id}}</a></td>
-                    <td>{{partenariat.dateDebut | date:'medium'}}</td>
-                    <td>{{partenariat.dateFin | date:'medium'}}</td>
+                    <td>{{partenariat.dateDebut | date:'mediumDate'}}</td>
+                    <td>{{partenariat.dateFin | date:'mediumDate'}}</td>
                     <td>
                         <a ui-sref="entreprise-detail({id:partenariat.entrepriseId})">{{partenariat.entrepriseNom}}</a>
                     </td>

@@ -55,8 +55,8 @@
                     <td>{{conventionStage.sujet}}</td>
                     <td>{{conventionStage.fonctions}}</td>
                     <td>{{conventionStage.competences}}</td>
-                    <td>{{conventionStage.dateDebut | date:'medium'}}</td>
-                    <td>{{conventionStage.dateFin | date:'medium'}}</td>
+                    <td>{{conventionStage.dateDebut | date:'mediumDate'}}</td>
+                    <td>{{conventionStage.dateFin | date:'mediumDate'}}</td>
                     <td>
                         <a has-authority="ROLE_ADMIN" ui-sref="etudiant-detail({id:conventionStage.etudiantId})">{{conventionStage.etudiantNom}}</a>
                         <span ng-if="vm.account.authorities.indexOf('ROLE_ADMIN') === -1">{{conventionStage.etudiantNom}}</span>
