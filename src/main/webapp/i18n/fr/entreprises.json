@@ -5,6 +5,10 @@
                 "title": "Exploration - Entreprises"
             },
             "entreprise": "Entreprise",
+            "adresse": "Adresse",
+            "codePostal": "Code Postal",
+            "ville": "Ville",
+            "pays": "Pays",
             "nbEtudiants": "Nb. Etudiants",
             "dateDebut" : "Date début",
             "dateFin" : "Date fin",

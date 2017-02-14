@@ -2,10 +2,9 @@ package fr.istic.crm.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import fr.istic.crm.service.ConventionStageService;
+import fr.istic.crm.service.dto.ConventionStageDTO;
 import fr.istic.crm.web.rest.util.HeaderUtil;
 import fr.istic.crm.web.rest.util.PaginationUtil;
-import fr.istic.crm.service.dto.ConventionStageDTO;
-
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing ConventionStage.
@@ -35,7 +29,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ConventionStageResource {
 
     private final Logger log = LoggerFactory.getLogger(ConventionStageResource.class);
-        
+
     @Inject
     private ConventionStageService conventionStageService;
 
@@ -134,7 +128,7 @@ public class ConventionStageResource {
      * SEARCH  /_search/convention-stages?query=:query : search for the conventionStage corresponding
      * to the query.
      *
-     * @param query the query of the conventionStage search 
+     * @param query the query of the conventionStage search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -149,5 +143,21 @@ public class ConventionStageResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /nb-etudiants : get the number of students grouped by site.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of Object (sites and nbEtudiants) in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/nb-etudiants")
+    @Timed
+    public ResponseEntity<List<Object>> findNbEtudiantsBySite(@ApiParam Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Object (sites and nbEtudiants");
+        Page<Object> page = conventionStageService.findNbEtudiantsBySite(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/nb-etudiants");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
 }

@@ -1,25 +1,21 @@
 package fr.istic.crm.service.impl;
 
-import fr.istic.crm.service.ConventionStageService;
 import fr.istic.crm.domain.ConventionStage;
 import fr.istic.crm.repository.ConventionStageRepository;
 import fr.istic.crm.repository.search.ConventionStageSearchRepository;
+import fr.istic.crm.service.ConventionStageService;
 import fr.istic.crm.service.dto.ConventionStageDTO;
 import fr.istic.crm.service.mapper.ConventionStageMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 /**
  * Service Implementation for managing ConventionStage.
@@ -29,7 +25,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ConventionStageServiceImpl implements ConventionStageService{
 
     private final Logger log = LoggerFactory.getLogger(ConventionStageServiceImpl.class);
-    
+
     @Inject
     private ConventionStageRepository conventionStageRepository;
 
@@ -56,11 +52,11 @@ public class ConventionStageServiceImpl implements ConventionStageService{
 
     /**
      *  Get all the conventionStages.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<ConventionStageDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ConventionStages");
         Page<ConventionStage> result = conventionStageRepository.findAll(pageable);
@@ -73,7 +69,7 @@ public class ConventionStageServiceImpl implements ConventionStageService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public ConventionStageDTO findOne(Long id) {
         log.debug("Request to get ConventionStage : {}", id);
         ConventionStage conventionStage = conventionStageRepository.findOne(id);
@@ -103,5 +99,12 @@ public class ConventionStageServiceImpl implements ConventionStageService{
         log.debug("Request to search for a page of ConventionStages for query {}", query);
         Page<ConventionStage> result = conventionStageSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(conventionStage -> conventionStageMapper.conventionStageToConventionStageDTO(conventionStage));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Object> findNbEtudiantsBySite(Pageable pageable) {
+        log.debug("Request to get the number of students grouped by site");
+        Page<Object> result = conventionStageRepository.findNbEtudiantsBySite(pageable);
+        return result;
     }
 }

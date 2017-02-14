@@ -1,5 +1,6 @@
+// maps.googleapis callback
 function initMap () {
-    angular.bootstrap(document.getElementById("map"), ['crmisticApp.ui-map']);
+    // angular.bootstrap(document.getElementById("map"), ['crmisticApp.ui-map']);
 }
 
 (function() {
@@ -9,42 +10,76 @@ function initMap () {
         .module('crmisticApp')
         .controller('EntreprisesController', EntreprisesController);
 
-    EntreprisesController.$inject = ['$timeout','$scope', 'Principal', 'LoginService', '$state','$log','$http'];
+    EntreprisesController.$inject = ['$timeout','$scope', 'Principal', 'LoginService', '$state','$log','$http','NbEtudiants','AlertService','paginationConstants','pagingParams','ParseLinks'];
 
-    function EntreprisesController ($timeout, $scope, Principal, LoginService, $state,$log,$http) {
+    function EntreprisesController ($timeout, $scope, Principal, LoginService, $state,$log,$http,NbEtudiants,AlertService,paginationConstants,pagingParams,ParseLinks) {
         var vm = this;
+
+        vm.loadPage = loadPage;
+        vm.predicate = pagingParams.predicate;
+        vm.reverse = pagingParams.ascending;
+        vm.transition = transition;
+        vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.loadAll = loadAll();
 
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
+
+        function loadAll () {
+            NbEtudiants.query({
+                page: pagingParams.page - 1,
+                size: vm.itemsPerPage,
+                sort: sort()
+            }, onSuccess, onError);
+
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'lieuStage.adresse') {
+                    result.push('lieuStage.adresse');
+                }
+                return result;
+            }
+
+            function onSuccess(data, headers) {
+                $log.debug($scope.myMap);
+
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                vm.queryCount = vm.totalItems;
+                vm.nbEtudiants = data;
+                vm.page = pagingParams.page;
+                $log.debug(vm.nbEtudiants);
+                displaySitesOnMap(vm.nbEtudiants);
+
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+
+        }
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
-
         vm.datePickerOpenStatus.dateDebut = false;
         vm.datePickerOpenStatus.dateFin = false;
+
+        function loadPage(page) {
+            vm.page = page;
+            vm.transition();
+        }
+
+        function transition() {
+            $state.transitionTo($state.$current, {
+                page: vm.page,
+                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')
+            });
+        }
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
-
-        var data = [
-            {
-                "nom": "Sopra Steria",
-                "adresse": "",
-                "codePostal": "",
-                "ville": "Rennes",
-                "nbStagiaires": 22
-            },
-            {
-                "nom": "Cap",
-                "adresse": "7 rue du gast",
-                "codePostal": "35410",
-                "ville": "Chateaugiron",
-                "nbStagiaires": 8
-            }
-        ];
 
         $scope.myMarkers = [];
 
@@ -54,13 +89,13 @@ function initMap () {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        $scope.addMarker = function($params, entreprise) {
+        $scope.addMarker = function($params, site) {
             var marker = new google.maps.Marker({
                 map: $scope.myMap,
-                label: entreprise.nbStagiaires+'',
+                label: site[1]+'',
                 position: new google.maps.LatLng($params.lat(), $params.lng())
             });
-            marker.entreprise = entreprise;
+            marker.site = site;
 
             $scope.myMarkers.push(marker);
         };
@@ -70,12 +105,12 @@ function initMap () {
             $scope.currentMarkerLat = marker.getPosition().lat();
             $scope.currentMarkerLng = marker.getPosition().lng();
             $scope.currentLabel = marker.getLabel();
-            $scope.currentEntreprise = marker.entreprise;
+            $scope.currentSite = marker.site;
             $scope.myInfoWindow.open($scope.myMap, marker);
         };
 
-        $scope.geocoding = function (entreprise) {
-            var rawAddress = entreprise.adresse + " " + entreprise.codePostal + " "+ entreprise.ville;
+        $scope.geocoding = function (site) {
+            var rawAddress = site[0].adresse + " " + site[0].codePostal + " "+ site[0].ville + " "+ site[0].pays;
 
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode( { "address": rawAddress }, function(results, status) {
@@ -83,7 +118,7 @@ function initMap () {
                     var location = results[0].geometry.location;
                     $log.debug(location);
 
-                    $scope.addMarker(location, entreprise);
+                    $scope.addMarker(location, site);
 
                 }
                 else {
@@ -92,12 +127,13 @@ function initMap () {
             });
         };
 
-        $log.debug($scope.myMap);
+        function displaySitesOnMap (sites) {
+            angular.forEach(sites, function (site) {
 
-        angular.forEach(data, function(entreprise, index) {
-            $scope.geocoding(entreprise);
-        });
-
+                $log.debug(site);
+                $scope.geocoding(site);
+            })
+        }
 
     }
 })();
