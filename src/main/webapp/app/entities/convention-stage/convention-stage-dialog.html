@@ -59,8 +59,12 @@
             </select>
         </div>
         <div class="form-group">
+            <label data-translate="crmisticApp.conventionStage.entreprise" for="field_entreprise">Entreprise</label>
+            <select class="form-control" id="field_entreprise" name="entreprise" ng-model="vm.conventionStage.entreprise" ng-options="entreprise as entreprise.nom for entreprise in vm.entreprises "></select>
+        </div>
+        <div class="form-group">
             <label data-translate="crmisticApp.conventionStage.lieuStage" for="field_lieuStage">Lieu Stage</label>
-            <select class="form-control" id="field_lieuStage" name="lieuStage" ng-model="vm.conventionStage.lieuStageId" ng-options="site.id as site.adresse for site in vm.sites"            >
+            <select class="form-control" id="field_lieuStage" name="lieuStage" data-ng-disabled="!vm.conventionStage.entreprise" ng-model="vm.conventionStage.lieuStageId" ng-options="site.id as site.adresse for site in vm.sites | filter : {entrepriseSiteId: vm.conventionStage.entreprise.id}"            >
                 <option value=""></option>
             </select>
         </div>
