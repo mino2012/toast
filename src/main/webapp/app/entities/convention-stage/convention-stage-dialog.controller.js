@@ -5,9 +5,9 @@
         .module('crmisticApp')
         .controller('ConventionStageDialogController', ConventionStageDialogController);
 
-    ConventionStageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ConventionStage', 'Etudiant', 'Site', 'Tuteur', 'Professionnel'];
+    ConventionStageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ConventionStage', 'Etudiant', 'Site', 'Tuteur', 'Professionnel', 'Entreprise'];
 
-    function ConventionStageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ConventionStage, Etudiant, Site, Tuteur, Professionnel) {
+    function ConventionStageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ConventionStage, Etudiant, Site, Tuteur, Professionnel, Entreprise) {
         var vm = this;
 
         vm.conventionStage = entity;
@@ -19,6 +19,7 @@
         vm.sites = Site.query();
         vm.tuteurs = Tuteur.query();
         vm.professionnels = Professionnel.query();
+        vm.entreprises = Entreprise.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
