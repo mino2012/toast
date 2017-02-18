@@ -24,6 +24,12 @@
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
+
+                // if the user is not authenticated, open the login modal
+                if (vm.account === null) {
+                    LoginService.open();
+                }
+
             });
         }
         function register () {
