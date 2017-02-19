@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="crmisticApp.entreprises.nbEtudiants" for="field_nbEtudiants">Nb. Etudiants</label>
                     <input type="number" class="form-control" name="nbEtudiants" id="field_nbEtudiants"
-                           ng-model="vm.entreprises.nbEtudiants"
+                           ng-model="vm.nbEtudiantsMin" ng-change="vm.nbEtudiantsFilter()" min="1"
                     />
                 </div>
             </div>
@@ -67,12 +67,12 @@
             <th jh-sort-by="lieuStage.codePostal"><span data-translate="crmisticApp.entreprises.codePostal">Code Postal</span> <span class="glyphicon glyphicon-sort"></span></th>
             <th jh-sort-by="lieuStage.ville"><span data-translate="crmisticApp.entreprises.ville">Ville</span> <span class="glyphicon glyphicon-sort"></span></th>
             <th jh-sort-by="lieuStage.pays"><span data-translate="crmisticApp.entreprises.pays">Pays</span> <span class="glyphicon glyphicon-sort"></span></th>
-            <th jh-sort-by="nbEtudiants"><span data-translate="crmisticApp.entreprises.nbEtudiants">Nb. Etudiants</span> <span class="glyphicon glyphicon-sort"></span></th>
+            <th jh-sort-by="nbEtudiants"><span data-translate="crmisticApp.entreprises.nbEtudiants">Nb. Etudiants Minimum</span> <span class="glyphicon glyphicon-sort"></span></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="site in vm.nbEtudiants">
+        <tr ng-repeat="site in vm.nbEtudiants" ng-if="site[1] >= vm.nbEtudiantsMin">
             <td><a ui-sref="entreprise-detail({id:site[0].entrepriseSite.id})">{{site[0].entrepriseSite.nom}}</a></td>
             <td><a ui-sref="site-detail({id:site[0].id})">{{site[0].adresse}}</a></td>
             <td>{{site[0].codePostal}}</td>

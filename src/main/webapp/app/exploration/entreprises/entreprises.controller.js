@@ -21,6 +21,8 @@ function initMap () {
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.loadAll = loadAll();
+        vm.nbEtudiantsMin = 1;
+        var geocoder = new google.maps.Geocoder();
 
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -41,14 +43,12 @@ function initMap () {
             }
 
             function onSuccess(data, headers) {
-                $log.debug($scope.myMap);
 
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.nbEtudiants = data;
                 vm.page = pagingParams.page;
-                $log.debug(vm.nbEtudiants);
                 displaySitesOnMap(vm.nbEtudiants);
 
             }
@@ -112,17 +112,15 @@ function initMap () {
         $scope.geocoding = function (site) {
             var rawAddress = site[0].adresse + " " + site[0].codePostal + " "+ site[0].ville + " "+ site[0].pays;
 
-            var geocoder = new google.maps.Geocoder();
             geocoder.geocode( { "address": rawAddress }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                     var location = results[0].geometry.location;
-                    $log.debug(location);
 
                     $scope.addMarker(location, site);
 
                 }
                 else {
-                    // the geocoding failed
+                    $log.debug("geocoding failed "+ status);
                 }
             });
         };
@@ -130,10 +128,23 @@ function initMap () {
         function displaySitesOnMap (sites) {
             angular.forEach(sites, function (site) {
 
-                $log.debug(site);
                 $scope.geocoding(site);
-            })
+            });
         }
+
+        vm.nbEtudiantsFilter = function () {
+
+            angular.forEach($scope.myMarkers, function (marker) {
+
+                var nbEtudiantsOnSite = parseInt(marker.label);
+                if (nbEtudiantsOnSite < vm.nbEtudiantsMin) {
+                    marker.setMap(null);
+                }
+                else {
+                    marker.setMap($scope.myMap);
+                }
+            });
+        };
 
     }
 })();
