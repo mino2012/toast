@@ -3,7 +3,6 @@ package fr.istic.crm.service;
 import fr.istic.crm.service.dto.ConventionStageDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import java.util.List;
 
 /**
  * Service Interface for managing ConventionStage.
@@ -20,7 +19,7 @@ public interface ConventionStageService {
 
     /**
      *  Get all the conventionStages.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -45,9 +44,18 @@ public interface ConventionStageService {
      * Search for the conventionStage corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<ConventionStageDTO> search(String query, Pageable pageable);
+
+    /**
+     *  Get the number of students grouped by site.
+     *
+     *  @param pageable the pagination information
+     *  @return the number of students grouped by site
+     */
+    Page<Object> findNbEtudiantsBySite(Pageable pageable);
+
 }

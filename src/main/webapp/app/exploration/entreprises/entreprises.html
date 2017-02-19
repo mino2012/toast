@@ -46,13 +46,12 @@
     </div>
 
     <div ui-map-info-window="myInfoWindow">
-        <span><strong>{{ currentEntreprise.nom }}</strong></span>
+        <span><strong>{{ currentSite[0].entrepriseSite.nom }}</strong></span>
         <br />
-        <span>{{ currentEntreprise.adresse }}</span>
+        <span>{{ currentSite[0].adresse }}</span>
         <br />
-        <span>{{ currentEntreprise.codePostal }} {{ currentEntreprise.ville }}</span>
+        <span>{{ currentSite[0].codePostal }} {{ currentSite[0].ville }}</span>
         <br /><br />
-        <!-- TODO : add translation -->
         <span data-translate="crmisticApp.entreprises.map.infoWindow.description" translate-values="{nbEtudiants: '{{currentLabel}}'}">a reçu {{ currentLabel }} stagiaire(s)</span>
     </div>
 
@@ -63,26 +62,28 @@
     <table class="jh-table table table-striped">
         <thead>
         <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-            <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-            <th jh-sort-by="entreprise"><span data-translate="crmisticApp.entreprises.entreprise">Entreprise</span> <span class="glyphicon glyphicon-sort"></span></th>
+            <th jh-sort-by="lieuStage.entrepriseSite.nom"><span data-translate="crmisticApp.entreprises.entreprise">Entreprise</span> <span class="glyphicon glyphicon-sort"></span></th>
+            <th jh-sort-by="lieuStage.adresse"><span data-translate="crmisticApp.entreprises.adresse">Adresse</span> <span class="glyphicon glyphicon-sort"></span></th>
+            <th jh-sort-by="lieuStage.codePostal"><span data-translate="crmisticApp.entreprises.codePostal">Code Postal</span> <span class="glyphicon glyphicon-sort"></span></th>
+            <th jh-sort-by="lieuStage.ville"><span data-translate="crmisticApp.entreprises.ville">Ville</span> <span class="glyphicon glyphicon-sort"></span></th>
+            <th jh-sort-by="lieuStage.pays"><span data-translate="crmisticApp.entreprises.pays">Pays</span> <span class="glyphicon glyphicon-sort"></span></th>
             <th jh-sort-by="nbEtudiants"><span data-translate="crmisticApp.entreprises.nbEtudiants">Nb. Etudiants</span> <span class="glyphicon glyphicon-sort"></span></th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="entreprise in vm.entreprises track by entreprise.id">
-            <!-- completer entreprise id-->
-            <td><a ui-sref=""></a></td>
-            <!-- completer entreprise nom -->
-            <td></td>
-            <!-- completer nb etudiants -->
-            <td></td>
+        <tr ng-repeat="site in vm.nbEtudiants">
+            <td><a ui-sref="entreprise-detail({id:site[0].entrepriseSite.id})">{{site[0].entrepriseSite.nom}}</a></td>
+            <td><a ui-sref="site-detail({id:site[0].id})">{{site[0].adresse}}</a></td>
+            <td>{{site[0].codePostal}}</td>
+            <td>{{site[0].ville}}</td>
+            <td>{{site[0].pays}}</td>
+            <td>{{site[1]}}</td>
 
             <td class="text-right">
                 <!-- completer/modifier rediriger vers la map -->
                 <div class="btn-group flex-btn-group-container">
                     <button type="submit"
-                            ui-sref=""
                             class="btn btn-info btn-sm">
                         <span class="glyphicon glyphicon-eye-open"></span>
                         <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
