@@ -20,15 +20,32 @@ function initMap () {
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+
+        vm.datepickerDebut = getDateNYearsLaterOrBeforeToday(-1);
+        vm.datepickerFin = new Date(Date.now());
+
         vm.loadAll = loadAll();
         vm.nbEtudiantsMin = 1;
+
         var geocoder = new google.maps.Geocoder();
 
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
 
         function loadAll () {
+            if (vm.datepickerDebut === null) {
+                vm.datepickerDebut = getDateNYearsLaterOrBeforeToday(-50);
+            }
+            if (vm.datepickerFin === null) {
+                vm.datepickerFin = getDateNYearsLaterOrBeforeToday(50);
+            }
+            if (typeof vm.nbEtudiantsMin === 'undefined') {
+                vm.nbEtudiantsMin = 1;
+            }
+
             NbEtudiants.query({
+                dateDebutDatepicker: vm.datepickerDebut,
+                dateFinDatepicker: vm.datepickerFin,
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -61,6 +78,10 @@ function initMap () {
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
+
+        function getDateNYearsLaterOrBeforeToday(nbYears) {
+            return new Date(new Date().setFullYear(new Date().getFullYear() + nbYears));
+        }
 
         vm.datePickerOpenStatus.dateDebut = false;
         vm.datePickerOpenStatus.dateFin = false;
@@ -116,8 +137,9 @@ function initMap () {
                 if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                     var location = results[0].geometry.location;
 
-                    $scope.addMarker(location, site);
-
+                    if (site[1] >= vm.nbEtudiantsMin) {
+                        $scope.addMarker(location, site);
+                    }
                 }
                 else {
                     $log.debug("geocoding failed "+ status);
@@ -132,19 +154,19 @@ function initMap () {
             });
         }
 
-        vm.nbEtudiantsFilter = function () {
+        vm.inputFilter = function () {
 
-            angular.forEach($scope.myMarkers, function (marker) {
-
-                var nbEtudiantsOnSite = parseInt(marker.label);
-                if (nbEtudiantsOnSite < vm.nbEtudiantsMin) {
-                    marker.setMap(null);
-                }
-                else {
-                    marker.setMap($scope.myMap);
-                }
-            });
+            clearAllMarkers();
+            vm.loadAll = loadAll();
         };
+
+        function clearAllMarkers() {
+            angular.forEach($scope.myMarkers, function (marker) {
+                marker.setMap(null);
+            });
+
+            $scope.myMarkers = [];
+        }
 
     }
 })();

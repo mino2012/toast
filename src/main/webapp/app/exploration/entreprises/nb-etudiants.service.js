@@ -10,7 +10,7 @@
         var resourceUrl =  'api/nb-etudiants';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
+            'query': { method: 'GET', isArray: true}
         });
     }
 })();

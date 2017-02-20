@@ -4,6 +4,8 @@ import fr.istic.crm.service.dto.ConventionStageDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.ZonedDateTime;
+
 /**
  * Service Interface for managing ConventionStage.
  */
@@ -56,6 +58,6 @@ public interface ConventionStageService {
      *  @param pageable the pagination information
      *  @return the number of students grouped by site
      */
-    Page<Object> findNbEtudiantsBySite(Pageable pageable);
+    Page<Object> findNbEtudiantsBySite(Pageable pageable, ZonedDateTime dateDebutDatepicker, ZonedDateTime dateFinDatepicker);
 
 }

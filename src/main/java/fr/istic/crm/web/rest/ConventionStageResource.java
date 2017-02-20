@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,10 +153,10 @@ public class ConventionStageResource {
      */
     @GetMapping("/nb-etudiants")
     @Timed
-    public ResponseEntity<List<Object>> findNbEtudiantsBySite(@ApiParam Pageable pageable)
+    public ResponseEntity<List<Object>> findNbEtudiantsBySite(@ApiParam Pageable pageable, @RequestParam ZonedDateTime dateDebutDatepicker, @RequestParam ZonedDateTime dateFinDatepicker)
         throws URISyntaxException {
-        log.debug("REST request to get a page of Object (sites and nbEtudiants");
-        Page<Object> page = conventionStageService.findNbEtudiantsBySite(pageable);
+        log.debug("REST request to get a page of Object (sites and nbEtudiants)");
+        Page<Object> page = conventionStageService.findNbEtudiantsBySite(pageable, dateDebutDatepicker, dateFinDatepicker);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/nb-etudiants");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -102,9 +103,9 @@ public class ConventionStageServiceImpl implements ConventionStageService{
     }
 
     @Transactional(readOnly = true)
-    public Page<Object> findNbEtudiantsBySite(Pageable pageable) {
+    public Page<Object> findNbEtudiantsBySite(Pageable pageable, ZonedDateTime dateDebutDatepicker, ZonedDateTime dateFinDatepicker) {
         log.debug("Request to get the number of students grouped by site");
-        Page<Object> result = conventionStageRepository.findNbEtudiantsBySite(pageable);
+        Page<Object> result = conventionStageRepository.findNbEtudiantsBySite(pageable, dateDebutDatepicker, dateFinDatepicker);
         return result;
     }
 }
