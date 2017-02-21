@@ -9,7 +9,7 @@
             "codePostal": "Code Postal",
             "ville": "Ville",
             "pays": "Pays",
-            "nbEtudiants": "Nb. Etudiants",
+            "nbEtudiants": "Nb. Etudiants Minimum",
             "dateDebut" : "Date début",
             "dateFin" : "Date fin",
             "map": {

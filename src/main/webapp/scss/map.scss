@@ -2,3 +2,7 @@
     height: 400px;
     margin-bottom: 25px;
 }
+
+.map-filters .form-control[readonly] {
+    background-color: white;
+}
