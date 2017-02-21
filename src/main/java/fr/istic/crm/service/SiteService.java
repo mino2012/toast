@@ -20,7 +20,7 @@ public interface SiteService {
 
     /**
      *  Get all the sites.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -45,9 +45,18 @@ public interface SiteService {
      * Search for the site corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<SiteDTO> search(String query, Pageable pageable);
+
+    /**
+     *
+     * get site version at the stage creation
+     *
+     * @param id
+     * @return
+     */
+    Object findSiteAtCreationStage(Long id);
 }

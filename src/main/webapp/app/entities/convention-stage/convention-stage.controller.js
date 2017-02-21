@@ -5,9 +5,9 @@
         .module('crmisticApp')
         .controller('ConventionStageController', ConventionStageController);
 
-    ConventionStageController.$inject = ['$scope', '$state', 'ConventionStage', 'ConventionStageSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Principal', 'LoginService'];
+    ConventionStageController.$inject = ['$scope', '$state', '$http', 'ConventionStage', 'ConventionStageSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Principal', 'LoginService'];
 
-    function ConventionStageController ($scope, $state, ConventionStage, ConventionStageSearch, ParseLinks, AlertService, paginationConstants, pagingParams, Principal, LoginService) {
+    function ConventionStageController ($scope, $state, $http, ConventionStage, ConventionStageSearch, ParseLinks, AlertService, paginationConstants, pagingParams, Principal, LoginService) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -66,6 +66,21 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
+                /* Update site at date creation of convention */
+                angular.forEach(data, function (convention) {
+                    /* Call synchrone function to wait the answer */
+                    $http({
+                        url: 'api/siteCreationStage/',
+                        method: "GET",
+                        params: {id: convention.id}
+                    }).then(function (response) {
+                        if (response) {
+                            response = angular.fromJson(response);
+                            convention.lieuStageAdresse = response.data[0].adresse;
+                        }
+                    });
+
+                });
                 vm.conventionStages = data;
                 vm.page = pagingParams.page;
             }

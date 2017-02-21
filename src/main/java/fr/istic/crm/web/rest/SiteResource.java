@@ -35,7 +35,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class SiteResource {
 
     private final Logger log = LoggerFactory.getLogger(SiteResource.class);
-        
+
     @Inject
     private SiteService siteService;
 
@@ -134,7 +134,7 @@ public class SiteResource {
      * SEARCH  /_search/sites?query=:query : search for the site corresponding
      * to the query.
      *
-     * @param query the query of the site search 
+     * @param query the query of the site search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
@@ -147,6 +147,24 @@ public class SiteResource {
         Page<SiteDTO> page = siteService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/sites");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /siteCreationStage/ : get site version at the conventionStage creation.
+     *
+     * @return the ResponseEntity with status 200 (OK) and site entity in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/siteCreationStage/")
+    @Timed
+    public ResponseEntity<Object> getSiteAtStageCreation(@RequestParam Long id) {
+        log.debug("REST request to get Site : {}", id);
+        Object site = siteService.findSiteAtCreationStage(id);
+        return Optional.ofNullable(site)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 
