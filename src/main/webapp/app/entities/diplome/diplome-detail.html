@@ -30,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="ancienDiplome in vm.anciennesVersions">
+            <tr ng-repeat="ancienDiplome in vm.anciennesVersions | orderBy:dateModification : true">
                 <td>{{ancienDiplome[2]}}</td>
                 <td>{{ancienDiplome[0].nom}}</td>
                 <td>{{ancienDiplome[0].dateCreation | date:'short'}}</td>

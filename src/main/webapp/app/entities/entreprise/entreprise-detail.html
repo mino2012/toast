@@ -57,7 +57,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="ancienneEntreprise in vm.anciennesVersions">
+            <tr ng-repeat="ancienneEntreprise in vm.anciennesVersions | orderBy:dateModification : true">
                 <td>{{ancienneEntreprise[0].id}}</td>
                 <td>{{ancienneEntreprise[2]}}</td>
                 <td>{{ancienneEntreprise[0].nom}}</td>
