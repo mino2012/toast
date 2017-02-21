@@ -1,17 +1,24 @@
 {
     "home": {
-        "title": "Bienvenue, Java Hipster !",
-        "subtitle": "Ceci est votre page d'accueil",
+        "title": "Bienvenue, Toast Next Gen !",
+        "subtitle": "crmistic",
         "logged": {
             "message": "Vous êtes connecté en tant que \"{{username}}\"."
         },
         "question": "Si vous avez des questions à propos de JHipster:",
+        "access": "Accéder facilement aux fonctionnalités principales",
+        "msgEtudiant": "En tant qu'étudiant je peux consulter:",
+        "msgProf": "En tant que professeur j'ai accès:",
         "link": {
             "homepage": "Page d'accueil de JHipster",
             "stackoverflow": "JHipster sur Stack Overflow",
             "bugtracker": "JHipster bug tracker",
             "chat": "JHipster public chat room",
-            "follow": "Suivez @java_hipster sur Twitter"
+            "follow": "Suivez @java_hipster sur Twitter",
+            "mapEntreprises": "Exploration entreprises",
+            "partenaire": "Entreprises partenaires",
+            "taxe": "Gestion de taxes",
+            "convention": "Conventions de stage"
         },
         "like": "Si vous aimez JHipster, donnez nous une étoile sur",
         "github": "GitHub"

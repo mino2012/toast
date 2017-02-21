@@ -1,0 +1,47 @@
+.rowAccess{
+    padding-left: 15px;
+    padding-right: 6px;
+}
+
+.secteurHomeConnect, .secteurHome{
+    background-color: #E6E6E6;
+    min-height: 50px;
+    text-align: center;
+    border-color: #848484;
+    min-width: 180px;
+    a{
+        color: #084B8A;
+    }
+}
+
+.secteurHome{
+    margin-right: 5px;
+}
+
+.secteurHomeConnect:hover, .secteurHome:hover{
+    background-color: #BDBDBD;
+    a{
+        color: #6E6E6E;
+    }
+}
+
+.titreAccess{
+    background-color: #084B8A;
+    color: whitesmoke;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fonctionnalites-img{
+    max-width: 100px;
+    margin-top: 5px;
+}
+
+.rowTitre{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.logo-img{
+    padding-bottom: 5px;
+}
