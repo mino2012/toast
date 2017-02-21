@@ -3,6 +3,7 @@
 ######################
 /src/main/webapp/content/css/main.css
 /src/main/webapp/content/css/map.css
+/src/main/webapp/content/css/home.css
 /target/www/**
 
 ######################
