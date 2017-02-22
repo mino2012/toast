@@ -117,6 +117,19 @@ public class SiteResource {
     }
 
     /**
+     * GET  /sitesOld/:id : get all old version of sites.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of sites in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/sitesOld/{id}")
+    @Timed
+    public ResponseEntity<List> getOldSite(@PathVariable Long id)
+        throws URISyntaxException {
+        return new ResponseEntity<>(siteService.findAnciennesVersions(id), HttpStatus.OK);
+    }
+
+    /**
      * DELETE  /sites/:id : delete the "id" site.
      *
      * @param id the id of the siteDTO to delete

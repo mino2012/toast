@@ -25,7 +25,8 @@
             "dateModification": "Date Modification",
             "entrepriseSiege": "Entreprise Siege",
             "conventionStage": "Convention Stage",
-            "entrepriseSite": "Entreprise Site"
+            "entrepriseSite": "Entreprise Site",
+            "anciennesVersions": "Historique des modifications"
         }
     }
 }

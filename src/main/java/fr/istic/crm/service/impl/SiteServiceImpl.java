@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -50,6 +51,10 @@ public class SiteServiceImpl implements SiteService{
     private SiteSearchRepository siteSearchRepository;
 
     AuditReader reader;
+
+    void init(){
+        reader = AuditReaderFactory.get(manager);
+    }
 
     /**
      * Save a site.
@@ -115,6 +120,27 @@ public class SiteServiceImpl implements SiteService{
         log.debug("Request to search for a page of Sites for query {}", query);
         Page<Site> result = siteSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(site -> siteMapper.siteToSiteDTO(site));
+    }
+
+    /**
+     *  Get old Site versions by id.
+     *
+     *  @param id the id of the entity
+     *  @return the list of old version
+     */
+    @Transactional(readOnly = true)
+    public List findAnciennesVersions(Long id) {
+        init();
+        log.debug("Request to get Site : {}", id);
+
+        List anciennesVersions = reader.createQuery()
+            .forRevisionsOfEntity(Site.class, false, true)
+            .add(AuditEntity.id().eq(id))
+            .getResultList();
+
+        log.debug("OLD VERSION" + anciennesVersions);
+
+        return anciennesVersions;
     }
 
     /**

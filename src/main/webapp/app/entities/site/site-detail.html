@@ -41,7 +41,41 @@
             <a ui-sref="entreprise-detail({id:vm.site.entrepriseSiteId})">{{vm.site.entrepriseSiteNom}}</a>
         </dd>
     </dl>
-
+    <br />
+    <h3 data-translate="crmisticApp.site.anciennesVersions">Anciennes Versions</h3>
+    <br />
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th><span>Action</span></th>
+                <th jh-sort-by="adresse"><span data-translate="crmisticApp.site.adresse">Adresse</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="codePostal"><span data-translate="crmisticApp.site.codePostal">Code Postal</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="ville"><span data-translate="crmisticApp.site.ville">Ville</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="pays"><span data-translate="crmisticApp.site.pays">Pays</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="telephone"><span data-translate="crmisticApp.site.telephone">Telephone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="dateCreation"><span data-translate="crmisticApp.site.dateCreation">Date Creation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="dateModification"><span data-translate="crmisticApp.site.dateModification">Date Modification</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="entrepriseSiegeId"><span data-translate="crmisticApp.site.entrepriseSiege">Entreprise Siege</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <th jh-sort-by="entrepriseSiteNom"><span data-translate="crmisticApp.site.entrepriseSite">Entreprise Site</span> <span class="glyphicon glyphicon-sort"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ancienneEntreprise in vm.anciennesVersions | orderBy:dateModification : true">
+                <td>{{ancienneEntreprise[2]}}</td>
+                <td>{{ancienneEntreprise[0].adresse}}</td>
+                <td>{{ancienneEntreprise[0].codePostal}}</td>
+                <td>{{ancienneEntreprise[0].ville}}</td>
+                <td>{{ancienneEntreprise[0].pays}}</td>
+                <td>{{ancienneEntreprise[0].telephone}}</td>
+                <td>{{ancienneEntreprise[0].dateCreation | date:'short'}}</td>
+                <td>{{ancienneEntreprise[0].dateModification | date:'short'}}</td>
+                <td>{{ancienneEntreprise[0].entrepriseSiege}}</td>
+                <td>{{ancienneEntreprise[0].entrepriseSite}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <button type="submit"
             ui-sref="{{ vm.previousState }}"
             class="btn btn-info">
