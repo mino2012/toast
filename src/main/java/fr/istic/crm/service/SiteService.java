@@ -35,6 +35,14 @@ public interface SiteService {
     SiteDTO findOne(Long id);
 
     /**
+     *  Get old version of site.
+     *
+     *  @param id the id of the entity
+     *  @return list of old version
+     */
+    List findAnciennesVersions(Long id);
+
+    /**
      *  Delete the "id" site.
      *
      *  @param id the id of the entity
