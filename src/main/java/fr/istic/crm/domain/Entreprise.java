@@ -68,6 +68,7 @@ public class Entreprise implements Serializable {
     @OneToMany(mappedBy = "entrepriseSite")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @NotAudited
     private Set<Site> sites = new HashSet<>();
 
     @OneToMany(mappedBy = "entreprisePersonnel")
@@ -83,6 +84,7 @@ public class Entreprise implements Serializable {
 
     @OneToOne(mappedBy = "entrepriseSiege")
     @JsonIgnore
+    @NotAudited
     private Site siege;
 
     @OneToOne(mappedBy = "entrepriseContact")
