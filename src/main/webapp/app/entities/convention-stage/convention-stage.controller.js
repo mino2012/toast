@@ -76,10 +76,19 @@
                     }).then(function (response) {
                         if (response) {
                             response = angular.fromJson(response);
-                            convention.lieuStageAdresse = response.data[0].adresse;
+                            convention.lieuStageAdresse = response.data[0][0].adresse;
                         }
                     });
-
+                    $http({
+                        url: 'api/entrepriseCreationStage/',
+                        method: "GET",
+                        params: {id: convention.id}
+                    }).then(function (response) {
+                        if (response) {
+                            response = angular.fromJson(response);
+                            convention.entreprise.nom = response.data[0][0].nom;
+                        }
+                    });
                 });
                 vm.conventionStages = data;
                 vm.page = pagingParams.page;
