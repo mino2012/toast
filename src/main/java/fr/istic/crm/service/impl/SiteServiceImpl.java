@@ -127,7 +127,6 @@ public class SiteServiceImpl implements SiteService{
     public Object findSiteAtCreationStage(Long id) {
         log.debug("Request to get ConventionStage : {}", id);
         ConventionStage stage = conventionStageRepository.findOne(id);
-
         if (stage.getDateDebut() != null) {
             Instant instant = stage.getDateDebut().toInstant();
             Date dateDebutStage = java.util.Date.from(instant);
@@ -136,9 +135,9 @@ public class SiteServiceImpl implements SiteService{
                 .forRevisionsOfEntity(Site.class, false, true)
                 // We are only interested in the first revision
                 .add(AuditEntity.id().eq(stage.getLieuStage().getId()))
-                .add(AuditEntity.property("dateModification").maximize()
-                    .add(AuditEntity.property("dateModification").le(dateDebutStage.getTime())))
-                .getSingleResult();
+                .add(AuditEntity.property("dateModification").le(dateDebutStage.getTime()))
+                .addOrder(AuditEntity.property("dateModification").desc())
+                .getResultList();
             return revision;
         } else {
             log.error("CONVENTION : Date de début de stage indisponible");

@@ -175,5 +175,23 @@ public class EntrepriseResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /entrepriseCreationStage/ : get entreprise version at the conventionStage creation.
+     *
+     * @return the ResponseEntity with status 200 (OK) and entreprise entity in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @GetMapping("/entrepriseCreationStage/")
+    @Timed
+    public ResponseEntity<Object> getEntrepriseAtStageCreation(@RequestParam Long id) {
+        log.debug("REST request to get Site : {}", id);
+        Object entreprise = entrepriseService.findEntrepriseAtCreationStage(id);
+        return Optional.ofNullable(entreprise)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
 }

@@ -1,5 +1,7 @@
 package fr.istic.crm.service.impl;
 
+import fr.istic.crm.domain.ConventionStage;
+import fr.istic.crm.repository.ConventionStageRepository;
 import fr.istic.crm.service.EntrepriseService;
 import fr.istic.crm.domain.Entreprise;
 import fr.istic.crm.repository.EntrepriseRepository;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +42,9 @@ public class EntrepriseServiceImpl implements EntrepriseService{
 
     @Inject
     private EntrepriseRepository entrepriseRepository;
+
+    @Inject
+    private ConventionStageRepository conventionStageRepository;
 
     @Inject
     private EntityManager manager;
@@ -171,5 +178,33 @@ public class EntrepriseServiceImpl implements EntrepriseService{
         log.debug("Request to search for a page of Entreprises for query {}", query);
         Page<Entreprise> result = entrepriseSearchRepository.search(queryStringQuery(query), pageable);
         return result.map(entreprise -> entrepriseMapper.entrepriseToEntrepriseDTO(entreprise));
+    }
+
+    /**
+     *  Get Entreprise version at the start of stage
+     *
+     *  @param id the id of the conventionStage
+     *  @return the revision of Entreprise
+     */
+    @Transactional(readOnly = true)
+    public Object findEntrepriseAtCreationStage(Long id) {
+        log.debug("Request to get ConventionStage : {}", id);
+        ConventionStage stage = conventionStageRepository.findOne(id);
+        if (stage.getDateDebut() != null) {
+            Instant instant = stage.getDateDebut().toInstant();
+            Date dateDebutStage = java.util.Date.from(instant);
+            reader = AuditReaderFactory.get(manager);
+            Object revision = reader.createQuery()
+                .forRevisionsOfEntity(Entreprise.class, false, true)
+                // We are only interested in the first revision
+                .add(AuditEntity.id().eq(stage.getLieuStage().getEntrepriseSite().getId()))
+                .add(AuditEntity.property("dateModification").le(dateDebutStage.getTime()))
+                .addOrder(AuditEntity.property("dateModification").desc())
+                .getResultList();
+            return revision;
+        } else {
+            log.error("CONVENTION : Date de début de stage indisponible");
+            return null;
+        }
     }
 }

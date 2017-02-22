@@ -72,4 +72,13 @@ public interface EntrepriseService {
      *  @return the list of entities
      */
     Page<EntrepriseDTO> search(String query, Pageable pageable);
+
+    /**
+     *
+     * get entreprise version at the stage creation
+     *
+     * @param id
+     * @return
+     */
+    Object findEntrepriseAtCreationStage(Long id);
 }
