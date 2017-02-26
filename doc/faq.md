@@ -15,3 +15,9 @@
 4. Add the new changelog in the *src/main/resources/config/liquibase/master.xml* file at the end of the file.
 
 5. That's done ! You can restart your application `./mvnw` and the changes will be take into account in the database.  
+
+**Q: How to easily import data in CSV format in the application?**  
+**A:**
+
+We develop an other project to do it.  
+[Link to the import-toast-data project](https://github.com/Mariam112/import-toast-data)

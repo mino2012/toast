@@ -6,5 +6,8 @@ Documentation index
 -------------------
 
 * [JHipster documentation](doc/jhipster.md)
+* [Get started](doc/get-started.md)
 * [Entity versioning - JBoss Envers](doc/entity-versioning.md)
 * [FAQ](doc/faq.md)
+* [LEFT TODO](doc/left-todo.md)
+* [Limitations of the application](doc/limitations.md)
