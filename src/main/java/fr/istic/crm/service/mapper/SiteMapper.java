@@ -13,6 +13,7 @@ import java.util.List;
 public interface SiteMapper {
 
     @Mapping(source = "entrepriseSiege.id", target = "entrepriseSiegeId")
+    @Mapping(source = "entrepriseSiege.nom", target = "entrepriseSiegeNom")
     @Mapping(source = "entrepriseSite.id", target = "entrepriseSiteId")
     @Mapping(source = "entrepriseSite.nom", target = "entrepriseSiteNom")
     SiteDTO siteToSiteDTO(Site site);
