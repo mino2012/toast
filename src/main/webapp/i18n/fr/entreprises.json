@@ -12,6 +12,9 @@
             "nbEtudiants": "Nb. Etudiants Minimum",
             "dateDebut" : "Date début",
             "dateFin" : "Date fin",
+            "action": {
+                "goToSiteOnMap": "Voir sur la carte"
+            },
             "map": {
                 "infoWindow": {
                     "description": "a reçu {{ nbEtudiants }} stagiaire(s)"

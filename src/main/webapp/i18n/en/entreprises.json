@@ -12,6 +12,9 @@
             "nbEtudiants": "Nb. Etudiants Minimum",
             "dateDebut" : "Date début",
             "dateFin" : "Date fin",
+            "action": {
+                "goToSiteOnMap": "See on the map"
+            },
             "map": {
                 "infoWindow": {
                     "description": "received {{ nbEtudiants }} intern(s)"
