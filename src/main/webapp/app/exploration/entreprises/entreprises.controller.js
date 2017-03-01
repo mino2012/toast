@@ -10,9 +10,9 @@ function initMap () {
         .module('crmisticApp')
         .controller('EntreprisesController', EntreprisesController);
 
-    EntreprisesController.$inject = ['$timeout','$scope', 'Principal', 'LoginService', '$state','$log','$http','NbEtudiants','AlertService','paginationConstants','pagingParams','ParseLinks'];
+    EntreprisesController.$inject = ['$timeout','$scope', 'Principal', 'LoginService', '$state','$log','$http','NbEtudiants','AlertService','paginationConstants','pagingParams','ParseLinks','Geocoder'];
 
-    function EntreprisesController ($timeout, $scope, Principal, LoginService, $state,$log,$http,NbEtudiants,AlertService,paginationConstants,pagingParams,ParseLinks) {
+    function EntreprisesController ($timeout, $scope, Principal, LoginService, $state,$log,$http,NbEtudiants,AlertService,paginationConstants,pagingParams,ParseLinks,Geocoder) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -22,12 +22,10 @@ function initMap () {
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
         vm.datepickerDebut = getDateNYearsLaterOrBeforeToday(-1);
-        vm.datepickerFin = new Date(Date.now());
+        vm.datepickerFin = getDateNYearsLaterOrBeforeToday(1);
 
         vm.loadAll = loadAll();
         vm.nbEtudiantsMin = 1;
-
-        var geocoder = new google.maps.Geocoder();
 
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -130,29 +128,31 @@ function initMap () {
             $scope.myInfoWindow.open($scope.myMap, marker);
         };
 
-        $scope.geocoding = function (site) {
-            var rawAddress = site[0].adresse + " " + site[0].codePostal + " "+ site[0].ville + " "+ site[0].pays;
-
-            geocoder.geocode( { "address": rawAddress }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-                    var location = results[0].geometry.location;
-
-                    if (site[1] >= vm.nbEtudiantsMin) {
-                        $scope.addMarker(location, site);
-                    }
-                }
-                else {
-                    $log.debug("geocoding failed "+ status);
-                }
-            });
-        };
-
         function displaySitesOnMap (sites) {
             angular.forEach(sites, function (site) {
 
-                $scope.geocoding(site);
+                // call Geocoder factory
+                Geocoder.geocode(site, function (location) {
+                    if (site[1] >= vm.nbEtudiantsMin) {
+                        $scope.addMarker(location, site);
+                    }
+                });
+
             });
         }
+
+        $scope.goToSiteOnMap = function (site) {
+
+            Geocoder.geocode(site, function (location) {
+                $('html, body').animate({
+                    scrollTop: $("#map-filters").offset().top
+                }, 200, function() {
+                    $scope.myMap.panTo(location);
+                    $scope.myMap.setZoom(9);
+                });
+
+            });
+        };
 
         vm.inputFilter = function () {
 
